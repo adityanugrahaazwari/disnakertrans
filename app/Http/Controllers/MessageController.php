@@ -26,4 +26,18 @@ class MessageController extends Controller
         $message->delete();
         return redirect()->route('admin.messages.index')->with('success', 'Pesan berhasil dihapus.');
     }
+
+    public function store(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        Message::create($validated);
+
+        return back()->with('success_message', 'Aduan Anda berhasil dikirim. Kami akan segera menindaklanjutinya.');
+    }
 }

@@ -21,5 +21,13 @@ class Profile extends Model
         'youtube_url',
         'twitter_url',
         'tiktok_url',
+        'nama_kepala',
+        'jabatan_kepala',
+        'sambutan_kepala',
+        'foto_kepala',
+        'pengaduan_title',
+        'pengaduan_description',
+        'pengaduan_wa',
+        'maklumat_pelayanan',
     ];
 }

@@ -25,5 +25,12 @@ class AppServiceProvider extends ServiceProvider
         Gate::before(function ($user, $ability) {
             return $user->hasRole('Super Admin') ? true : null;
         });
+
+        // Share common data with public views
+        view()->composer(['welcome', 'layouts.public'], function ($view) {
+            $view->with('footerProfile', \App\Models\Profile::first() ?? new \App\Models\Profile());
+            $view->with('navCategories', \App\Models\Category::all());
+            $view->with('navServices', \App\Models\Service::where('is_active', true)->orderBy('order')->get());
+        });
     }
 }

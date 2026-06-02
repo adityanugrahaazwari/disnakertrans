@@ -6,6 +6,7 @@ use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -92,5 +93,75 @@ class ProfileController extends Controller
         $profile->update($validated);
 
         return back()->with('success', 'Pengaturan footer berhasil diperbarui.');
+    }
+
+    public function greeting(): View
+    {
+        $profile = Profile::first();
+        return view('admin.profile.greeting', compact('profile'));
+    }
+
+    public function updateGreeting(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'nama_kepala' => 'required|string|max:255',
+            'jabatan_kepala' => 'required|string|max:255',
+            'sambutan_kepala' => 'required|string',
+            'foto_kepala' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
+
+        $profile = Profile::firstOrCreate(['id' => 1]);
+
+        if ($request->hasFile('foto_kepala')) {
+            if ($profile->foto_kepala) {
+                Storage::disk('public')->delete($profile->foto_kepala);
+            }
+            $path = $request->file('foto_kepala')->store('profile', 'public');
+            $validated['foto_kepala'] = $path;
+        }
+
+        $profile->update($validated);
+
+        return back()->with('success', 'Sambutan Kepala Dinas berhasil diperbarui.');
+    }
+
+    public function complaint(): View
+    {
+        $profile = Profile::first();
+        return view('admin.profile.complaint', compact('profile'));
+    }
+
+    public function updateComplaint(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'pengaduan_title' => 'required|string|max:255',
+            'pengaduan_description' => 'required|string',
+            'pengaduan_wa' => 'nullable|string|max:20',
+        ]);
+
+        $profile = Profile::firstOrCreate(['id' => 1]);
+        $profile->update($validated);
+
+        return back()->with('success', 'Pengaturan section pengaduan berhasil diperbarui.');
+    }
+
+    public function maklumat(): View
+    {
+        $profile = Profile::first();
+        return view('admin.profile.maklumat', compact('profile'));
+    }
+
+    public function updateMaklumat(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'maklumat_pelayanan' => 'required',
+        ]);
+
+        $profile = Profile::firstOrCreate(['id' => 1]);
+        $profile->update([
+            'maklumat_pelayanan' => $request->maklumat_pelayanan,
+        ]);
+
+        return back()->with('success', 'Maklumat Pelayanan berhasil diperbarui.');
     }
 }

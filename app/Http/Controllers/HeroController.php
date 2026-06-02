@@ -42,6 +42,6 @@ class HeroController extends Controller
             Hero::create($validated);
         }
 
-        return redirect()->route('admin.heroes.index')->with('success', 'Hero section berhasil diperbarui.');
+        return redirect()->route('admin.heroes.index')->with('success', 'Hero banner berhasil diperbarui.');
     }
 }

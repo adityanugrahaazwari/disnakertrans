@@ -25,6 +25,9 @@ class CmsDataSeeder extends Seeder
             'alamat' => 'Jl. Ahmad Yani No. 123, Martapura, Kabupaten Banjar, Kalimantan Selatan',
             'email' => 'disnakertrans@banjarkab.go.id',
             'telepon' => '(0511) 4721234',
+            'nama_kepala' => 'Drs. H. Ahmad Fauzi, M.Si',
+            'jabatan_kepala' => 'Kepala Dinas',
+            'sambutan_kepala' => 'Selamat datang di website resmi Dinas Tenaga Kerja dan Transmigrasi Kabupaten Banjar. Kami berkomitmen untuk terus meningkatkan kualitas pelayanan publik di bidang ketenagakerjaan dan transmigrasi demi mewujudkan masyarakat Kabupaten Banjar yang lebih sejahtera.',
         ]);
 
         // 2. Employees (Hierarchy)

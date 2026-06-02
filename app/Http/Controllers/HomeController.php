@@ -46,6 +46,12 @@ class HomeController extends Controller
         return view('profile.structure', compact('profile', 'employees'));
     }
 
+    public function maklumat()
+    {
+        $profile = \App\Models\Profile::first();
+        return view('profile.maklumat', compact('profile'));
+    }
+
     public function allPosts(Request $request)
     {
         $query = Post::with('category')

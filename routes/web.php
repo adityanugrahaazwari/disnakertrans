@@ -17,8 +17,11 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/profil/visi-misi', [HomeController::class, 'vision'])->name('profile.vision');
 Route::get('/profil/sejarah', [HomeController::class, 'history'])->name('profile.history');
 Route::get('/profil/struktur-organisasi', [HomeController::class, 'structure'])->name('profile.structure');
+Route::get('/profil/maklumat-pelayanan', [HomeController::class, 'maklumat'])->name('profile.maklumat');
 Route::get('/berita', [HomeController::class, 'allPosts'])->name('posts.index');
 Route::get('/berita/{slug}', [HomeController::class, 'showPost'])->name('posts.show');
+
+Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 
 // Authentication Routes
 Route::middleware(['guest'])->group(function () {
@@ -32,6 +35,10 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
+    // Akun Saya
+    Route::get('/account/password', [\App\Http\Controllers\AccountController::class, 'password'])->name('admin.account.password');
+    Route::post('/account/password', [\App\Http\Controllers\AccountController::class, 'updatePassword'])->name('admin.account.password.update');
+
     // Profil Dinas
     Route::prefix('profile')->name('admin.profile.')->group(function () {
         Route::get('/vision', [ProfileController::class, 'vision'])->name('vision');
@@ -42,6 +49,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/contact', [ProfileController::class, 'updateContact'])->name('contact.update');
         Route::get('/footer', [ProfileController::class, 'footer'])->name('footer');
         Route::post('/footer', [ProfileController::class, 'updateFooter'])->name('footer.update');
+        Route::get('/greeting', [ProfileController::class, 'greeting'])->name('greeting');
+        Route::post('/greeting', [ProfileController::class, 'updateGreeting'])->name('greeting.update');
+        Route::get('/complaint', [ProfileController::class, 'complaint'])->name('complaint');
+        Route::post('/complaint', [ProfileController::class, 'updateComplaint'])->name('complaint.update');
+        Route::get('/maklumat', [ProfileController::class, 'maklumat'])->name('maklumat');
+        Route::post('/maklumat', [ProfileController::class, 'updateMaklumat'])->name('maklumat.update');
 
         // Struktur Organisasi (Manajemen Pegawai)
         Route::resource('structure', EmployeeController::class)->names('structure');

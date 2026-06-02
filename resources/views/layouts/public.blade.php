@@ -331,14 +331,12 @@
                 <ul class="dropdown-menu">
                     <li><a href="{{ route('profile.vision') }}" class="dropdown-item"><i class="fas fa-eye"></i> Visi & Misi</a></li>
                     <li><a href="{{ route('profile.structure') }}" class="dropdown-item"><i class="fas fa-sitemap"></i> Struktur Organisasi</a></li>
+                    <li><a href="{{ route('profile.maklumat') }}" class="dropdown-item"><i class="fas fa-hand-holding-heart"></i> Maklumat Pelayanan</a></li>
                     <li><a href="{{ route('profile.history') }}" class="dropdown-item"><i class="fas fa-history"></i> Sejarah</a></li>
                 </ul>
             </li>
             <li class="nav-item">
                 <a href="{{ route('posts.index') }}">Berita <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
-                @php
-                    $navCategories = \App\Models\Category::all();
-                @endphp
                 @if($navCategories->count() > 0)
                     <ul class="dropdown-menu">
                         <li><a href="{{ route('posts.index') }}" class="dropdown-item"><i class="fas fa-list"></i> Semua Berita</a></li>
@@ -352,23 +350,7 @@
                     </ul>
                 @endif
             </li>
-            <li class="nav-item">
-                <a href="/#layanan">Layanan <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
-                @php
-                    $navServices = \App\Models\Service::where('is_active', true)->orderBy('order')->get();
-                @endphp
-                @if($navServices->count() > 0)
-                    <ul class="dropdown-menu">
-                        @foreach($navServices as $service)
-                            <li>
-                                <a href="{{ $service->url ?? '/#layanan' }}" class="dropdown-item">
-                                    <i class="{{ $service->icon }}"></i> {{ $service->title }}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                @endif
-            </li>
+            <li><a href="/#layanan">Layanan</a></li>
             <li><a href="/dashboard" class="btn-portal">Portal Admin</a></li>
         </ul>
     </nav>
@@ -429,7 +411,6 @@
 
             <div class="footer-col">
                 <h4>Hubungi Kami</h4>
-                @php $footerProfile = \App\Models\Profile::first(); @endphp
                 <ul style="color: #94a3b8; font-size: 0.9rem;">
                     <li style="display: flex; gap: 10px;">
                         <i class="fas fa-map-marker-alt" style="margin-top: 5px; color: var(--accent);"></i>

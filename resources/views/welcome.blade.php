@@ -532,14 +532,12 @@
                 <ul class="dropdown-menu">
                     <li><a href="{{ route('profile.vision') }}" class="dropdown-item"><i class="fas fa-eye"></i> Visi & Misi</a></li>
                     <li><a href="{{ route('profile.structure') }}" class="dropdown-item"><i class="fas fa-sitemap"></i> Struktur Organisasi</a></li>
+                    <li><a href="{{ route('profile.maklumat') }}" class="dropdown-item"><i class="fas fa-hand-holding-heart"></i> Maklumat Pelayanan</a></li>
                     <li><a href="{{ route('profile.history') }}" class="dropdown-item"><i class="fas fa-history"></i> Sejarah</a></li>
                 </ul>
             </li>
             <li class="nav-item">
                 <a href="/berita">Berita <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
-                @php
-                    $navCategories = \App\Models\Category::all();
-                @endphp
                 @if($navCategories->count() > 0)
                     <ul class="dropdown-menu">
                         <li><a href="/berita" class="dropdown-item"><i class="fas fa-list"></i> Semua Berita</a></li>
@@ -553,20 +551,7 @@
                     </ul>
                 @endif
             </li>
-            <li class="nav-item">
-                <a href="#layanan">Layanan <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
-                @if($services->count() > 0)
-                    <ul class="dropdown-menu">
-                        @foreach($services as $service)
-                            <li>
-                                <a href="{{ $service->url ?? '#layanan' }}" class="dropdown-item">
-                                    <i class="{{ $service->icon }}"></i> {{ $service->title }}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                @endif
-            </li>
+            <li><a href="#layanan">Layanan</a></li>
             <li><a href="/dashboard" class="btn-portal">Portal Admin</a></li>
         </ul>
     </nav>
@@ -602,7 +587,50 @@
         @endif
     </div>
 
-    <section class="stats-section" id="layanan">
+    @if($footerProfile->sambutan_kepala)
+    <section class="section" style="background: white; padding: 100px 8%;">
+        <div style="display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 80px; align-items: center;">
+            <div style="position: relative;">
+                <div style="position: absolute; width: 100%; height: 100%; border: 2px solid var(--accent); border-radius: 24px; top: 20px; left: 20px; z-index: 1;"></div>
+                <div style="position: relative; z-index: 2; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                    @if($footerProfile->foto_kepala)
+                        <img src="{{ asset('storage/' . $footerProfile->foto_kepala) }}" alt="{{ $footerProfile->nama_kepala }}" style="width: 100%; height: auto; display: block;">
+                    @else
+                        <div style="width: 100%; height: 500px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; color: #cbd5e1;">
+                            <i class="fas fa-user" style="font-size: 5rem;"></i>
+                        </div>
+                    @endif
+                    <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); color: white;">
+                        <h4 style="font-size: 1.25rem; font-weight: 700; margin: 0;">{{ $footerProfile->nama_kepala }}</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.8; margin: 5px 0 0;">{{ $footerProfile->jabatan_kepala }}</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div style="width: 60px; height: 4px; background: var(--accent); margin-bottom: 30px;"></div>
+                <h4 style="color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; margin-bottom: 12px; font-weight: 800;">Sambutan Hangat</h4>
+                <h2 style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 30px; line-height: 1.2;">Selamat Datang di Portal Resmi Disnakertrans</h2>
+                <div style="color: var(--text-light); font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px;">
+                    {!! nl2br(e($footerProfile->sambutan_kepala)) !!}
+                </div>
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                    <p style="font-style: italic; color: var(--primary); font-weight: 600; margin: 0;">"Melayani dengan Hati, Membangun Negeri."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <section class="section" id="layanan" style="background: #f8fafc;">
+        <div style="text-align: center; margin-bottom: 60px;">
+            <h4 style="color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; margin-bottom: 12px; font-weight: 800;">Program & Layanan</h4>
+            <h2 style="font-size: 2.5rem; font-weight: 800; color: var(--primary);">Layanan Unggulan Kami</h2>
+            <div style="width: 50px; height: 3px; background: var(--accent); margin: 20px auto 0;"></div>
+        </div>
+        
         <div class="stats-grid">
             @forelse($services as $service)
                 <div class="stat-card">
@@ -655,6 +683,70 @@
         </div>
     </section>
 
+    <section class="section" id="pengaduan" style="background: white; padding: 100px 8%;">
+        <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center;">
+            <div>
+                <h4 style="color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; margin-bottom: 12px; font-weight: 800;">Hubungi Kami</h4>
+                <h2 style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 24px;">{{ $footerProfile->pengaduan_title ?? 'Layanan Pengaduan & Aspirasi' }}</h2>
+                <p style="color: var(--text-light); font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px;">
+                    {{ $footerProfile->pengaduan_description ?? 'Sampaikan keluhan, saran, atau pertanyaan Anda terkait layanan ketenagakerjaan kami. Tim kami akan segera menanggapi setiap laporan yang masuk.' }}
+                </p>
+                
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    @if($footerProfile->pengaduan_wa)
+                        <a href="https://wa.me/62{{ $footerProfile->pengaduan_wa }}" target="_blank" style="display: flex; align-items: center; gap: 15px; text-decoration: none; color: inherit; background: #25d366; color: white; padding: 15px 25px; border-radius: 12px; width: fit-content; font-weight: 700; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);">
+                            <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
+                            <span>Chat WhatsApp (+62 {{ $footerProfile->pengaduan_wa }})</span>
+                        </a>
+                    @endif
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <div style="width: 50px; height: 50px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p style="margin: 0; font-size: 0.8rem; color: var(--text-light); font-weight: 600;">Email Resmi</p>
+                            <p style="margin: 0; font-weight: 700; color: var(--primary);">{{ $footerProfile->email ?? 'disnakertrans@banjarkab.go.id' }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="padding: 40px; border: none; box-shadow: 0 20px 50px rgba(0,0,0,0.05); border-radius: 30px;">
+                @if(session('success_message'))
+                    <div style="padding: 20px; background: #dcfce7; color: #166534; border-radius: 12px; margin-bottom: 30px; border: 1px solid #bbf7d0; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-check-circle" style="font-size: 1.25rem;"></i>
+                        <span style="font-weight: 600;">{{ session('success_message') }}</span>
+                    </div>
+                @endif
+
+                <form action="{{ route('messages.store') }}" method="POST">
+                    @csrf
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                        <div>
+                            <label style="font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; display: block;">Nama Lengkap</label>
+                            <input type="text" name="name" required placeholder="Masukkan nama Anda" style="padding: 14px 18px; border-radius: 12px; background: #f8fafc; border: 1px solid #f1f5f9;">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; display: block;">Alamat Email</label>
+                            <input type="email" name="email" required placeholder="email@contoh.com" style="padding: 14px 18px; border-radius: 12px; background: #f8fafc; border: 1px solid #f1f5f9;">
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; display: block;">Subjek Pesan</label>
+                        <input type="text" name="subject" required placeholder="Contoh: Pertanyaan Layanan AK-1" style="padding: 14px 18px; border-radius: 12px; background: #f8fafc; border: 1px solid #f1f5f9;">
+                    </div>
+                    <div style="margin-bottom: 30px;">
+                        <label style="font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; display: block;">Isi Pesan / Pengaduan</label>
+                        <textarea name="message" required rows="5" placeholder="Tuliskan pesan Anda di sini secara detail..." style="padding: 14px 18px; border-radius: 12px; background: #f8fafc; border: 1px solid #f1f5f9; width: 100%; font-family: inherit; resize: none;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px; font-size: 1rem; border-radius: 12px; justify-content: center; gap: 12px;">
+                        <i class="fas fa-paper-plane"></i> Kirim Aduan Sekarang
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <div class="footer-main">
             <div class="footer-brand">
@@ -703,13 +795,12 @@
                     <li><a href="#">Pendaftaran AK-1</a></li>
                     <li><a href="#">Info Pelatihan</a></li>
                     <li><a href="#">Lowongan Kerja</a></li>
-                    <li><a href="#">Pengaduan</a></li>
+                    <li><a href="#pengaduan">Pengaduan</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
                 <h4>Hubungi Kami</h4>
-                @php $footerProfile = \App\Models\Profile::first(); @endphp
                 <ul style="color: #94a3b8; font-size: 0.9rem;">
                     <li style="display: flex; gap: 10px;">
                         <i class="fas fa-map-marker-alt" style="margin-top: 5px; color: var(--accent);"></i>

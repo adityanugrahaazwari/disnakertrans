@@ -109,7 +109,7 @@
             </div>
         </div>
         
-        <a href="#" class="btn" style="width: 100%; margin-top: 24px; background: rgba(255,255,255,0.1); color: white; font-size: 0.875rem;">Edit Profil</a>
+        <a href="{{ route('admin.account.password') }}" class="btn" style="width: 100%; margin-top: 24px; background: rgba(255,255,255,0.1); color: white; font-size: 0.875rem;">Ubah Password</a>
     </div>
 </div>
 @endsection
