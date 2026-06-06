@@ -79,6 +79,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('heroes', [\App\Http\Controllers\HeroController::class, 'update'])->name('admin.heroes.update');
 
     Route::resource('categories', \App\Http\Controllers\CategoryController::class)->names('admin.categories');
+    Route::resource('training-categories', \App\Http\Controllers\TrainingCategoryController::class)->names('admin.training-categories');
     Route::resource('tags', \App\Http\Controllers\TagController::class)->names('admin.tags');
 
     // Program & Layanan

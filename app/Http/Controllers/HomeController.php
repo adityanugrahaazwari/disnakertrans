@@ -109,10 +109,20 @@ class HomeController extends Controller
         return view('departments.tk');
     }
 
-    public function trainingDept()
+    public function trainingDept(Request $request)
     {
-        $trainings = Training::where('is_active', true)->latest()->paginate(9);
-        return view('departments.training', compact('trainings'));
+        $query = Training::with('category')->where('is_active', true);
+
+        if ($request->has('category')) {
+            $query->whereHas('category', function($q) use ($request) {
+                $q->where('slug', $request->category);
+            });
+        }
+
+        $trainings = $query->latest()->paginate(9);
+        $categories = \App\Models\TrainingCategory::whereHas('trainings')->get();
+
+        return view('departments.training', compact('trainings', 'categories'));
     }
 
     public function allJobs()
@@ -140,12 +150,20 @@ class HomeController extends Controller
         return view('jobs.show', compact('job', 'otherJobs'));
     }
 
-    public function allTrainings()
+    public function allTrainings(Request $request)
     {
-        $trainings = Training::where('is_active', true)
-            ->latest()
-            ->paginate(12);
-        return view('trainings.index', compact('trainings'));
+        $query = Training::with('category')->where('is_active', true);
+
+        if ($request->has('category')) {
+            $query->whereHas('category', function($q) use ($request) {
+                $q->where('slug', $request->category);
+            });
+        }
+
+        $trainings = $query->latest()->paginate(12);
+        $categories = \App\Models\TrainingCategory::whereHas('trainings')->get();
+
+        return view('trainings.index', compact('trainings', 'categories'));
     }
 
     public function downloads()

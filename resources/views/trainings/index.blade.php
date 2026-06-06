@@ -14,15 +14,33 @@
 
 <section class="section">
     <div class="container">
+        <div style="margin-bottom: 40px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <a href="{{ route('trainings.index') }}" 
+               style="padding: 10px 25px; border-radius: 50px; text-decoration: none; font-size: 0.95rem; font-weight: 600; {{ !request('category') ? 'background: var(--primary); color: white;' : 'background: white; color: var(--text-light); border: 1px solid #e2e8f0;' }}">
+                Semua Program
+            </a>
+            @foreach($categories as $category)
+                <a href="{{ route('trainings.index', ['category' => $category->slug]) }}" 
+                   style="padding: 10px 25px; border-radius: 50px; text-decoration: none; font-size: 0.95rem; font-weight: 600; {{ request('category') == $category->slug ? 'background: var(--primary); color: white;' : 'background: white; color: var(--text-light); border: 1px solid #e2e8f0;' }}">
+                    {{ $category->name }}
+                </a>
+            @endforeach
+        </div>
+
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;">
             @forelse($trainings as $training)
                 <div style="background: white; border-radius: var(--radius-md); overflow: hidden; border: 1px solid #f1f5f9; box-shadow: var(--shadow-soft);">
-                    <div style="height: 220px; background: #f1f5f9;">
+                    <div style="height: 220px; background: #f1f5f9; position: relative;">
                         @if($training->image)
                             <img src="{{ asset('storage/'.$training->image) }}" alt="{{ $training->title }}" style="width: 100%; height: 100%; object-fit: cover;">
                         @else
                             <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #cbd5e1;">
                                 <i class="fas fa-graduation-cap" style="font-size: 4rem;"></i>
+                            </div>
+                        @endif
+                        @if($training->category)
+                            <div style="position: absolute; top: 15px; left: 15px; background: rgba(var(--accent-rgb), 0.9); color: white; padding: 5px 15px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                                {{ $training->category->name }}
                             </div>
                         @endif
                     </div>

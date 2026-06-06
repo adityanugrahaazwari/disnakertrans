@@ -8,9 +8,20 @@
     
     <form action="{{ route('admin.trainings.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <div style="margin-bottom: 20px;">
-            <label style="display: block; margin-bottom: 8px; font-weight: bold;">Judul Pelatihan</label>
-            <input type="text" name="title" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;" value="{{ old('title') }}">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+            <div>
+                <label style="display: block; margin-bottom: 8px; font-weight: bold;">Judul Pelatihan</label>
+                <input type="text" name="title" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;" value="{{ old('title') }}">
+            </div>
+            <div>
+                <label style="display: block; margin-bottom: 8px; font-weight: bold;">Kategori</label>
+                <select name="category_id" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;">
+                    <option value="">Pilih Kategori</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px;">

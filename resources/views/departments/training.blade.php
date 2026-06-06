@@ -32,18 +32,36 @@
 
         <div style="text-align: center; margin-bottom: 50px;">
             <h2 style="font-size: 2rem; font-weight: 800; color: var(--primary);">Daftar Pelatihan Tersedia</h2>
-            <div style="width: 50px; height: 3px; background: var(--accent); margin: 15px auto 0;"></div>
+            <div style="width: 50px; height: 3px; background: var(--accent); margin: 15px auto 30px;"></div>
+            
+            <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                <a href="{{ route('departments.training') }}" 
+                   style="padding: 8px 20px; border-radius: 50px; text-decoration: none; font-size: 0.9rem; font-weight: 600; {{ !request('category') ? 'background: var(--primary); color: white;' : 'background: #f1f5f9; color: var(--text-light);' }}">
+                    Semua
+                </a>
+                @foreach($categories as $category)
+                    <a href="{{ route('departments.training', ['category' => $category->slug]) }}" 
+                       style="padding: 8px 20px; border-radius: 50px; text-decoration: none; font-size: 0.9rem; font-weight: 600; {{ request('category') == $category->slug ? 'background: var(--primary); color: white;' : 'background: #f1f5f9; color: var(--text-light);' }}">
+                        {{ $category->name }}
+                    </a>
+                @endforeach
+            </div>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
             @forelse($trainings as $training)
                 <div style="background: white; border-radius: var(--radius-md); overflow: hidden; border: 1px solid #f1f5f9; box-shadow: var(--shadow-soft);">
-                    <div style="height: 200px; background: #f1f5f9;">
+                    <div style="height: 200px; background: #f1f5f9; position: relative;">
                         @if($training->image)
                             <img src="{{ asset('storage/'.$training->image) }}" alt="{{ $training->title }}" style="width: 100%; height: 100%; object-fit: cover;">
                         @else
                             <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #cbd5e1;">
                                 <i class="fas fa-graduation-cap" style="font-size: 3rem;"></i>
+                            </div>
+                        @endif
+                        @if($training->category)
+                            <div style="position: absolute; top: 15px; left: 15px; background: rgba(var(--primary-rgb), 0.9); color: white; padding: 4px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">
+                                {{ $training->category->name }}
                             </div>
                         @endif
                     </div>

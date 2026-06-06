@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Training;
+use App\Models\TrainingCategory;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -12,18 +13,20 @@ class TrainingController extends Controller
 {
     public function index(): View
     {
-        $trainings = Training::latest()->paginate(10);
+        $trainings = Training::with('category')->latest()->paginate(10);
         return view('admin.trainings.index', compact('trainings'));
     }
 
     public function create(): View
     {
-        return view('admin.trainings.create');
+        $categories = TrainingCategory::all();
+        return view('admin.trainings.create', compact('categories'));
     }
 
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
+            'category_id' => 'required|exists:training_categories,id',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'quota' => 'required|integer|min:1',
@@ -44,12 +47,14 @@ class TrainingController extends Controller
 
     public function edit(Training $training): View
     {
-        return view('admin.trainings.edit', compact('training'));
+        $categories = TrainingCategory::all();
+        return view('admin.trainings.edit', compact('training', 'categories'));
     }
 
     public function update(Request $request, Training $training): RedirectResponse
     {
         $validated = $request->validate([
+            'category_id' => 'required|exists:training_categories,id',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'quota' => 'required|integer|min:1',

@@ -26,6 +26,7 @@
             <thead>
                 <tr>
                     <th>Judul Pelatihan</th>
+                    <th>Kategori</th>
                     <th>Kapasitas</th>
                     <th>Jadwal Pelaksanaan</th>
                     <th style="text-align: center;">Status</th>
@@ -37,6 +38,9 @@
                 <tr>
                     <td>
                         <div style="font-weight: 700; color: var(--primary); font-size: 1rem;">{{ $training->title }}</div>
+                    </td>
+                    <td>
+                        <span class="badge" style="background: #e2e8f0; color: #475569;">{{ $training->category->name ?? 'N/A' }}</span>
                     </td>
                     <td>
                         <div style="font-weight: 600; color: var(--text-main);">{{ $training->quota }} Peserta</div>

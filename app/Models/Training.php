@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Training extends Model
 {
     protected $fillable = [
+        'category_id',
         'title',
         'description',
         'quota',
@@ -21,4 +22,9 @@ class Training extends Model
         'end_date' => 'date',
         'is_active' => 'boolean',
     ];
+
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(TrainingCategory::class, 'category_id');
+    }
 }

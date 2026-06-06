@@ -121,22 +121,40 @@ class MenuSeeder extends Seeder
             'permission_id' => $pManageBerita,
         ]);
 
-        // 4. Layanan & Program
+        // 4. Manajemen Pelatihan
+        $pelatihan = Menu::create([
+            'title' => 'Manajemen Pelatihan',
+            'url' => '#',
+            'icon' => 'fas fa-graduation-cap',
+            'order' => 4,
+            'permission_id' => $pManagePelatihan,
+        ]);
+
+        Menu::create([
+            'parent_id' => $pelatihan->id,
+            'title' => 'Daftar Pelatihan',
+            'url' => '/trainings',
+            'icon' => 'fas fa-list',
+            'order' => 1,
+            'permission_id' => $pManagePelatihan,
+        ]);
+
+        Menu::create([
+            'parent_id' => $pelatihan->id,
+            'title' => 'Kategori Pelatihan',
+            'url' => '/training-categories',
+            'icon' => 'fas fa-tags',
+            'order' => 2,
+            'permission_id' => $pManagePelatihan,
+        ]);
+
+        // 5. Layanan & Program
         $layanan = Menu::create([
             'title' => 'Layanan & Program',
             'url' => '#',
             'icon' => 'fas fa-laptop-code',
-            'order' => 4,
+            'order' => 5,
             'permission_id' => $pManageLayanan,
-        ]);
-
-        Menu::create([
-            'parent_id' => $layanan->id,
-            'title' => 'Program Pelatihan',
-            'url' => '/trainings',
-            'icon' => 'fas fa-graduation-cap',
-            'order' => 1,
-            'permission_id' => $pManagePelatihan,
         ]);
 
         Menu::create([
@@ -157,12 +175,12 @@ class MenuSeeder extends Seeder
             'permission_id' => $pManageLayanan,
         ]);
 
-        // 5. Komunikasi
+        // 6. Komunikasi
         $komunikasi = Menu::create([
             'title' => 'Komunikasi',
             'url' => '#',
             'icon' => 'fas fa-comments',
-            'order' => 5,
+            'order' => 6,
             'permission_id' => $pManageLayanan,
         ]);
 
@@ -175,12 +193,12 @@ class MenuSeeder extends Seeder
             'permission_id' => $pManageLayanan,
         ]);
 
-        // 6. Pengaturan Tampilan
+        // 7. Pengaturan Tampilan
         $tampilan = Menu::create([
             'title' => 'Pengaturan Tampilan',
             'url' => '#',
             'icon' => 'fas fa-desktop',
-            'order' => 6,
+            'order' => 7,
             'permission_id' => $pEditProfil,
         ]);
 
@@ -211,12 +229,12 @@ class MenuSeeder extends Seeder
             'permission_id' => $pEditProfil,
         ]);
 
-        // 7. Pengaturan Akun
+        // 8. Pengaturan Akun
         $akun = Menu::create([
             'title' => 'Pengaturan Akun',
             'url' => '#',
             'icon' => 'fas fa-user-circle',
-            'order' => 7,
+            'order' => 8,
         ]);
 
         Menu::create([
