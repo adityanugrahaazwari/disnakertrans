@@ -562,36 +562,74 @@
         </ul>
     </nav>
 
-    <div class="hero-container" style="position: relative; height: 85vh; overflow: hidden; margin: 100px 0 80px; box-shadow: var(--shadow-soft);">
-        @if($hero)
-            <header class="hero" 
-                style="width: 100%; height: 100%; display: flex; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9) 30%, rgba(255, 255, 255, 0.2)), url('{{ asset('storage/' . $hero->image) }}'); background-size: cover; background-position: center; padding: 0 8%;">
-                <div class="hero-content">
-                    <span class="badge-hero">Resmi • Pemerintah Kab. Banjar</span>
-                    <h2>{!! nl2br(e($hero->title)) !!}</h2>
-                    <p>{{ $hero->subtitle }}</p>
-                    <div class="hero-btns">
-                        @if($hero->button_text)
-                            <a href="{{ $hero->button_url ?? '#' }}" class="btn btn-accent">{{ $hero->button_text }} <i class="fas fa-arrow-right"></i></a>
-                        @endif
-                        <a href="#layanan" class="btn btn-outline">Tentang Kami</a>
+    <div class="hero-container" style="position: relative; overflow: hidden; margin-top: 100px; background: #ffffff;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; padding: 100px 8% 80px;">
+            <div class="hero-content">
+                <span class="badge-hero">Pusat Ketenagakerjaan Resmi</span>
+                <h2>Masa Depan Karirmu <br><span style="color: var(--accent);">Mulai di Sini.</span></h2>
+                <p>Kami menjembatani pencari kerja dengan peluang terbaik dan meningkatkan kompetensi tenaga kerja Kabupaten Banjar melalui pelatihan profesional.</p>
+                <div class="hero-btns" style="margin-top: 30px;">
+                    <a href="{{ route('jobs.index') }}" class="btn btn-accent">Cari Lowongan <i class="fas fa-search"></i></a>
+                    <a href="{{ route('trainings.index') }}" class="btn btn-outline">Ikuti Pelatihan</a>
+                </div>
+                
+                <div style="margin-top: 50px; display: flex; gap: 40px; border-top: 1px solid #f1f5f9; padding-top: 30px;">
+                    <div>
+                        <h4 style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">500+</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-light); font-weight: 600;">Lowongan Aktif</p>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">50+</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-light); font-weight: 600;">Program Pelatihan</p>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">10k+</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-light); font-weight: 600;">Tenaga Terampil</p>
                     </div>
                 </div>
-            </header>
-        @else
-            <header class="hero" style="display: flex; width: 100%; height: 100%; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9) 30%, rgba(255, 255, 255, 0.2)); padding: 0 8%;">
-                <div class="hero-content">
-                    <span class="badge-hero">Resmi • Pemerintah Kab. Banjar</span>
-                    <h2>Masa Depan Kerja <br>Mulai dari Sini.</h2>
-                    <p>Kami hadir untuk menciptakan ekosistem ketenagakerjaan yang unggul, kompeten, dan menyejahterakan seluruh masyarakat Kabupaten Banjar.</p>
-                    <div class="hero-btns">
-                        <a href="#layanan" class="btn btn-accent">Jelajahi Layanan <i class="fas fa-arrow-right"></i></a>
-                        <a href="#" class="btn btn-outline">Tentang Kami</a>
-                    </div>
-                </div>
-            </header>
-        @endif
+            </div>
+            <div class="hero-illustration" style="position: relative;">
+                <div style="position: absolute; width: 400px; height: 400px; background: var(--accent-soft); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; opacity: 0.5; filter: blur(50px);"></div>
+                <img src="https://illustrations.popsy.co/white/work-from-home.svg" alt="Labor Illustration" style="width: 100%; height: auto; position: relative; z-index: 2; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.1));">
+            </div>
+        </div>
     </div>
+
+    <!-- Bidang Section -->
+    <section style="padding: 80px 8%; background: white;">
+        <div style="text-align: center; margin-bottom: 50px;">
+            <h4 style="color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; margin-bottom: 12px; font-weight: 800;">Struktur Organisasi</h4>
+            <h2 style="font-size: 2.2rem; font-weight: 800; color: var(--primary);">Bidang Layanan Kami</h2>
+            <p style="color: var(--text-light); margin-top: 10px;">Mengenal lebih dekat pembagian tugas dan fungsi di Disnakertrans Kabupaten Banjar.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+            <a href="{{ route('departments.tk') }}" style="text-decoration: none; color: inherit;">
+                <div style="padding: 40px 30px; border-radius: 24px; background: #f8fafc; border: 1px solid #f1f5f9; transition: 0.3s; text-align: center; height: 100%;">
+                    <div style="width: 60px; height: 60px; background: white; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; color: var(--accent); font-size: 1.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.05);"><i class="fas fa-users"></i></div>
+                    <h4 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 15px; color: var(--primary);">Bidang Tenaga Kerja</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-light); line-height: 1.6;">Mengelola penempatan tenaga kerja, perluasan kesempatan kerja, dan pendataan pencari kerja (AK-1).</p>
+                    <span style="display: inline-block; margin-top: 20px; font-weight: 700; color: var(--accent); font-size: 0.85rem;">Lihat Detail <i class="fas fa-arrow-right" style="font-size: 0.7rem; margin-left: 5px;"></i></span>
+                </div>
+            </a>
+            <a href="{{ route('departments.training') }}" style="text-decoration: none; color: inherit;">
+                <div style="padding: 40px 30px; border-radius: 24px; background: #f8fafc; border: 1px solid #f1f5f9; transition: 0.3s; text-align: center; height: 100%;">
+                    <div style="width: 60px; height: 60px; background: white; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; color: #f59e0b; font-size: 1.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.05);"><i class="fas fa-tools"></i></div>
+                    <h4 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 15px; color: var(--primary);">Bidang Pelatihan</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-light); line-height: 1.6;">Menyelenggarakan pelatihan kerja, standardisasi kompetensi, dan peningkatan produktivitas tenaga kerja.</p>
+                    <span style="display: inline-block; margin-top: 20px; font-weight: 700; color: #f59e0b; font-size: 0.85rem;">Lihat Detail <i class="fas fa-arrow-right" style="font-size: 0.7rem; margin-left: 5px;"></i></span>
+                </div>
+            </a>
+            <a href="{{ route('departments.hi') }}" style="text-decoration: none; color: inherit;">
+                <div style="padding: 40px 30px; border-radius: 24px; background: #f8fafc; border: 1px solid #f1f5f9; transition: 0.3s; text-align: center; height: 100%;">
+                    <div style="width: 60px; height: 60px; background: white; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; color: #ef4444; font-size: 1.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.05);"><i class="fas fa-handshake"></i></div>
+                    <h4 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 15px; color: var(--primary);">Bidang Hubungan Industrial</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-light); line-height: 1.6;">Menangani kesejahteraan pekerja, perselisihan hubungan industrial, dan pengawasan ketenagakerjaan.</p>
+                    <span style="display: inline-block; margin-top: 20px; font-weight: 700; color: #ef4444; font-size: 0.85rem;">Lihat Detail <i class="fas fa-arrow-right" style="font-size: 0.7rem; margin-left: 5px;"></i></span>
+                </div>
+            </a>
+        </div>
+    </section>
 
     @if($footerProfile->sambutan_kepala)
     <section class="section" style="background: white; padding: 100px 8%;">
@@ -630,6 +668,42 @@
     </section>
     @endif
 
+    <!-- Steps Section -->
+    <section class="section" style="background: white; padding: 120px 8%;">
+        <div style="text-align: center; margin-bottom: 80px;">
+            <h4 style="color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; margin-bottom: 12px; font-weight: 800;">Panduan Karir</h4>
+            <h2 style="font-size: 2.8rem; font-weight: 800; color: var(--primary); letter-spacing: -1px;">Cara Mudah Dapatkan Pekerjaan</h2>
+            <p style="color: var(--text-light); max-width: 600px; margin: 20px auto 0;">Ikuti langkah strategis ini untuk membangun karir impian Anda bersama Disnakertrans.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
+            <div style="text-align: center;">
+                <div style="height: 200px; margin-bottom: 30px; display: flex; align-items: center; justify-content: center;">
+                    <img src="https://illustrations.popsy.co/white/personal-data.svg" alt="Daftar AK-1" style="max-height: 100%; width: auto;">
+                </div>
+                <div style="width: 40px; height: 40px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 800; font-size: 1.2rem; box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);">1</div>
+                <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 15px;">Daftar Kartu AK-1</h3>
+                <p style="color: var(--text-light); font-size: 0.95rem;">Lengkapi profil Anda dan dapatkan Kartu Kuning sebagai syarat resmi pencari kerja.</p>
+            </div>
+            <div style="text-align: center;">
+                <div style="height: 200px; margin-bottom: 30px; display: flex; align-items: center; justify-content: center;">
+                    <img src="https://illustrations.popsy.co/white/student-going-to-school.svg" alt="Ikuti Pelatihan" style="max-height: 100%; width: auto;">
+                </div>
+                <div style="width: 40px; height: 40px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 800; font-size: 1.2rem; box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);">2</div>
+                <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 15px;">Tingkatkan Skill</h3>
+                <p style="color: var(--text-light); font-size: 0.95rem;">Pilih pelatihan yang sesuai dengan minat Anda untuk meningkatkan nilai jual di pasar kerja.</p>
+            </div>
+            <div style="text-align: center;">
+                <div style="height: 200px; margin-bottom: 30px; display: flex; align-items: center; justify-content: center;">
+                    <img src="https://illustrations.popsy.co/white/celebration.svg" alt="Lamar Pekerjaan" style="max-height: 100%; width: auto;">
+                </div>
+                <div style="width: 40px; height: 40px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 800; font-size: 1.2rem; box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);">3</div>
+                <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 15px;">Lamar & Berkarir</h3>
+                <p style="color: var(--text-light); font-size: 0.95rem;">Cari lowongan yang cocok, kirim lamaran, dan mulai babak baru dalam perjalanan profesional Anda.</p>
+            </div>
+        </div>
+    </section>
+
     <section class="section" id="layanan" style="background: #f8fafc;">
         <div style="text-align: center; margin-bottom: 60px;">
             <h4 style="color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; margin-bottom: 12px; font-weight: 800;">Program & Layanan</h4>
@@ -658,114 +732,205 @@
     </section>
 
     <!-- Pelatihan Kerja Section -->
-    <section class="section" id="pelatihan" style="background: white;">
-        <div class="section-header">
-            <div class="section-title">
-                <h4>Peningkatan Kompetensi</h4>
-                <h2>Pelatihan Kerja Terbaru</h2>
+    <section class="section" id="pelatihan" style="background: linear-gradient(to bottom, #f8fafc, #ffffff); border-radius: 60px 60px 0 0; padding: 120px 8%;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 80px; gap: 40px; flex-wrap: wrap;">
+            <div style="max-width: 600px;">
+                <h4 style="color: var(--accent); text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; margin-bottom: 15px; font-weight: 800; display: flex; align-items: center; gap: 10px;">
+                    <span style="width: 30px; height: 2px; background: var(--accent);"></span> Program Kompetensi
+                </h4>
+                <h2 style="font-size: 3rem; font-weight: 800; color: var(--primary); line-height: 1.1; letter-spacing: -1.5px;">Tingkatkan Keahlian, <br><span style="color: var(--accent);">Raih Masa Depan.</span></h2>
+                <p style="color: var(--text-light); margin-top: 25px; font-size: 1.1rem; line-height: 1.8;">Kembangkan potensi diri Anda melalui program pelatihan bersertifikat yang dirancang khusus untuk memenuhi standar kebutuhan industri saat ini.</p>
             </div>
-            <a href="{{ route('trainings.index') }}" class="news-link">Lihat Semua Pelatihan <i class="fas fa-arrow-right"></i></a>
+            <a href="{{ route('trainings.index') }}" class="btn btn-accent" style="padding: 18px 35px; border-radius: 18px; box-shadow: 0 15px 30px rgba(59, 130, 246, 0.2);">
+                Lihat Jadwal Pelatihan <i class="fas fa-calendar-alt" style="margin-left: 10px;"></i>
+            </a>
         </div>
         
-        <div class="news-grid">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px;">
             @forelse($latestTrainings as $training)
-                <div class="news-card">
-                    <div class="news-img">
+                <div class="training-modern-card" style="background: white; border-radius: 32px; overflow: hidden; border: 1px solid #f1f5f9; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; display: flex; flex-direction: column;">
+                    <div style="height: 240px; overflow: hidden; position: relative;">
                         @if($training->image)
-                            <img src="{{ asset('storage/'.$training->image) }}" alt="{{ $training->title }}">
+                            <img src="{{ asset('storage/'.$training->image) }}" alt="{{ $training->title }}" style="width: 100%; height: 100%; object-fit: cover; transition: 0.5s;">
                         @else
-                            <div style="width: 100%; height: 100%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; color: #cbd5e1;">
-                                <i class="fas fa-tools" style="font-size: 3rem;"></i>
+                            <div style="width: 100%; height: 100%; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; color: var(--accent);">
+                                <i class="fas fa-graduation-cap" style="font-size: 4rem;"></i>
                             </div>
                         @endif
-                        <span class="news-tag" style="background: var(--secondary);">Kuota: {{ $training->quota }}</span>
+                        <div style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.9); padding: 8px 15px; border-radius: 12px; font-size: 0.75rem; font-weight: 800; color: var(--primary); backdrop-filter: blur(5px);">
+                            <i class="fas fa-users" style="color: var(--accent); margin-right: 5px;"></i> {{ $training->quota }} Kuota
+                        </div>
                     </div>
-                    <div class="news-content">
-                        <span class="news-date">
-                            <i class="far fa-calendar-alt"></i> 
-                            {{ $training->start_date ? $training->start_date->format('d M Y') : '-' }} - 
-                            {{ $training->end_date ? $training->end_date->format('d M Y') : '-' }}
-                        </span>
-                        <h3>{{ Str::limit($training->title, 60) }}</h3>
-                        <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 20px;">{{ Str::limit($training->description, 100) }}</p>
-                        <a href="#" class="news-link">Detail Pelatihan <i class="fas fa-chevron-right"></i></a>
+                    <div style="padding: 35px; flex-grow: 1; display: flex; flex-direction: column;">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                            <span style="background: var(--accent-soft); color: var(--accent); padding: 5px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">{{ $training->category->name ?? 'Umum' }}</span>
+                            <span style="font-size: 0.8rem; color: var(--text-light); font-weight: 600;">
+                                <i class="far fa-calendar" style="margin-right: 5px;"></i> {{ $training->start_date ? $training->start_date->format('d M') : 'Segera' }}
+                            </span>
+                        </div>
+                        <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--primary); margin-bottom: 15px; line-height: 1.3;">{{ Str::limit($training->title, 50) }}</h3>
+                        <p style="color: var(--text-light); font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px; flex-grow: 1;">{{ Str::limit($training->description, 100) }}</p>
+                        <div style="padding-top: 25px; border-top: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent);">Gratis & Bersertifikat</span>
+                            <a href="{{ route('trainings.index') }}" style="width: 45px; height: 45px; background: var(--primary); color: white; border-radius: 14px; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.3s;" onmouseover="this.style.background='var(--accent)'" onmouseout="this.style.background='var(--primary)'">
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             @empty
-                <div style="grid-column: 1/-1; text-align: center; padding: 40px; background: #f8fafc; border-radius: 16px;">
-                    <p style="color: #64748b;">Belum ada program pelatihan saat ini.</p>
+                <div style="grid-column: 1/-1; text-align: center; padding: 60px; background: white; border-radius: 30px; border: 2px dashed #e2e8f0;">
+                    <img src="https://illustrations.popsy.co/white/searching.svg" alt="Empty" style="width: 150px; margin-bottom: 20px; opacity: 0.5;">
+                    <p style="color: #64748b; font-weight: 600;">Saat ini belum ada jadwal pelatihan yang dibuka.</p>
                 </div>
             @endforelse
         </div>
     </section>
+
+    <style>
+        .training-modern-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.1);
+            border-color: var(--accent-soft);
+        }
+        .training-modern-card:hover img {
+            transform: scale(1.1);
+        }
+    </style>
 
     <!-- Lowongan Kerja Section -->
-    <section class="section" id="lowongan" style="background: #f8fafc;">
-        <div class="section-header">
-            <div class="section-title">
-                <h4>Bursa Kerja</h4>
-                <h2>Lowongan Kerja Terkini</h2>
+    <section class="section" id="lowongan" style="background: #ffffff; padding-top: 100px;">
+        <div style="display: grid; grid-template-columns: 0.7fr 1.3fr; gap: 60px; align-items: center; margin-bottom: 60px;">
+            <div>
+                <h4 style="color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; margin-bottom: 12px; font-weight: 800;">Bursa Kerja</h4>
+                <h2 style="font-size: 2.5rem; font-weight: 800; color: var(--primary); line-height: 1.2;">Temukan Peluang Karir Impianmu</h2>
+                <p style="color: var(--text-light); margin: 20px 0 30px; font-size: 1.1rem;">Ratusan perusahaan terpercaya mencari talenta terbaik seperti Anda. Mulai lamar sekarang!</p>
+                <a href="{{ route('jobs.index') }}" class="btn btn-accent">Lihat Semua Lowongan <i class="fas fa-briefcase"></i></a>
             </div>
-            <a href="{{ route('jobs.index') }}" class="news-link">Lihat Semua Lowongan <i class="fas fa-arrow-right"></i></a>
-        </div>
-        
-        <div class="news-grid">
-            @forelse($latestJobs as $job)
-                <div class="news-card" style="border-top: 4px solid var(--accent);">
-                    <div class="news-content">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
-                            <span class="news-tag" style="position: static; background: var(--accent-soft); color: var(--accent);">{{ $job->perusahaan }}</span>
-                            @if($job->is_verified)
-                                <i class="fas fa-check-circle" style="color: #10b981;" title="Verified Company"></i>
-                            @endif
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                @forelse($latestJobs as $job)
+                    <div class="news-card" style="border: 1px solid #f1f5f9; box-shadow: 0 4px 15px rgba(0,0,0,0.02); border-radius: 16px; transition: 0.3s; height: fit-content;">
+                        <div class="news-content" style="padding: 24px;">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                                <div style="width: 40px; height: 40px; background: #f8fafc; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent);">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                                <div>
+                                    <p style="margin: 0; font-size: 0.75rem; color: var(--text-light); font-weight: 600;">{{ Str::limit($job->perusahaan, 20) }}</p>
+                                    @if($job->is_verified)
+                                        <span style="font-size: 0.65rem; color: #10b981; font-weight: 700;"><i class="fas fa-check-circle"></i> Terverifikasi</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <h3 style="font-size: 1.1rem; margin-bottom: 10px; font-weight: 700;">{{ Str::limit($job->posisi, 30) }}</h3>
+                            <div style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 20px;">
+                                <i class="fas fa-map-marker-alt" style="margin-right: 5px;"></i> Kab. Banjar & Sekitarnya
+                            </div>
+                            <a href="{{ route('jobs.show', $job->id) }}" class="news-link" style="font-size: 0.85rem;">Detail Loker <i class="fas fa-arrow-right"></i></a>
                         </div>
-                        <h3 style="margin-bottom: 10px;">{{ $job->posisi }}</h3>
-                        <div style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 15px;">
-                            <i class="fas fa-clock"></i> Deadline: {{ $job->deadline ? $job->deadline->format('d M Y') : 'N/A' }}
-                        </div>
-                        <div style="font-size: 0.9rem; color: var(--text-dark); margin-bottom: 20px; line-height: 1.5;">
-                            {!! Str::limit($job->syarat, 120) !!}
-                        </div>
-                        <a href="{{ route('jobs.show', $job->id) }}" class="news-link">Lihat Detail <i class="fas fa-arrow-right"></i></a>
                     </div>
-                </div>
-            @empty
-                <div style="grid-column: 1/-1; text-align: center; padding: 40px; background: white; border-radius: 16px;">
-                    <p style="color: #64748b;">Belum ada lowongan kerja tersedia saat ini.</p>
-                </div>
-            @endforelse
+                @empty
+                    <div style="grid-column: 1/-1; text-align: center; padding: 40px; background: #f8fafc; border-radius: 16px;">
+                        <p style="color: #64748b;">Belum ada lowongan kerja tersedia.</p>
+                    </div>
+                @endforelse
+            </div>
         </div>
     </section>
 
-    <section class="section" id="berita">
-        <div class="section-header">
-            <div class="section-title">
-                <h4>Berita & Pengumuman</h4>
-                <h2>Informasi Terkini</h2>
+    <section class="section" id="berita" style="background: white; padding: 120px 8%;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px;">
+            <div>
+                <h4 style="color: var(--accent); text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; margin-bottom: 12px; font-weight: 800; display: flex; align-items: center; gap: 10px;">
+                    <span style="width: 30px; height: 2px; background: var(--accent);"></span> Informasi & Publikasi
+                </h4>
+                <h2 style="font-size: 2.8rem; font-weight: 800; color: var(--primary); letter-spacing: -1px;">Berita Terbaru</h2>
             </div>
-            <a href="{{ route('posts.index') }}" class="news-link">Lihat Semua Berita <i class="fas fa-arrow-right"></i></a>
+            <a href="{{ route('posts.index') }}" class="btn btn-outline" style="border-radius: 14px; padding: 12px 25px;">
+                Eksplorasi Berita <i class="fas fa-arrow-right" style="margin-left: 8px; font-size: 0.8rem;"></i>
+            </a>
         </div>
         
-        <div class="news-grid">
-            @forelse($latestPosts as $post)
-                <div class="news-card">
-                    <div class="news-img">
-                        @if($post->image)
-                            <img src="{{ asset('storage/'.$post->image) }}" alt="{{ $post->title }}">
-                        @endif
-                        <span class="news-tag">{{ $post->category->name }}</span>
-                    </div>
-                    <div class="news-content">
-                        <span class="news-date">{{ $post->created_at->format('d M Y') }}</span>
-                        <h3>{{ Str::limit($post->title, 60) }}</h3>
-                        <a href="{{ route('posts.show', $post->slug) }}" class="news-link">Baca Selengkapnya <i class="fas fa-chevron-right"></i></a>
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px;">
+            @php $mainPost = $latestPosts->first(); @endphp
+            @if($mainPost)
+                <div class="news-main-card" style="position: relative; border-radius: 30px; overflow: hidden; height: 500px; cursor: pointer; group">
+                    @if($mainPost->image)
+                        <img src="{{ asset('storage/'.$mainPost->image) }}" alt="{{ $mainPost->title }}" style="width: 100%; height: 100%; object-fit: cover; transition: 0.5s;">
+                    @else
+                        <div style="width: 100%; height: 100%; background: var(--primary); display: flex; align-items: center; justify-content: center; color: white;">
+                            <i class="fas fa-newspaper" style="font-size: 5rem; opacity: 0.2;"></i>
+                        </div>
+                    @endif
+                    <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 50px; background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent); color: white;">
+                        <span style="background: var(--accent); color: white; padding: 6px 15px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 20px; display: inline-block;">{{ $mainPost->category->name ?? 'Update' }}</span>
+                        <h3 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2; letter-spacing: -0.5px;">{{ Str::limit($mainPost->title, 80) }}</h3>
+                        <div style="display: flex; align-items: center; gap: 20px; font-size: 0.9rem; opacity: 0.8; font-weight: 500;">
+                            <span><i class="far fa-calendar-alt" style="margin-right: 8px;"></i> {{ $mainPost->created_at->format('d M Y') }}</span>
+                            <span><i class="far fa-user" style="margin-right: 8px;"></i> Admin Disnaker</span>
+                        </div>
+                        <a href="{{ route('posts.show', $mainPost->slug) }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;"></a>
                     </div>
                 </div>
-            @empty
-                <div style="grid-column: 1/-1; text-align: center; padding: 40px; background: #f8fafc; border-radius: 16px;">
-                    <p style="color: #64748b;">Belum ada berita terbaru saat ini.</p>
-                </div>
-            @endforelse
+            @endif
+
+            <div style="display: flex; flex-direction: column; gap: 25px;">
+                @foreach($latestPosts->skip(1)->take(3) as $post)
+                    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 20px; align-items: center; padding: 15px; border-radius: 20px; transition: 0.3s; cursor: pointer; border: 1px solid transparent;" onmouseover="this.style.background='#f8fafc'; this.style.borderColor='#f1f5f9'" onmouseout="this.style.background='transparent'; this.style.borderColor='transparent'">
+                        <div style="height: 100px; border-radius: 15px; overflow: hidden;">
+                            @if($post->image)
+                                <img src="{{ asset('storage/'.$post->image) }}" alt="{{ $post->title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            @else
+                                <div style="width: 100%; height: 100%; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; color: var(--accent);">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                            @endif
+                        </div>
+                        <div>
+                            <span style="font-size: 0.75rem; color: var(--accent); font-weight: 700; text-transform: uppercase;">{{ $post->category->name ?? 'Update' }}</span>
+                            <h4 style="font-size: 1rem; font-weight: 800; color: var(--primary); margin: 8px 0; line-height: 1.4;">{{ Str::limit($post->title, 60) }}</h4>
+                            <span style="font-size: 0.8rem; color: var(--text-light); font-weight: 500;"><i class="far fa-calendar-alt"></i> {{ $post->created_at->format('d M Y') }}</span>
+                        </div>
+                        <a href="{{ route('posts.show', $post->slug) }}" style="position: absolute; width: 100%; height: 100%; z-index: 2;"></a>
+                    </div>
+                @endforeach
+
+                @if($latestPosts->count() == 0)
+                    <div style="text-align: center; padding: 40px; background: #f8fafc; border-radius: 20px; border: 1px dashed #e2e8f0;">
+                        <p style="color: #64748b; font-weight: 600;">Belum ada berita terbaru saat ini.</p>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .news-main-card:hover img {
+            transform: scale(1.05);
+        }
+        .news-main-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.2);
+            transition: 0.3s;
+        }
+        .news-main-card:hover::after {
+            background: rgba(15, 23, 42, 0.1);
+        }
+    </style>
+
+    <section class="section" style="background: white; padding: 80px 8%;">
+        <div style="text-align: center; margin-bottom: 50px;">
+            <p style="text-transform: uppercase; letter-spacing: 3px; font-size: 0.75rem; font-weight: 800; color: #94a3b8; margin-bottom: 10px;">Bekerja Sama Dengan</p>
+            <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">Ratusan Perusahaan & Instansi</h3>
+        </div>
+        <div style="display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; opacity: 0.5; filter: grayscale(100%);">
+            <div style="display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 800; color: #64748b;"><i class="fas fa-industry"></i> MANUFAKTUR</div>
+            <div style="display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 800; color: #64748b;"><i class="fas fa-microchip"></i> TEKNOLOGI</div>
+            <div style="display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 800; color: #64748b;"><i class="fas fa-hospital"></i> KESEHATAN</div>
+            <div style="display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 800; color: #64748b;"><i class="fas fa-hotel"></i> PARIWISATA</div>
+            <div style="display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 800; color: #64748b;"><i class="fas fa-hard-hat"></i> KONSTRUKSI</div>
         </div>
     </section>
 

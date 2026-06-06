@@ -3,12 +3,18 @@
 @section('title', 'Lowongan Kerja - Disnakertrans Kabupaten Banjar')
 
 @section('content')
-<header class="page-header">
-    <h1>Bursa Lowongan Kerja</h1>
-    <div class="breadcrumb">
-        <a href="/">Beranda</a>
-        <span>/</span>
-        <span>Lowongan Kerja</span>
+<header class="page-header" style="padding: 180px 8% 100px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; text-align: left; background: white;">
+    <div>
+        <div class="breadcrumb" style="justify-content: flex-start; margin-bottom: 20px;">
+            <a href="/">Beranda</a>
+            <span>/</span>
+            <span>Lowongan Kerja</span>
+        </div>
+        <h1 style="font-size: 3.5rem; margin-bottom: 20px;">Temukan Peluang <br><span style="color: var(--accent);">Karir Terbaik.</span></h1>
+        <p style="color: var(--text-light); font-size: 1.1rem; max-width: 600px;">Telusuri berbagai lowongan pekerjaan dari perusahaan terverifikasi di Kabupaten Banjar dan sekitarnya.</p>
+    </div>
+    <div style="text-align: right;">
+        <img src="https://illustrations.popsy.co/white/remote-work.svg" alt="Jobs Illustration" style="width: 100%; max-width: 400px;">
     </div>
 </header>
 

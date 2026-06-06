@@ -31,6 +31,8 @@
             color: var(--text-dark);
             line-height: 1.6;
             background-color: #ffffff;
+            background-image: radial-gradient(#e2e8f0 0.5px, transparent 0.5px);
+            background-size: 30px 30px;
             overflow-x: hidden;
         }
 
@@ -168,12 +170,17 @@
             transition: 0.3s;
         }
 
-        .nav-links a:hover {
+        .nav-links a.active {
             color: var(--accent);
         }
 
-        .nav-links a:hover::after {
+        .nav-links a.active::after {
             width: 100%;
+        }
+
+        .dropdown-item.active {
+            background: var(--accent-soft);
+            color: var(--accent);
         }
 
         .btn-portal {
@@ -325,37 +332,37 @@
             </div>
         </a>
         <ul class="nav-links">
-            <li><a href="/">Beranda</a></li>
+            <li><a href="/" class="{{ Request::is('/') ? 'active' : '' }}">Beranda</a></li>
             
             <li class="nav-item">
-                <a href="#">Profil <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                <a href="#" class="{{ Request::is('profil*') ? 'active' : '' }}">Profil <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                 <ul class="dropdown-menu">
-                    <li><a href="{{ route('profile.history') }}" class="dropdown-item"><i class="fas fa-info-circle"></i> Tentang</a></li>
-                    <li><a href="{{ route('profile.vision') }}" class="dropdown-item"><i class="fas fa-eye"></i> Visi & Misi</a></li>
-                    <li><a href="{{ route('profile.structure') }}" class="dropdown-item"><i class="fas fa-sitemap"></i> Struktur Organisasi</a></li>
-                    <li><a href="{{ route('profile.maklumat') }}" class="dropdown-item"><i class="fas fa-hand-holding-heart"></i> Maklumat Pelayanan</a></li>
+                    <li><a href="{{ route('profile.history') }}" class="dropdown-item {{ Request::routeIs('profile.history') ? 'active' : '' }}"><i class="fas fa-info-circle"></i> Tentang</a></li>
+                    <li><a href="{{ route('profile.vision') }}" class="dropdown-item {{ Request::routeIs('profile.vision') ? 'active' : '' }}"><i class="fas fa-eye"></i> Visi & Misi</a></li>
+                    <li><a href="{{ route('profile.structure') }}" class="dropdown-item {{ Request::routeIs('profile.structure') ? 'active' : '' }}"><i class="fas fa-sitemap"></i> Struktur Organisasi</a></li>
+                    <li><a href="{{ route('profile.maklumat') }}" class="dropdown-item {{ Request::routeIs('profile.maklumat') ? 'active' : '' }}"><i class="fas fa-hand-holding-heart"></i> Maklumat Pelayanan</a></li>
                 </ul>
             </li>
 
             <li class="nav-item">
-                <a href="#">Bidang <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                <a href="#" class="{{ Request::is('bidang*') ? 'active' : '' }}">Bidang <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                 <ul class="dropdown-menu">
-                    <li><a href="{{ route('departments.hi') }}" class="dropdown-item"><i class="fas fa-handshake"></i> Hubungan Industrial</a></li>
-                    <li><a href="{{ route('departments.tk') }}" class="dropdown-item"><i class="fas fa-users"></i> Tenaga Kerja</a></li>
-                    <li><a href="{{ route('departments.training') }}" class="dropdown-item"><i class="fas fa-tools"></i> Pelatihan</a></li>
+                    <li><a href="{{ route('departments.hi') }}" class="dropdown-item {{ Request::routeIs('departments.hi') ? 'active' : '' }}"><i class="fas fa-handshake"></i> Hubungan Industrial</a></li>
+                    <li><a href="{{ route('departments.tk') }}" class="dropdown-item {{ Request::routeIs('departments.tk') ? 'active' : '' }}"><i class="fas fa-users"></i> Tenaga Kerja</a></li>
+                    <li><a href="{{ route('departments.training') }}" class="dropdown-item {{ Request::routeIs('departments.training') ? 'active' : '' }}"><i class="fas fa-tools"></i> Pelatihan</a></li>
                 </ul>
             </li>
 
             <li class="nav-item">
-                <a href="#">Publikasi <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                <a href="#" class="{{ Request::is('berita*') || Request::is('lowongan-kerja*') || Request::is('pelatihan*') ? 'active' : '' }}">Publikasi <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                 <ul class="dropdown-menu">
-                    <li><a href="{{ route('posts.index') }}" class="dropdown-item"><i class="fas fa-newspaper"></i> Berita</a></li>
-                    <li><a href="{{ route('jobs.index') }}" class="dropdown-item"><i class="fas fa-briefcase"></i> Lowongan Kerja</a></li>
-                    <li><a href="{{ route('trainings.index') }}" class="dropdown-item"><i class="fas fa-graduation-cap"></i> Pelatihan</a></li>
+                    <li><a href="{{ route('posts.index') }}" class="dropdown-item {{ Request::is('berita*') ? 'active' : '' }}"><i class="fas fa-newspaper"></i> Berita</a></li>
+                    <li><a href="{{ route('jobs.index') }}" class="dropdown-item {{ Request::is('lowongan-kerja*') ? 'active' : '' }}"><i class="fas fa-briefcase"></i> Lowongan Kerja</a></li>
+                    <li><a href="{{ route('trainings.index') }}" class="dropdown-item {{ Request::is('pelatihan*') ? 'active' : '' }}"><i class="fas fa-graduation-cap"></i> Pelatihan</a></li>
                 </ul>
             </li>
 
-            <li><a href="{{ route('downloads.index') }}">Unduhan</a></li>
+            <li><a href="{{ route('downloads.index') }}" class="{{ Request::routeIs('downloads.index') ? 'active' : '' }}">Unduhan</a></li>
             <li><a href="/#pengaduan">Kontak</a></li>
             <li><a href="/dashboard" class="btn-portal">Portal Admin</a></li>
         </ul>
