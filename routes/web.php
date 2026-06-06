@@ -21,6 +21,17 @@ Route::get('/profil/maklumat-pelayanan', [HomeController::class, 'maklumat'])->n
 Route::get('/berita', [HomeController::class, 'allPosts'])->name('posts.index');
 Route::get('/berita/{slug}', [HomeController::class, 'showPost'])->name('posts.show');
 
+// Bidang Routes
+Route::get('/bidang/hubungan-industrial', [HomeController::class, 'industrialRelations'])->name('departments.hi');
+Route::get('/bidang/tenaga-kerja', [HomeController::class, 'laborForce'])->name('departments.tk');
+Route::get('/bidang/pelatihan', [HomeController::class, 'trainingDept'])->name('departments.training');
+
+// Publication/Lists Routes
+Route::get('/lowongan-kerja', [HomeController::class, 'allJobs'])->name('jobs.index');
+Route::get('/lowongan-kerja/{id}', [HomeController::class, 'showJob'])->name('jobs.show');
+Route::get('/pelatihan', [HomeController::class, 'allTrainings'])->name('trainings.index');
+Route::get('/unduhan', [HomeController::class, 'downloads'])->name('downloads.index');
+
 Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 
 // Authentication Routes
@@ -62,7 +73,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Berita
     Route::resource('posts', PostController::class)->names('admin.posts');
-    
+
     // Hero Section (Singleton Management)
     Route::get('heroes', [\App\Http\Controllers\HeroController::class, 'index'])->name('admin.heroes.index');
     Route::post('heroes', [\App\Http\Controllers\HeroController::class, 'update'])->name('admin.heroes.update');

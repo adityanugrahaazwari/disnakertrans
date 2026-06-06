@@ -326,31 +326,37 @@
         </a>
         <ul class="nav-links">
             <li><a href="/">Beranda</a></li>
+            
             <li class="nav-item">
                 <a href="#">Profil <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                 <ul class="dropdown-menu">
+                    <li><a href="{{ route('profile.history') }}" class="dropdown-item"><i class="fas fa-info-circle"></i> Tentang</a></li>
                     <li><a href="{{ route('profile.vision') }}" class="dropdown-item"><i class="fas fa-eye"></i> Visi & Misi</a></li>
                     <li><a href="{{ route('profile.structure') }}" class="dropdown-item"><i class="fas fa-sitemap"></i> Struktur Organisasi</a></li>
                     <li><a href="{{ route('profile.maklumat') }}" class="dropdown-item"><i class="fas fa-hand-holding-heart"></i> Maklumat Pelayanan</a></li>
-                    <li><a href="{{ route('profile.history') }}" class="dropdown-item"><i class="fas fa-history"></i> Sejarah</a></li>
                 </ul>
             </li>
+
             <li class="nav-item">
-                <a href="{{ route('posts.index') }}">Berita <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
-                @if($navCategories->count() > 0)
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ route('posts.index') }}" class="dropdown-item"><i class="fas fa-list"></i> Semua Berita</a></li>
-                        @foreach($navCategories as $category)
-                            <li>
-                                <a href="{{ route('posts.index', ['category' => $category->slug]) }}" class="dropdown-item">
-                                    <i class="fas fa-tag"></i> {{ $category->name }}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                @endif
+                <a href="#">Bidang <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ route('departments.hi') }}" class="dropdown-item"><i class="fas fa-handshake"></i> Hubungan Industrial</a></li>
+                    <li><a href="{{ route('departments.tk') }}" class="dropdown-item"><i class="fas fa-users"></i> Tenaga Kerja</a></li>
+                    <li><a href="{{ route('departments.training') }}" class="dropdown-item"><i class="fas fa-tools"></i> Pelatihan</a></li>
+                </ul>
             </li>
-            <li><a href="/#layanan">Layanan</a></li>
+
+            <li class="nav-item">
+                <a href="#">Publikasi <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ route('posts.index') }}" class="dropdown-item"><i class="fas fa-newspaper"></i> Berita</a></li>
+                    <li><a href="{{ route('jobs.index') }}" class="dropdown-item"><i class="fas fa-briefcase"></i> Lowongan Kerja</a></li>
+                    <li><a href="{{ route('trainings.index') }}" class="dropdown-item"><i class="fas fa-graduation-cap"></i> Pelatihan</a></li>
+                </ul>
+            </li>
+
+            <li><a href="{{ route('downloads.index') }}">Unduhan</a></li>
+            <li><a href="/#pengaduan">Kontak</a></li>
             <li><a href="/dashboard" class="btn-portal">Portal Admin</a></li>
         </ul>
     </nav>
