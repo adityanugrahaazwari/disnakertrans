@@ -62,6 +62,7 @@ class ProfileController extends Controller
     {
         $validated = $request->validate([
             'alamat' => 'required',
+            'google_maps_url' => 'nullable|string',
             'email' => 'required|email',
             'telepon' => 'required',
         ]);

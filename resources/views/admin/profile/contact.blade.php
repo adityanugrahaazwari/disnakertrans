@@ -18,6 +18,12 @@
             <label style="display: block; margin-bottom: 8px; font-weight: bold;">Alamat Lengkap</label>
             <textarea name="alamat" required style="width: 100%; height: 80px; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;">{{ old('alamat', $profile->alamat ?? '') }}</textarea>
         </div>
+
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 8px; font-weight: bold;">Google Maps Iframe</label>
+            <textarea name="google_maps_url" style="width: 100%; height: 120px; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box; font-family: monospace;" placeholder='<iframe src="https://www.google.com/maps/embed?..." ...></iframe>'>{{ old('google_maps_url', $profile->google_maps_url ?? '') }}</textarea>
+            <small style="color: #6b7280;">Tempelkan kode <strong>Embed Map (iframe)</strong> dari Google Maps. Buka Google Maps, cari lokasi, klik Bagikan > Sematkan peta, lalu salin HTML-nya.</small>
+        </div>
         
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
             <div>

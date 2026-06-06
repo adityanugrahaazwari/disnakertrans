@@ -370,6 +370,21 @@
 
     @yield('content')
 
+    @if($footerProfile->google_maps_url)
+    <section style="padding: 0; line-height: 0; overflow: hidden;">
+        <div class="google-maps-container" style="width: 100%; height: 400px;">
+            {!! $footerProfile->google_maps_url !!}
+        </div>
+        <style>
+            .google-maps-container iframe {
+                width: 100% !important;
+                height: 100% !important;
+                border: 0;
+            }
+        </style>
+    </section>
+    @endif
+
     <footer>
         <div class="footer-main">
             <div class="footer-brand">

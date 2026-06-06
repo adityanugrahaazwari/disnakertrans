@@ -934,6 +934,54 @@
         </div>
     </section>
 
+    @if($footerProfile->google_maps_url)
+    <section style="padding: 100px 8% 0; background: white;">
+        <div style="display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: center;">
+            <div style="padding-right: 20px;">
+                <h4 style="color: var(--accent); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">Kunjungi Kami</h4>
+                <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--primary); margin-bottom: 20px; line-height: 1.3;">{{ $footerProfile->nama_dinas }}</h3>
+                
+                <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                    <i class="fas fa-map-marker-alt" style="color: var(--accent); margin-top: 5px;"></i>
+                    <p style="color: var(--text-light); font-size: 0.95rem; line-height: 1.6; margin: 0;">{{ $footerProfile->alamat }}</p>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 20px; border-top: 1px solid #f1f5f9;">
+                    <div style="display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: var(--text-dark); font-weight: 600;">
+                        <i class="fas fa-phone-alt" style="color: var(--accent); width: 16px;"></i> {{ $footerProfile->telepon }}
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: var(--text-dark); font-weight: 600;">
+                        <i class="fas fa-envelope" style="color: var(--accent); width: 16px;"></i> {{ $footerProfile->email }}
+                    </div>
+                </div>
+            </div>
+            
+            <div style="border-radius: 30px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; background: #f8fafc;">
+                <div class="google-maps-container" style="width: 100%; height: 400px;">
+                    {!! $footerProfile->google_maps_url !!}
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .google-maps-container iframe {
+                width: 100% !important;
+                height: 100% !important;
+                border: 0;
+            }
+            @media (max-width: 992px) {
+                section[style*="padding: 100px 8% 0"] > div {
+                    grid-template-columns: 1fr !important;
+                    gap: 40px !important;
+                }
+                div[style*="padding-right: 20px"] {
+                    padding-right: 0 !important;
+                }
+            }
+        </style>
+    </section>
+    @endif
+
     <section class="section" id="pengaduan" style="background: white; padding: 100px 8%;">
         <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center;">
             <div>

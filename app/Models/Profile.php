@@ -14,6 +14,7 @@ class Profile extends Model
         'sejarah',
         'struktur_organisasi',
         'alamat',
+        'google_maps_url',
         'email',
         'telepon',
         'facebook_url',

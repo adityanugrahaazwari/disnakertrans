@@ -23,6 +23,7 @@ class CmsDataSeeder extends Seeder
             'visi' => 'Terwujudnya Tenaga Kerja yang Kompeten, Produktif, dan Sejahtera.',
             'misi' => "1. Meningkatkan kualitas dan kompetensi tenaga kerja.\n2. Memperluas kesempatan kerja dan mengurangi pengangguran.\n3. Meningkatkan perlindungan dan kesejahteraan tenaga kerja.\n4. Meningkatkan tata kelola pemerintahan yang baik.",
             'alamat' => 'Jl. Ahmad Yani No. 123, Martapura, Kabupaten Banjar, Kalimantan Selatan',
+            'google_maps_url' => '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.125636040854!2d114.8384241!3d-3.3283259!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de68102d93e7f9b%3A0x6b44356e4c2780e8!2sDinas%20Tenaga%20Kerja%20dan%20Transmigrasi%20Kabupaten%20Banjar!5e0!3m2!1sid!2sid!4v1717684000000!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
             'email' => 'disnakertrans@banjarkab.go.id',
             'telepon' => '(0511) 4721234',
             'nama_kepala' => 'Drs. H. Ahmad Fauzi, M.Si',
