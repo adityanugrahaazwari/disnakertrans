@@ -527,31 +527,37 @@
         </a>
         <ul class="nav-links">
             <li><a href="/">Beranda</a></li>
+            
             <li class="nav-item">
                 <a href="#">Profil <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                 <ul class="dropdown-menu">
+                    <li><a href="{{ route('profile.history') }}" class="dropdown-item"><i class="fas fa-info-circle"></i> Tentang</a></li>
                     <li><a href="{{ route('profile.vision') }}" class="dropdown-item"><i class="fas fa-eye"></i> Visi & Misi</a></li>
                     <li><a href="{{ route('profile.structure') }}" class="dropdown-item"><i class="fas fa-sitemap"></i> Struktur Organisasi</a></li>
                     <li><a href="{{ route('profile.maklumat') }}" class="dropdown-item"><i class="fas fa-hand-holding-heart"></i> Maklumat Pelayanan</a></li>
-                    <li><a href="{{ route('profile.history') }}" class="dropdown-item"><i class="fas fa-history"></i> Sejarah</a></li>
                 </ul>
             </li>
+
             <li class="nav-item">
-                <a href="/berita">Berita <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
-                @if($navCategories->count() > 0)
-                    <ul class="dropdown-menu">
-                        <li><a href="/berita" class="dropdown-item"><i class="fas fa-list"></i> Semua Berita</a></li>
-                        @foreach($navCategories as $category)
-                            <li>
-                                <a href="{{ route('posts.index', ['category' => $category->slug]) }}" class="dropdown-item">
-                                    <i class="fas fa-tag"></i> {{ $category->name }}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                @endif
+                <a href="#">Bidang <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ route('departments.hi') }}" class="dropdown-item"><i class="fas fa-handshake"></i> Hubungan Industrial</a></li>
+                    <li><a href="{{ route('departments.tk') }}" class="dropdown-item"><i class="fas fa-users"></i> Tenaga Kerja</a></li>
+                    <li><a href="{{ route('departments.training') }}" class="dropdown-item"><i class="fas fa-tools"></i> Pelatihan</a></li>
+                </ul>
             </li>
-            <li><a href="#layanan">Layanan</a></li>
+
+            <li class="nav-item">
+                <a href="#">Publikasi <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ route('posts.index') }}" class="dropdown-item"><i class="fas fa-newspaper"></i> Berita</a></li>
+                    <li><a href="{{ route('jobs.index') }}" class="dropdown-item"><i class="fas fa-briefcase"></i> Lowongan Kerja</a></li>
+                    <li><a href="{{ route('trainings.index') }}" class="dropdown-item"><i class="fas fa-graduation-cap"></i> Pelatihan</a></li>
+                </ul>
+            </li>
+
+            <li><a href="{{ route('downloads.index') }}">Unduhan</a></li>
+            <li><a href="#pengaduan">Kontak</a></li>
             <li><a href="/dashboard" class="btn-portal">Portal Admin</a></li>
         </ul>
     </nav>
@@ -646,6 +652,86 @@
                     <div class="stat-icon"><i class="fas fa-info-circle"></i></div>
                     <h3>Layanan Kami</h3>
                     <p>Silakan hubungi kami atau cek secara berkala untuk informasi layanan terbaru.</p>
+                </div>
+            @endforelse
+        </div>
+    </section>
+
+    <!-- Pelatihan Kerja Section -->
+    <section class="section" id="pelatihan" style="background: white;">
+        <div class="section-header">
+            <div class="section-title">
+                <h4>Peningkatan Kompetensi</h4>
+                <h2>Pelatihan Kerja Terbaru</h2>
+            </div>
+            <a href="{{ route('trainings.index') }}" class="news-link">Lihat Semua Pelatihan <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="news-grid">
+            @forelse($latestTrainings as $training)
+                <div class="news-card">
+                    <div class="news-img">
+                        @if($training->image)
+                            <img src="{{ asset('storage/'.$training->image) }}" alt="{{ $training->title }}">
+                        @else
+                            <div style="width: 100%; height: 100%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; color: #cbd5e1;">
+                                <i class="fas fa-tools" style="font-size: 3rem;"></i>
+                            </div>
+                        @endif
+                        <span class="news-tag" style="background: var(--secondary);">Kuota: {{ $training->quota }}</span>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-date">
+                            <i class="far fa-calendar-alt"></i> 
+                            {{ $training->start_date ? $training->start_date->format('d M Y') : '-' }} - 
+                            {{ $training->end_date ? $training->end_date->format('d M Y') : '-' }}
+                        </span>
+                        <h3>{{ Str::limit($training->title, 60) }}</h3>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 20px;">{{ Str::limit($training->description, 100) }}</p>
+                        <a href="#" class="news-link">Detail Pelatihan <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            @empty
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px; background: #f8fafc; border-radius: 16px;">
+                    <p style="color: #64748b;">Belum ada program pelatihan saat ini.</p>
+                </div>
+            @endforelse
+        </div>
+    </section>
+
+    <!-- Lowongan Kerja Section -->
+    <section class="section" id="lowongan" style="background: #f8fafc;">
+        <div class="section-header">
+            <div class="section-title">
+                <h4>Bursa Kerja</h4>
+                <h2>Lowongan Kerja Terkini</h2>
+            </div>
+            <a href="{{ route('jobs.index') }}" class="news-link">Lihat Semua Lowongan <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="news-grid">
+            @forelse($latestJobs as $job)
+                <div class="news-card" style="border-top: 4px solid var(--accent);">
+                    <div class="news-content">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                            <span class="news-tag" style="position: static; background: var(--accent-soft); color: var(--accent);">{{ $job->perusahaan }}</span>
+                            @if($job->is_verified)
+                                <i class="fas fa-check-circle" style="color: #10b981;" title="Verified Company"></i>
+                            @endif
+                        </div>
+                        <h3 style="margin-bottom: 10px;">{{ $job->posisi }}</h3>
+                        <div style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 15px;">
+                            <i class="fas fa-clock"></i> Deadline: {{ $job->deadline ? $job->deadline->format('d M Y') : 'N/A' }}
+                        </div>
+                        <div style="font-size: 0.9rem; color: var(--text-dark); margin-bottom: 20px; line-height: 1.5;">
+                            {!! Str::limit($job->syarat, 120) !!}
+                        </div>
+                        <a href="{{ route('jobs.show', $job->id) }}" class="news-link">Lihat Detail <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            @empty
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px; background: white; border-radius: 16px;">
+                    <p style="color: #64748b;">Belum ada lowongan kerja tersedia saat ini.</p>
                 </div>
             @endforelse
         </div>
