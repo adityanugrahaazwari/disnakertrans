@@ -31,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('footerProfile', \App\Models\Profile::first() ?? new \App\Models\Profile());
             $view->with('navCategories', \App\Models\Category::all());
             $view->with('navServices', \App\Models\Service::where('is_active', true)->orderBy('order')->get());
+            $view->with('departments', \App\Models\Department::where('is_active', true)->orderBy('order')->get());
         });
     }
 }

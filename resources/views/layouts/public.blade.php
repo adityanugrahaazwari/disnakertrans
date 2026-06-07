@@ -313,9 +313,41 @@
             font-size: 0.9rem;
         }
 
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.8rem; color: var(--primary); cursor: pointer; }
+
         @media (max-width: 1024px) {
             .footer-main { grid-template-columns: 1fr 1fr; }
-            .nav-links { display: none; }
+            nav { padding: 1rem 5%; height: 80px; }
+            .mobile-menu-btn { display: block; }
+            .nav-links { 
+                position: fixed; 
+                top: 80px; 
+                left: -100%; 
+                width: 100%; 
+                height: calc(100vh - 80px); 
+                background: white; 
+                flex-direction: column; 
+                padding: 40px; 
+                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+                align-items: flex-start; 
+                overflow-y: auto; 
+                z-index: 1999; 
+                box-shadow: 20px 0 40px rgba(0,0,0,0.1); 
+                display: flex;
+            }
+            .nav-links.active { left: 0; }
+            .nav-item { width: 100%; border-bottom: 1px solid #f1f5f9; padding-bottom: 15px; }
+            .dropdown-menu { 
+                position: static; 
+                opacity: 1; 
+                visibility: visible; 
+                transform: none; 
+                box-shadow: none; 
+                padding: 15px 0 0 20px; 
+                display: none; 
+                border: none; 
+            }
+            .nav-item.active .dropdown-menu { display: block; }
         }
     </style>
     @yield('extra_css')
@@ -331,11 +363,12 @@
                 <span>KABUPATEN BANJAR</span>
             </div>
         </a>
+        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
         <ul class="nav-links">
             <li><a href="/" class="{{ Request::is('/') ? 'active' : '' }}">Beranda</a></li>
             
             <li class="nav-item">
-                <a href="#" class="{{ Request::is('profil*') ? 'active' : '' }}">Profil <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                <a href="javascript:void(0)" class="dropdown-trigger {{ Request::is('profil*') ? 'active' : '' }}">Profil <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                 <ul class="dropdown-menu">
                     <li><a href="{{ route('profile.history') }}" class="dropdown-item {{ Request::routeIs('profile.history') ? 'active' : '' }}"><i class="fas fa-info-circle"></i> Tentang</a></li>
                     <li><a href="{{ route('profile.vision') }}" class="dropdown-item {{ Request::routeIs('profile.vision') ? 'active' : '' }}"><i class="fas fa-eye"></i> Visi & Misi</a></li>
@@ -345,16 +378,16 @@
             </li>
 
             <li class="nav-item">
-                <a href="#" class="{{ Request::is('bidang*') ? 'active' : '' }}">Bidang <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                <a href="javascript:void(0)" class="dropdown-trigger {{ Request::is('bidang*') ? 'active' : '' }}">Bidang <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                 <ul class="dropdown-menu">
-                    <li><a href="{{ route('departments.hi') }}" class="dropdown-item {{ Request::routeIs('departments.hi') ? 'active' : '' }}"><i class="fas fa-handshake"></i> Hubungan Industrial</a></li>
-                    <li><a href="{{ route('departments.tk') }}" class="dropdown-item {{ Request::routeIs('departments.tk') ? 'active' : '' }}"><i class="fas fa-users"></i> Tenaga Kerja</a></li>
-                    <li><a href="{{ route('departments.training') }}" class="dropdown-item {{ Request::routeIs('departments.training') ? 'active' : '' }}"><i class="fas fa-tools"></i> Pelatihan</a></li>
+                    @foreach($departments as $dept)
+                        <li><a href="{{ $dept->url ?? '#' }}" class="dropdown-item {{ Request::url() == $dept->url ? 'active' : '' }}"><i class="{{ $dept->icon ?? 'fas fa-chevron-right' }}"></i> {{ $dept->title }}</a></li>
+                    @endforeach
                 </ul>
             </li>
 
             <li class="nav-item">
-                <a href="#" class="{{ Request::is('berita*') || Request::is('lowongan-kerja*') || Request::is('pelatihan*') ? 'active' : '' }}">Publikasi <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                <a href="javascript:void(0)" class="dropdown-trigger {{ Request::is('berita*') || Request::is('lowongan-kerja*') || Request::is('pelatihan*') ? 'active' : '' }}">Publikasi <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
                 <ul class="dropdown-menu">
                     <li><a href="{{ route('posts.index') }}" class="dropdown-item {{ Request::is('berita*') ? 'active' : '' }}"><i class="fas fa-newspaper"></i> Berita</a></li>
                     <li><a href="{{ route('jobs.index') }}" class="dropdown-item {{ Request::is('lowongan-kerja*') ? 'active' : '' }}"><i class="fas fa-briefcase"></i> Lowongan Kerja</a></li>
@@ -370,7 +403,7 @@
 
     @yield('content')
 
-    @if($footerProfile->google_maps_url)
+    @if($footerProfile->google_maps_url && request()->routeIs('home'))
     <section style="padding: 0; line-height: 0; overflow: hidden;">
         <div class="google-maps-container" style="width: 100%; height: 400px;">
             {!! $footerProfile->google_maps_url !!}
@@ -462,6 +495,28 @@
     </footer>
 
     <script>
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        const triggers = document.querySelectorAll('.dropdown-trigger');
+        
+        if (menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                const icon = menuBtn.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+        }
+
+        triggers.forEach(t => {
+            t.addEventListener('click', () => {
+                if(window.innerWidth <= 1024) {
+                    const parent = t.parentElement;
+                    parent.classList.toggle('active');
+                }
+            });
+        });
+
         window.addEventListener('scroll', function() {
             const nav = document.querySelector('nav');
             if (window.scrollY > 50) {

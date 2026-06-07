@@ -1,87 +1,40 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semua Berita - Disnakertrans Kabupaten Banjar</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #0f172a;
-            --accent: #3b82f6;
-            --accent-soft: #eff6ff;
-            --text-dark: #1e293b;
-            --text-light: #64748b;
-            --radius-md: 16px;
-        }
+@extends('layouts.public')
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-dark); background: #f8fafc; line-height: 1.6; }
-        
-        nav {
-            padding: 1.5rem 8%;
-            background: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+@section('title', 'Semua Berita - Disnakertrans Kabupaten Banjar')
 
-        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .logo-icon { width: 40px; height: 40px; background: var(--accent); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; }
-        .logo-text h1 { font-size: 1rem; font-weight: 800; color: var(--primary); line-height: 1; }
-        .logo-text span { font-size: 0.7rem; color: var(--text-light); text-transform: uppercase; font-weight: 600; }
+@section('extra_css')
+<style>
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
+    .news-card { background: white; border-radius: var(--radius-md); overflow: hidden; border: 1px solid #f1f5f9; transition: 0.3s; height: 100%; display: flex; flex-direction: column; }
+    .news-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+    .news-img { height: 220px; position: relative; }
+    .news-img img { width: 100%; height: 100%; object-fit: cover; }
+    .news-tag { position: absolute; top: 15px; left: 15px; background: var(--accent); color: white; padding: 5px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; }
+    .news-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+    .news-date { font-size: 0.8rem; color: var(--text-light); margin-bottom: 10px; display: block; }
+    .news-content h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; line-height: 1.4; color: var(--primary); }
+    .news-link { color: var(--accent); text-decoration: none; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; margin-top: auto; }
 
-        .container { padding: 60px 8%; max-width: 1400px; margin: 0 auto; }
-        
-        .page-header { margin-bottom: 50px; text-align: center; }
-        .page-header h2 { font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 10px; }
-        .page-header p { color: var(--text-light); font-size: 1.1rem; }
+    @media (max-width: 768px) {
+        .news-grid { grid-template-columns: 1fr; }
+    }
+</style>
+@endsection
 
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
-        .news-card { background: white; border-radius: var(--radius-md); overflow: hidden; border: 1px solid #f1f5f9; transition: 0.3s; }
-        .news-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
-        .news-img { height: 220px; position: relative; }
-        .news-img img { width: 100%; height: 100%; object-fit: cover; }
-        .news-tag { position: absolute; top: 15px; left: 15px; background: var(--accent); color: white; padding: 5px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; }
-        .news-content { padding: 25px; }
-        .news-date { font-size: 0.8rem; color: var(--text-light); margin-bottom: 10px; display: block; }
-        .news-content h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; line-height: 1.4; color: var(--primary); }
-        .news-link { color: var(--accent); text-decoration: none; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; }
-
-        .pagination { margin-top: 60px; display: flex; justify-content: center; }
-        
-        footer { background: #020617; color: white; padding: 40px 8%; text-align: center; margin-top: 100px; }
-        footer p { font-size: 0.9rem; color: #94a3b8; }
-
-        @media (max-width: 768px) {
-            .news-grid { grid-template-columns: 1fr; }
-            .page-header h2 { font-size: 2rem; }
-        }
-    </style>
-</head>
-<body>
-    <nav>
-        <a href="/" class="logo">
-            <div class="logo-icon"><i class="fas fa-building-columns"></i></div>
-            <div class="logo-text">
-                <h1>DISNAKERTRANS</h1>
-                <span>KABUPATEN BANJAR</span>
-            </div>
-        </a>
-        <a href="/" style="text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 0.9rem;"><i class="fas fa-arrow-left"></i> Kembali ke Beranda</a>
-    </nav>
-
+@section('content')
+<header class="page-header">
     <div class="container">
-        <div class="page-header">
-            <h2>Berita & Pengumuman</h2>
-            <p>Dapatkan informasi terbaru seputar ketenagakerjaan di Kabupaten Banjar.</p>
+        <h1>Berita & Pengumuman</h1>
+        <div class="breadcrumb">
+            <a href="/">Beranda</a>
+            <span>/</span>
+            <span>Berita</span>
         </div>
+    </div>
+</header>
 
+<section class="section">
+    <div class="container" style="max-width: 1200px;">
         <div class="news-grid">
             @forelse($posts as $post)
                 <div class="news-card">
@@ -109,13 +62,9 @@
             @endforelse
         </div>
 
-        <div class="pagination">
+        <div style="margin-top: 60px; display: flex; justify-content: center;">
             {{ $posts->links() }}
         </div>
     </div>
-
-    <footer>
-        <p>&copy; {{ date('Y') }} Pemerintah Kabupaten Banjar. Hak Cipta Dilindungi Undang-Undang.</p>
-    </footer>
-</body>
-</html>
+</section>
+@endsection
