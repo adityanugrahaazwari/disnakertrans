@@ -56,7 +56,7 @@
         .badge-hero { display: inline-block; background: var(--accent-soft); color: var(--accent); padding: 10px 25px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
         .hero h2 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1; font-weight: 800; color: var(--primary); margin-bottom: 30px; letter-spacing: -3px; }
         .hero p { font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--text-light); margin-bottom: 45px; max-width: 650px; line-height: 1.7; }
-        .hero-btns { display: flex; gap: 20px; margin-bottom: 60px; }
+        .hero-btns { display: flex; gap: 20px; margin-top: 20px; margin-bottom: 60px; }
         .btn { display: inline-flex; align-items: center; gap: 12px; padding: 18px 36px; border-radius: 16px; font-weight: 800; text-decoration: none; transition: 0.4s; font-size: 1rem; cursor: pointer; border: none; }
         .btn-accent { background: var(--accent); color: white; box-shadow: 0 15px 35px rgba(59, 130, 246, 0.25); }
         .btn-accent:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3); }
