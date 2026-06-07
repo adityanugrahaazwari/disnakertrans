@@ -19,7 +19,7 @@
     <form action="{{ route('admin.heroes.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+        <div class="hero-form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
             <div style="grid-column: span 2;">
                 <label>Badge Text (Teks Kecil di Atas Judul)</label>
                 <input type="text" name="badge_text" value="{{ old('badge_text', $hero->badge_text) }}" placeholder="Contoh: Pusat Ketenagakerjaan Resmi">
@@ -33,6 +33,14 @@
             </div>
         </div>
 
+        <style>
+            @media (max-width: 768px) {
+                .hero-form-grid { grid-template-columns: 1fr !important; }
+                .action-btns-grid { grid-template-columns: 1fr !important; }
+                .stats-input-grid { grid-template-columns: 1fr !important; }
+            }
+        </style>
+
         <div style="margin-bottom: 24px;">
             <label>Subtitle / Deskripsi</label>
             <textarea name="subtitle" rows="3" style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit;" placeholder="Masukkan penjelasan singkat banner">{{ old('subtitle', $hero->subtitle) }}</textarea>
@@ -41,7 +49,7 @@
 
         <div style="padding: 20px; background: #f8fafc; border-radius: 12px; margin-bottom: 24px;">
             <h4 style="margin: 0 0 15px; font-size: 1rem;">Tombol Aksi</h4>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 15px;">
+            <div class="action-btns-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 15px;">
                 <div>
                     <label>Teks Tombol 1 (Utama)</label>
                     <input type="text" name="button_text" value="{{ old('button_text', $hero->button_text) }}" placeholder="Contoh: Cari Lowongan">
@@ -53,7 +61,7 @@
                     @error('button_url') <small style="color: var(--danger);">{{ $message }}</small> @enderror
                 </div>
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+            <div class="action-btns-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
                 <div>
                     <label>Teks Tombol 2 (Outline)</label>
                     <input type="text" name="button_text_2" value="{{ old('button_text_2', $hero->button_text_2) }}" placeholder="Contoh: Ikuti Pelatihan">
@@ -69,7 +77,7 @@
 
         <div style="padding: 20px; background: #f8fafc; border-radius: 12px; margin-bottom: 24px;">
             <h4 style="margin: 0 0 15px; font-size: 1rem;">Statistik (Bawah Deskripsi)</h4>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 15px;">
+            <div class="stats-input-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 15px;">
                 <div>
                     <label>Stat 1 Angka/Jumlah</label>
                     <input type="text" name="stat_1_count" value="{{ old('stat_1_count', $hero->stat_1_count) }}" placeholder="Contoh: 500+">
@@ -79,7 +87,7 @@
                     <input type="text" name="stat_1_text" value="{{ old('stat_1_text', $hero->stat_1_text) }}" placeholder="Contoh: Lowongan Aktif">
                 </div>
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 15px;">
+            <div class="stats-input-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 15px;">
                 <div>
                     <label>Stat 2 Angka/Jumlah</label>
                     <input type="text" name="stat_2_count" value="{{ old('stat_2_count', $hero->stat_2_count) }}" placeholder="Contoh: 50+">
@@ -89,7 +97,7 @@
                     <input type="text" name="stat_2_text" value="{{ old('stat_2_text', $hero->stat_2_text) }}" placeholder="Contoh: Program Pelatihan">
                 </div>
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+            <div class="stats-input-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
                 <div>
                     <label>Stat 3 Angka/Jumlah</label>
                     <input type="text" name="stat_3_count" value="{{ old('stat_3_count', $hero->stat_3_count) }}" placeholder="Contoh: 10k+">

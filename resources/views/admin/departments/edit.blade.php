@@ -24,7 +24,7 @@
             @error('description') <small style="color: var(--danger);">{{ $message }}</small> @enderror
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+        <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
             <div>
                 <label>Ikon (FontAwesome Class) <span style="color: var(--danger);">*</span></label>
                 <input type="text" name="icon" value="{{ old('icon', $department->icon) }}" required placeholder="Contoh: fas fa-users">
@@ -38,7 +38,7 @@
             </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+        <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
             <div>
                 <label>Link Tujuan (Opsional)</label>
                 <input type="text" name="url" value="{{ old('url', $department->url) }}" placeholder="Contoh: /departments/tk">
@@ -50,6 +50,12 @@
                 @error('order') <small style="color: var(--danger);">{{ $message }}</small> @enderror
             </div>
         </div>
+
+        <style>
+            @media (max-width: 768px) {
+                .form-grid { grid-template-columns: 1fr !important; }
+            }
+        </style>
 
         <div style="margin-bottom: 32px;">
             <label>Status</label>

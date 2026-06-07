@@ -185,6 +185,7 @@
             display: flex;
             flex-direction: column;
             min-width: 0;
+            transition: all 0.3s;
         }
 
         header {
@@ -205,6 +206,15 @@
             display: flex;
             align-items: center;
             gap: 16px;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            color: var(--primary);
+            cursor: pointer;
         }
 
         .page-info h2 {
@@ -295,6 +305,7 @@
 
         .table-responsive {
             overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         table {
@@ -374,20 +385,41 @@
             color: var(--text-main);
         }
 
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
         @media (max-width: 1024px) {
             .sidebar {
                 transform: translateX(-100%);
             }
-            .main-wrapper {
-                margin-left: 0;
-            }
             .sidebar.active {
                 transform: translateX(0);
             }
+            .main-wrapper {
+                margin-left: 0;
+            }
+            .mobile-toggle {
+                display: block;
+            }
+            .sidebar-overlay.active {
+                display: block;
+            }
+            header { padding: 0 16px; }
+            .content-container { padding: 20px; }
+            .user-nav span { display: none; }
         }
     </style>
 </head>
 <body>
+    <div class="sidebar-overlay"></div>
     <aside class="sidebar">
         <div class="sidebar-header">
             <div class="logo-container">
@@ -429,6 +461,7 @@
     <div class="main-wrapper">
         <header>
             <div class="header-left">
+                <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
                 <div class="page-info">
                     <h2>@yield('header_title', 'Dashboard')</h2>
                 </div>
@@ -459,7 +492,20 @@
     </div>
 
     <script>
-        // Enhanced Sidebar Toggle Logic
+        // Mobile Sidebar Toggle
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.querySelector('.sidebar-overlay');
+        const toggleBtn = document.querySelector('.mobile-toggle');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        toggleBtn.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+
+        // Enhanced Submenu Logic
         document.querySelectorAll('.menu-link').forEach(link => {
             link.addEventListener('click', function() {
                 const parent = this.parentElement;

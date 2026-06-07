@@ -34,7 +34,7 @@
             @error('image') <small style="color: var(--danger);">{{ $message }}</small> @enderror
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px;">
+        <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px;">
             <div>
                 <label>Urutan Tampilan</label>
                 <input type="number" name="order" value="{{ old('order', $careerStep->order) }}" required>
@@ -47,6 +47,12 @@
                 </select>
             </div>
         </div>
+
+        <style>
+            @media (max-width: 768px) {
+                .form-grid { grid-template-columns: 1fr !important; }
+            }
+        </style>
 
         <div style="display: flex; gap: 12px; border-top: 1px solid #f1f5f9; padding-top: 24px;">
             <button type="submit" class="btn btn-primary" style="padding: 12px 32px;">
