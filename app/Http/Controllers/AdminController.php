@@ -15,9 +15,15 @@ class AdminController extends Controller
             'employees' => \App\Models\Employee::count(),
             'trainings' => \App\Models\Training::where('is_active', true)->count(),
             'messages' => \App\Models\Message::where('is_read', false)->count(),
+            'jobs' => \App\Models\JobVacancy::count(),
+            'services' => \App\Models\Service::where('is_active', true)->count(),
         ];
+
+        $latestPosts = \App\Models\Post::with('category')->latest()->take(5)->get();
+        $latestMessages = \App\Models\Message::latest()->take(5)->get();
+        $categories = \App\Models\Category::withCount('posts')->get();
         
-        return view('admin.dashboard', compact('stats'));
+        return view('admin.dashboard', compact('stats', 'latestPosts', 'latestMessages', 'categories'));
     }
 
     /**
