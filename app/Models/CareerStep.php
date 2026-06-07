@@ -5,27 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hero extends Model
+class CareerStep extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'title',
-        'subtitle',
-        'badge_text',
+        'description',
         'image',
-        'button_text',
-        'button_url',
-        'button_text_2',
-        'button_url_2',
-        'stat_1_count',
-        'stat_1_text',
-        'stat_2_count',
-        'stat_2_text',
-        'stat_3_count',
-        'stat_3_text',
-        'is_active',
         'order',
+        'is_active',
     ];
 
     protected $casts = [

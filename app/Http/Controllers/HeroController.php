@@ -19,11 +19,20 @@ class HeroController extends Controller
         $hero = Hero::first() ?? new Hero();
 
         $validated = $request->validate([
-            'title' => 'nullable|string|max:255',
+            'title' => 'nullable|string',
             'subtitle' => 'nullable|string',
+            'badge_text' => 'nullable|string|max:255',
             'image' => ($hero->exists ? 'nullable' : 'required') . '|image|mimes:jpeg,png,jpg,webp|max:2048',
             'button_text' => 'nullable|string|max:50',
             'button_url' => 'nullable|string|max:255',
+            'button_text_2' => 'nullable|string|max:50',
+            'button_url_2' => 'nullable|string|max:255',
+            'stat_1_count' => 'nullable|string|max:50',
+            'stat_1_text' => 'nullable|string|max:50',
+            'stat_2_count' => 'nullable|string|max:50',
+            'stat_2_text' => 'nullable|string|max:50',
+            'stat_3_count' => 'nullable|string|max:50',
+            'stat_3_text' => 'nullable|string|max:50',
         ]);
 
         if ($request->hasFile('image')) {

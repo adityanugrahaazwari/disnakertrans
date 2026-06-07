@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Service;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ServiceSeeder extends Seeder
 {
@@ -12,72 +13,58 @@ class ServiceSeeder extends Seeder
      */
     public function run(): void
     {
-        // Clear existing services to avoid duplicates
+        // Nonaktifkan foreign key checks untuk truncate jika diperlukan
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Service::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $services = [
             [
-                'title' => 'Pencari Kerja (AK-1)',
-                'description' => 'Layanan pembuatan Kartu Kuning (AK-1) secara online dan offline untuk pendataan pencari kerja.',
-                'icon' => 'fas fa-user-check',
+                'title' => 'Pendaftaran AK-1',
+                'description' => 'Layanan pembuatan Kartu Kuning (AK-1) secara online dan offline untuk pendataan pencari kerja resmi.',
+                'icon' => 'fas fa-id-card',
                 'url' => '#',
                 'order' => 1,
                 'is_active' => true,
             ],
             [
-                'title' => 'Pelatihan Kerja (BLK)',
-                'description' => 'Program pelatihan kejuruan gratis untuk meningkatkan kompetensi dan daya saing tenaga kerja.',
-                'icon' => 'fas fa-tools',
+                'title' => 'Info Pelatihan',
+                'description' => 'Program pelatihan kejuruan gratis untuk meningkatkan kompetensi dan daya saing tenaga kerja di berbagai bidang.',
+                'icon' => 'fas fa-graduation-cap',
                 'url' => '/trainings',
                 'order' => 2,
                 'is_active' => true,
             ],
             [
                 'title' => 'Lowongan Kerja',
-                'description' => 'Informasi bursa kerja (Job Fair) dan lowongan pekerjaan dari perusahaan mitra resmi.',
-                'icon' => 'fas fa-search-dollar',
-                'url' => '/job-vacancies',
+                'description' => 'Informasi bursa kerja terbaru dan lowongan pekerjaan terverifikasi dari perusahaan mitra di Kabupaten Banjar.',
+                'icon' => 'fas fa-briefcase',
+                'url' => '/jobs',
                 'order' => 3,
                 'is_active' => true,
             ],
             [
                 'title' => 'Hubungan Industrial',
-                'description' => 'Mediasi perselisihan hubungan industrial dan konsultasi peraturan perusahaan/PKB.',
+                'description' => 'Layanan mediasi perselisihan hubungan industrial, kesejahteraan pekerja, dan konsultasi peraturan perusahaan.',
                 'icon' => 'fas fa-handshake',
-                'url' => '#',
+                'url' => '/departments/hi',
                 'order' => 4,
                 'is_active' => true,
             ],
             [
-                'title' => 'Program Transmigrasi',
-                'description' => 'Layanan pendaftaran dan pendampingan program transmigrasi bagi masyarakat Kabupaten Banjar.',
-                'icon' => 'fas fa-map-marked-alt',
-                'url' => '#',
+                'title' => 'Pengaduan Tenaga Kerja',
+                'description' => 'Fasilitas pengaduan terkait pelanggaran hak pekerja dan konsultasi norma ketenagakerjaan.',
+                'icon' => 'fas fa-exclamation-circle',
+                'url' => '#pengaduan',
                 'order' => 5,
                 'is_active' => true,
             ],
             [
-                'title' => 'Pengaduan Tenaga Kerja',
-                'description' => 'Fasilitas pengaduan terkait pelanggaran hak-hak tenaga kerja dan norma ketenagakerjaan.',
-                'icon' => 'fas fa-exclamation-triangle',
-                'url' => '/messages',
-                'order' => 6,
-                'is_active' => true,
-            ],
-            [
                 'title' => 'Pemagangan Kerja',
-                'description' => 'Informasi dan pendaftaran program pemagangan dalam negeri maupun luar negeri (Jepang).',
+                'description' => 'Informasi pendaftaran program pemagangan dalam negeri maupun luar negeri untuk pengalaman kerja nyata.',
                 'icon' => 'fas fa-user-graduate',
                 'url' => '#',
-                'order' => 7,
-                'is_active' => true,
-            ],
-            [
-                'title' => 'Pekerja Migran (CPMI)',
-                'description' => 'Layanan rekomendasi paspor dan perlindungan bagi Calon Pekerja Migran Indonesia.',
-                'icon' => 'fas fa-passport',
-                'url' => '#',
-                'order' => 8,
+                'order' => 6,
                 'is_active' => true,
             ],
         ];

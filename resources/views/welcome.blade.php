@@ -565,32 +565,45 @@
     <div class="hero-container" style="position: relative; overflow: hidden; margin-top: 100px; background: #ffffff;">
         <div class="container" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; padding: 100px 8% 80px;">
             <div class="hero-content">
-                <span class="badge-hero">Pusat Ketenagakerjaan Resmi</span>
-                <h2>Masa Depan Karirmu <br><span style="color: var(--accent);">Mulai di Sini.</span></h2>
-                <p>Kami menjembatani pencari kerja dengan peluang terbaik dan meningkatkan kompetensi tenaga kerja Kabupaten Banjar melalui pelatihan profesional.</p>
+                <span class="badge-hero">{{ $hero->badge_text ?? 'Pusat Ketenagakerjaan Resmi' }}</span>
+                <h2>{!! $hero->title ?? 'Masa Depan Karirmu <br><span style="color: var(--accent);">Mulai di Sini.</span>' !!}</h2>
+                <p>{{ $hero->subtitle ?? 'Kami menjembatani pencari kerja dengan peluang terbaik dan meningkatkan kompetensi tenaga kerja Kabupaten Banjar melalui pelatihan profesional.' }}</p>
                 <div class="hero-btns" style="margin-top: 30px;">
-                    <a href="{{ route('jobs.index') }}" class="btn btn-accent">Cari Lowongan <i class="fas fa-search"></i></a>
-                    <a href="{{ route('trainings.index') }}" class="btn btn-outline">Ikuti Pelatihan</a>
+                    @if($hero && $hero->button_text)
+                        <a href="{{ $hero->button_url ?? '#' }}" class="btn btn-accent">{{ $hero->button_text }} <i class="fas fa-search"></i></a>
+                    @else
+                        <a href="{{ route('jobs.index') }}" class="btn btn-accent">Cari Lowongan <i class="fas fa-search"></i></a>
+                    @endif
+
+                    @if($hero && $hero->button_text_2)
+                        <a href="{{ $hero->button_url_2 ?? '#' }}" class="btn btn-outline">{{ $hero->button_text_2 }}</a>
+                    @else
+                        <a href="{{ route('trainings.index') }}" class="btn btn-outline">Ikuti Pelatihan</a>
+                    @endif
                 </div>
                 
                 <div style="margin-top: 50px; display: flex; gap: 40px; border-top: 1px solid #f1f5f9; padding-top: 30px;">
                     <div>
-                        <h4 style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">500+</h4>
-                        <p style="font-size: 0.85rem; color: var(--text-light); font-weight: 600;">Lowongan Aktif</p>
+                        <h4 style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">{{ $hero->stat_1_count ?? '500+' }}</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-light); font-weight: 600;">{{ $hero->stat_1_text ?? 'Lowongan Aktif' }}</p>
                     </div>
                     <div>
-                        <h4 style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">50+</h4>
-                        <p style="font-size: 0.85rem; color: var(--text-light); font-weight: 600;">Program Pelatihan</p>
+                        <h4 style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">{{ $hero->stat_2_count ?? '50+' }}</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-light); font-weight: 600;">{{ $hero->stat_2_text ?? 'Program Pelatihan' }}</p>
                     </div>
                     <div>
-                        <h4 style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">10k+</h4>
-                        <p style="font-size: 0.85rem; color: var(--text-light); font-weight: 600;">Tenaga Terampil</p>
+                        <h4 style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">{{ $hero->stat_3_count ?? '10k+' }}</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-light); font-weight: 600;">{{ $hero->stat_3_text ?? 'Tenaga Terampil' }}</p>
                     </div>
                 </div>
             </div>
             <div class="hero-illustration" style="position: relative;">
                 <div style="position: absolute; width: 400px; height: 400px; background: var(--accent-soft); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; opacity: 0.5; filter: blur(50px);"></div>
-                <img src="https://illustrations.popsy.co/white/work-from-home.svg" alt="Labor Illustration" style="width: 100%; height: auto; position: relative; z-index: 2; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.1));">
+                @if($hero && $hero->image)
+                    <img src="{{ asset('storage/' . $hero->image) }}" alt="Hero Illustration" style="width: 100%; height: auto; position: relative; z-index: 2; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.1));">
+                @else
+                    <img src="https://illustrations.popsy.co/white/work-from-home.svg" alt="Labor Illustration" style="width: 100%; height: auto; position: relative; z-index: 2; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.1));">
+                @endif
             </div>
         </div>
     </div>
@@ -604,30 +617,22 @@
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
-            <a href="{{ route('departments.tk') }}" style="text-decoration: none; color: inherit;">
-                <div style="padding: 40px 30px; border-radius: 24px; background: #f8fafc; border: 1px solid #f1f5f9; transition: 0.3s; text-align: center; height: 100%;">
-                    <div style="width: 60px; height: 60px; background: white; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; color: var(--accent); font-size: 1.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.05);"><i class="fas fa-users"></i></div>
-                    <h4 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 15px; color: var(--primary);">Bidang Tenaga Kerja</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-light); line-height: 1.6;">Mengelola penempatan tenaga kerja, perluasan kesempatan kerja, dan pendataan pencari kerja (AK-1).</p>
-                    <span style="display: inline-block; margin-top: 20px; font-weight: 700; color: var(--accent); font-size: 0.85rem;">Lihat Detail <i class="fas fa-arrow-right" style="font-size: 0.7rem; margin-left: 5px;"></i></span>
+            @foreach($departments as $dept)
+                <a href="{{ $dept->url ?? '#' }}" style="text-decoration: none; color: inherit;">
+                    <div style="padding: 40px 30px; border-radius: 24px; background: #f8fafc; border: 1px solid #f1f5f9; transition: 0.3s; text-align: center; height: 100%;">
+                        <div style="width: 60px; height: 60px; background: white; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; color: {{ $dept->color }}; font-size: 1.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.05);"><i class="{{ $dept->icon }}"></i></div>
+                        <h4 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 15px; color: var(--primary);">{{ $dept->title }}</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-light); line-height: 1.6;">{{ $dept->description }}</p>
+                        <span style="display: inline-block; margin-top: 20px; font-weight: 700; color: {{ $dept->color }}; font-size: 0.85rem;">Lihat Detail <i class="fas fa-arrow-right" style="font-size: 0.7rem; margin-left: 5px;"></i></span>
+                    </div>
+                </a>
+            @endforeach
+            
+            @if($departments->count() == 0)
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px; background: #f8fafc; border-radius: 24px;">
+                    <p style="color: #64748b;">Belum ada data bidang tersedia.</p>
                 </div>
-            </a>
-            <a href="{{ route('departments.training') }}" style="text-decoration: none; color: inherit;">
-                <div style="padding: 40px 30px; border-radius: 24px; background: #f8fafc; border: 1px solid #f1f5f9; transition: 0.3s; text-align: center; height: 100%;">
-                    <div style="width: 60px; height: 60px; background: white; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; color: #f59e0b; font-size: 1.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.05);"><i class="fas fa-tools"></i></div>
-                    <h4 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 15px; color: var(--primary);">Bidang Pelatihan</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-light); line-height: 1.6;">Menyelenggarakan pelatihan kerja, standardisasi kompetensi, dan peningkatan produktivitas tenaga kerja.</p>
-                    <span style="display: inline-block; margin-top: 20px; font-weight: 700; color: #f59e0b; font-size: 0.85rem;">Lihat Detail <i class="fas fa-arrow-right" style="font-size: 0.7rem; margin-left: 5px;"></i></span>
-                </div>
-            </a>
-            <a href="{{ route('departments.hi') }}" style="text-decoration: none; color: inherit;">
-                <div style="padding: 40px 30px; border-radius: 24px; background: #f8fafc; border: 1px solid #f1f5f9; transition: 0.3s; text-align: center; height: 100%;">
-                    <div style="width: 60px; height: 60px; background: white; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; color: #ef4444; font-size: 1.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.05);"><i class="fas fa-handshake"></i></div>
-                    <h4 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 15px; color: var(--primary);">Bidang Hubungan Industrial</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-light); line-height: 1.6;">Menangani kesejahteraan pekerja, perselisihan hubungan industrial, dan pengawasan ketenagakerjaan.</p>
-                    <span style="display: inline-block; margin-top: 20px; font-weight: 700; color: #ef4444; font-size: 0.85rem;">Lihat Detail <i class="fas fa-arrow-right" style="font-size: 0.7rem; margin-left: 5px;"></i></span>
-                </div>
-            </a>
+            @endif
         </div>
     </section>
 
@@ -677,30 +682,33 @@
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
-            <div style="text-align: center;">
-                <div style="height: 200px; margin-bottom: 30px; display: flex; align-items: center; justify-content: center;">
-                    <img src="https://illustrations.popsy.co/white/personal-data.svg" alt="Daftar AK-1" style="max-height: 100%; width: auto;">
+            @php
+                $illustrations = [
+                    'https://illustrations.popsy.co/white/personal-data.svg',
+                    'https://illustrations.popsy.co/white/student-going-to-school.svg',
+                    'https://illustrations.popsy.co/white/celebration.svg'
+                ];
+            @endphp
+            @foreach($careerSteps as $index => $step)
+                <div style="text-align: center;">
+                    <div style="height: 200px; margin-bottom: 30px; display: flex; align-items: center; justify-content: center;">
+                        @if($step->image)
+                            <img src="{{ asset('storage/' . $step->image) }}" alt="{{ $step->title }}" style="max-height: 100%; width: auto;">
+                        @else
+                            <img src="{{ $illustrations[$index % 3] }}" alt="{{ $step->title }}" style="max-height: 100%; width: auto;">
+                        @endif
+                    </div>
+                    <div style="width: 40px; height: 40px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 800; font-size: 1.2rem; box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);">{{ $index + 1 }}</div>
+                    <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 15px;">{{ $step->title }}</h3>
+                    <p style="color: var(--text-light); font-size: 0.95rem;">{{ $step->description }}</p>
                 </div>
-                <div style="width: 40px; height: 40px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 800; font-size: 1.2rem; box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);">1</div>
-                <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 15px;">Daftar Kartu AK-1</h3>
-                <p style="color: var(--text-light); font-size: 0.95rem;">Lengkapi profil Anda dan dapatkan Kartu Kuning sebagai syarat resmi pencari kerja.</p>
-            </div>
-            <div style="text-align: center;">
-                <div style="height: 200px; margin-bottom: 30px; display: flex; align-items: center; justify-content: center;">
-                    <img src="https://illustrations.popsy.co/white/student-going-to-school.svg" alt="Ikuti Pelatihan" style="max-height: 100%; width: auto;">
+            @endforeach
+            
+            @if($careerSteps->count() == 0)
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px; background: #f8fafc; border-radius: 24px;">
+                    <p style="color: #64748b;">Belum ada langkah panduan karir tersedia.</p>
                 </div>
-                <div style="width: 40px; height: 40px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 800; font-size: 1.2rem; box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);">2</div>
-                <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 15px;">Tingkatkan Skill</h3>
-                <p style="color: var(--text-light); font-size: 0.95rem;">Pilih pelatihan yang sesuai dengan minat Anda untuk meningkatkan nilai jual di pasar kerja.</p>
-            </div>
-            <div style="text-align: center;">
-                <div style="height: 200px; margin-bottom: 30px; display: flex; align-items: center; justify-content: center;">
-                    <img src="https://illustrations.popsy.co/white/celebration.svg" alt="Lamar Pekerjaan" style="max-height: 100%; width: auto;">
-                </div>
-                <div style="width: 40px; height: 40px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 800; font-size: 1.2rem; box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);">3</div>
-                <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 15px;">Lamar & Berkarir</h3>
-                <p style="color: var(--text-light); font-size: 0.95rem;">Cari lowongan yang cocok, kirim lamaran, dan mulai babak baru dalam perjalanan profesional Anda.</p>
-            </div>
+            @endif
         </div>
     </section>
 

@@ -16,6 +16,14 @@ class HomeController extends Controller
         $hero = Hero::where('is_active', true)
             ->first();
 
+        $departments = \App\Models\Department::where('is_active', true)
+            ->orderBy('order')
+            ->get();
+
+        $careerSteps = \App\Models\CareerStep::where('is_active', true)
+            ->orderBy('order')
+            ->get();
+
         $services = Service::where('is_active', true)
             ->orderBy('order')
             ->get();
@@ -37,7 +45,7 @@ class HomeController extends Controller
             ->take(3)
             ->get();
 
-        return view('welcome', compact('hero', 'services', 'latestPosts', 'latestTrainings', 'latestJobs'));
+        return view('welcome', compact('hero', 'departments', 'careerSteps', 'services', 'latestPosts', 'latestTrainings', 'latestJobs'));
     }
 
     public function vision()

@@ -85,6 +85,8 @@ Route::middleware(['auth'])->group(function () {
     // Program & Layanan
     Route::resource('trainings', TrainingController::class)->names('admin.trainings');
     Route::resource('services', \App\Http\Controllers\ServiceController::class)->names('admin.services');
+    Route::resource('departments', \App\Http\Controllers\DepartmentController::class)->names('admin.departments');
+    Route::resource('career-steps', \App\Http\Controllers\CareerStepController::class)->names('admin.career-steps');
 
     // Lowongan Kerja
     Route::resource('job-vacancies', JobVacancyController::class)->names('admin.job-vacancies');

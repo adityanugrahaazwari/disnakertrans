@@ -5,15 +5,18 @@ namespace Database\Seeders;
 use App\Models\Menu;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\DB;
 
 class MenuSeeder extends Seeder
 {
     public function run(): void
     {
-        // Clear existing menus to avoid duplicates
+        // Bersihkan menu lama
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Menu::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        // Get permission IDs
+        // Ambil ID Permission
         $pManageUsers = Permission::where('name', 'manage-users')->first()?->id;
         $pEditProfil = Permission::where('name', 'edit-profil')->first()?->id;
         $pManageBerita = Permission::where('name', 'manage-berita')->first()?->id;
@@ -22,89 +25,35 @@ class MenuSeeder extends Seeder
         $pManageLayanan = Permission::where('name', 'manage-layanan')->first()?->id;
         $pViewDashboard = Permission::where('name', 'view-dashboard')->first()?->id;
 
-        // 1. Dashboard
+        // --- GROUP 1: UTAMA ---
         Menu::create([
             'title' => 'Dashboard',
             'url' => '/dashboard',
             'icon' => 'fas fa-tachometer-alt',
-            'order' => 1,
+            'order' => 10,
             'permission_id' => $pViewDashboard,
         ]);
 
-        // 2. Profil Instansi
-        $profil = Menu::create([
-            'title' => 'Profil Instansi',
+        // --- GROUP 2: PUBLIKASI ---
+        $publikasi = Menu::create([
+            'title' => 'Informasi & Publikasi',
             'url' => '#',
-            'icon' => 'fas fa-building',
-            'order' => 2,
-            'permission_id' => $pEditProfil,
-        ]);
-
-        Menu::create([
-            'parent_id' => $profil->id,
-            'title' => 'Visi & Misi',
-            'url' => '/profile/vision',
-            'icon' => 'fas fa-eye',
-            'order' => 1,
-            'permission_id' => $pEditProfil,
-        ]);
-
-        Menu::create([
-            'parent_id' => $profil->id,
-            'title' => 'Sambutan Kepala',
-            'url' => '/profile/greeting',
-            'icon' => 'fas fa-comment-dots',
-            'order' => 2,
-            'permission_id' => $pEditProfil,
-        ]);
-
-        Menu::create([
-            'parent_id' => $profil->id,
-            'title' => 'Sejarah',
-            'url' => '/profile/history',
-            'icon' => 'fas fa-history',
-            'order' => 3,
-            'permission_id' => $pEditProfil,
-        ]);
-
-        Menu::create([
-            'parent_id' => $profil->id,
-            'title' => 'Struktur Organisasi',
-            'url' => '/profile/structure',
-            'icon' => 'fas fa-sitemap',
-            'order' => 3,
-            'permission_id' => $pManagePegawai,
-        ]);
-
-        Menu::create([
-            'parent_id' => $profil->id,
-            'title' => 'Maklumat Pelayanan',
-            'url' => '/profile/maklumat',
-            'icon' => 'fas fa-hand-holding-heart',
-            'order' => 4,
-            'permission_id' => $pEditProfil,
-        ]);
-
-        // 3. Informasi & Berita
-        $berita = Menu::create([
-            'title' => 'Informasi & Berita',
-            'url' => '#',
-            'icon' => 'fas fa-newspaper',
-            'order' => 3,
+            'icon' => 'fas fa-bullhorn',
+            'order' => 20,
             'permission_id' => $pManageBerita,
         ]);
 
         Menu::create([
-            'parent_id' => $berita->id,
-            'title' => 'Daftar Berita',
+            'parent_id' => $publikasi->id,
+            'title' => 'Berita & Artikel',
             'url' => '/posts',
-            'icon' => 'fas fa-edit',
+            'icon' => 'fas fa-newspaper',
             'order' => 1,
             'permission_id' => $pManageBerita,
         ]);
 
         Menu::create([
-            'parent_id' => $berita->id,
+            'parent_id' => $publikasi->id,
             'title' => 'Kategori Berita',
             'url' => '/categories',
             'icon' => 'fas fa-tags',
@@ -113,7 +62,7 @@ class MenuSeeder extends Seeder
         ]);
 
         Menu::create([
-            'parent_id' => $berita->id,
+            'parent_id' => $publikasi->id,
             'title' => 'Tag Berita',
             'url' => '/tags',
             'icon' => 'fas fa-hashtag',
@@ -121,12 +70,21 @@ class MenuSeeder extends Seeder
             'permission_id' => $pManageBerita,
         ]);
 
-        // 4. Manajemen Pelatihan
+        Menu::create([
+            'parent_id' => $publikasi->id,
+            'title' => 'Lowongan Kerja',
+            'url' => '/job-vacancies',
+            'icon' => 'fas fa-briefcase',
+            'order' => 4,
+            'permission_id' => $pManageLayanan,
+        ]);
+
+        // --- GROUP 3: PELATIHAN ---
         $pelatihan = Menu::create([
-            'title' => 'Manajemen Pelatihan',
+            'title' => 'Pusat Pelatihan',
             'url' => '#',
             'icon' => 'fas fa-graduation-cap',
-            'order' => 4,
+            'order' => 30,
             'permission_id' => $pManagePelatihan,
         ]);
 
@@ -134,7 +92,7 @@ class MenuSeeder extends Seeder
             'parent_id' => $pelatihan->id,
             'title' => 'Daftar Pelatihan',
             'url' => '/trainings',
-            'icon' => 'fas fa-list',
+            'icon' => 'fas fa-list-check',
             'order' => 1,
             'permission_id' => $pManagePelatihan,
         ]);
@@ -143,62 +101,89 @@ class MenuSeeder extends Seeder
             'parent_id' => $pelatihan->id,
             'title' => 'Kategori Pelatihan',
             'url' => '/training-categories',
-            'icon' => 'fas fa-tags',
+            'icon' => 'fas fa-folder-tree',
             'order' => 2,
             'permission_id' => $pManagePelatihan,
         ]);
 
-        // 5. Layanan & Program
-        $layanan = Menu::create([
-            'title' => 'Layanan & Program',
+        // --- GROUP 4: INSTANSI & KEPEGAWAIAN ---
+        $instansi = Menu::create([
+            'title' => 'Profil Instansi',
             'url' => '#',
-            'icon' => 'fas fa-laptop-code',
-            'order' => 5,
+            'icon' => 'fas fa-building',
+            'order' => 40,
+            'permission_id' => $pEditProfil,
+        ]);
+
+        Menu::create([
+            'parent_id' => $instansi->id,
+            'title' => 'Visi, Misi & Sejarah',
+            'url' => '/profile/vision', // Digabung atau pilih salah satu
+            'icon' => 'fas fa-info-circle',
+            'order' => 1,
+            'permission_id' => $pEditProfil,
+        ]);
+
+        Menu::create([
+            'parent_id' => $instansi->id,
+            'title' => 'Maklumat Pelayanan',
+            'url' => '/profile/maklumat',
+            'icon' => 'fas fa-hand-holding-heart',
+            'order' => 2,
+            'permission_id' => $pEditProfil,
+        ]);
+
+        Menu::create([
+            'parent_id' => $instansi->id,
+            'title' => 'Struktur & Pegawai',
+            'url' => '/profile/structure',
+            'icon' => 'fas fa-sitemap',
+            'order' => 3,
+            'permission_id' => $pManagePegawai,
+        ]);
+
+        // --- GROUP 5: LAYANAN & INTERAKSI ---
+        $layanan = Menu::create([
+            'title' => 'Layanan & Interaksi',
+            'url' => '#',
+            'icon' => 'fas fa-concierge-bell',
+            'order' => 50,
             'permission_id' => $pManageLayanan,
         ]);
 
         Menu::create([
             'parent_id' => $layanan->id,
-            'title' => 'Lowongan Kerja',
-            'url' => '/job-vacancies',
-            'icon' => 'fas fa-briefcase',
+            'title' => 'Manajemen Bidang',
+            'url' => '/departments',
+            'icon' => 'fas fa-layer-group',
+            'order' => 1,
+            'permission_id' => $pManageLayanan,
+        ]);
+
+        Menu::create([
+            'parent_id' => $layanan->id,
+            'title' => 'Daftar Layanan (Ikon)',
+            'url' => '/services',
+            'icon' => 'fas fa-th-large',
             'order' => 2,
             'permission_id' => $pManageLayanan,
         ]);
 
         Menu::create([
             'parent_id' => $layanan->id,
-            'title' => 'Daftar Layanan',
-            'url' => '/services',
-            'icon' => 'fas fa-concierge-bell',
+            'title' => 'Pesan & Pengaduan',
+            'url' => '/messages',
+            'icon' => 'fas fa-envelope-open-text',
             'order' => 3,
             'permission_id' => $pManageLayanan,
         ]);
 
-        // 6. Komunikasi
-        $komunikasi = Menu::create([
-            'title' => 'Komunikasi',
-            'url' => '#',
-            'icon' => 'fas fa-comments',
-            'order' => 6,
-            'permission_id' => $pManageLayanan,
-        ]);
-
-        Menu::create([
-            'parent_id' => $komunikasi->id,
-            'title' => 'Pesan & Pengaduan',
-            'url' => '/messages',
-            'icon' => 'fas fa-inbox',
-            'order' => 1,
-            'permission_id' => $pManageLayanan,
-        ]);
-
-        // 7. Pengaturan Tampilan
+        // --- GROUP 6: PENGATURAN WEBSITE ---
         $tampilan = Menu::create([
-            'title' => 'Pengaturan Tampilan',
+            'title' => 'Konfigurasi Web',
             'url' => '#',
             'icon' => 'fas fa-desktop',
-            'order' => 7,
+            'order' => 60,
             'permission_id' => $pEditProfil,
         ]);
 
@@ -213,44 +198,55 @@ class MenuSeeder extends Seeder
 
         Menu::create([
             'parent_id' => $tampilan->id,
-            'title' => 'Footer & Sosmed',
-            'url' => '/profile/footer',
-            'icon' => 'fas fa-info-circle',
+            'title' => 'Panduan Karir',
+            'url' => '/career-steps',
+            'icon' => 'fas fa-shoe-prints',
             'order' => 2,
             'permission_id' => $pEditProfil,
         ]);
 
         Menu::create([
             'parent_id' => $tampilan->id,
-            'title' => 'Layanan Pengaduan',
-            'url' => '/profile/complaint',
-            'icon' => 'fas fa-exclamation-circle',
+            'title' => 'Sambutan Kepala',
+            'url' => '/profile/greeting',
+            'icon' => 'fas fa-comment-dots',
             'order' => 3,
             'permission_id' => $pEditProfil,
         ]);
 
-        // 8. Pengaturan Akun
-        $akun = Menu::create([
-            'title' => 'Pengaturan Akun',
-            'url' => '#',
-            'icon' => 'fas fa-user-circle',
-            'order' => 8,
+        Menu::create([
+            'parent_id' => $tampilan->id,
+            'title' => 'Section Pengaduan',
+            'url' => '/profile/complaint',
+            'icon' => 'fas fa-exclamation-circle',
+            'order' => 4,
+            'permission_id' => $pEditProfil,
         ]);
 
         Menu::create([
-            'parent_id' => $akun->id,
-            'title' => 'Ubah Password',
-            'url' => '/account/password',
-            'icon' => 'fas fa-key',
-            'order' => 1,
+            'parent_id' => $tampilan->id,
+            'title' => 'Footer & Sosmed',
+            'url' => '/profile/footer',
+            'icon' => 'fas fa-share-nodes',
+            'order' => 5,
+            'permission_id' => $pEditProfil,
         ]);
 
-        // 8. Keamanan & Sistem
+        Menu::create([
+            'parent_id' => $tampilan->id,
+            'title' => 'Kontak Dinas',
+            'url' => '/profile/contact',
+            'icon' => 'fas fa-address-book',
+            'order' => 6,
+            'permission_id' => $pEditProfil,
+        ]);
+
+        // --- GROUP 7: SISTEM ---
         $system = Menu::create([
             'title' => 'Keamanan & Sistem',
             'url' => '#',
-            'icon' => 'fas fa-shield-alt',
-            'order' => 99,
+            'icon' => 'fas fa-shield-halved',
+            'order' => 100,
             'permission_id' => $pManageUsers,
         ]);
 
@@ -258,14 +254,14 @@ class MenuSeeder extends Seeder
             'parent_id' => $system->id,
             'title' => 'Manajemen User',
             'url' => '/users',
-            'icon' => 'fas fa-users-cog',
+            'icon' => 'fas fa-users-gear',
             'order' => 1,
             'permission_id' => $pManageUsers,
         ]);
 
         Menu::create([
             'parent_id' => $system->id,
-            'title' => 'Peran & Izin (RBAC)',
+            'title' => 'Role & Permissions',
             'url' => '/roles',
             'icon' => 'fas fa-user-lock',
             'order' => 2,
@@ -279,6 +275,22 @@ class MenuSeeder extends Seeder
             'icon' => 'fas fa-list-ul',
             'order' => 3,
             'permission_id' => $pManageUsers,
+        ]);
+
+        // --- GROUP 8: AKUN SAYA ---
+        $akun = Menu::create([
+            'title' => 'Akun Saya',
+            'url' => '#',
+            'icon' => 'fas fa-user-circle',
+            'order' => 110,
+        ]);
+
+        Menu::create([
+            'parent_id' => $akun->id,
+            'title' => 'Ubah Password',
+            'url' => '/account/password',
+            'icon' => 'fas fa-key',
+            'order' => 1,
         ]);
     }
 }
