@@ -61,8 +61,10 @@
         </div>
 
         <div style="display: flex; gap: 10px;">
-            <button type="submit" class="btn-login" style="width: auto; padding: 10px 25px;">Update Menu</button>
-            <a href="{{ route('admin.menus.index') }}" style="padding: 10px 25px; text-decoration: none; color: #6b7280; border: 1px solid #d1d5db; border-radius: 6px;">Batal</a>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Update Menu
+            </button>
+            <a href="{{ route('admin.menus.index') }}" class="btn btn-outline">Batal</a>
         </div>
     </form>
 </div>

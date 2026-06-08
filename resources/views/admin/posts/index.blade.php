@@ -38,11 +38,11 @@
                         <td>
                             <div style="font-weight: 700; color: var(--primary); margin-bottom: 4px;">{{ $post->title }}</div>
                             <div style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--text-muted);">
-                                <i class="fas fa-user-circle"></i> {{ $post->user->name }}
+                                <i class="fas fa-user-circle"></i> {{ $post->user?->name }}
                             </div>
                         </td>
                         <td>
-                            <span class="badge badge-info" style="margin-bottom: 6px;">{{ $post->category->name }}</span>
+                            <span class="badge badge-info" style="margin-bottom: 6px;">{{ $post->category?->name }}</span>
                             <div style="display: flex; flex-wrap: wrap; gap: 4px;">
                                 @foreach($post->tags as $tag)
                                     <span style="font-size: 0.7rem; color: var(--text-light); background: #f1f5f9; padding: 2px 6px; border-radius: 4px;">#{{ $tag->name }}</span>
@@ -62,13 +62,13 @@
                         </td>
                         <td style="text-align: center;">
                             <div style="display: flex; justify-content: center; gap: 8px;">
-                                <a href="{{ route('admin.posts.edit', $post) }}" class="btn" style="background: #f1f5f9; color: var(--primary); padding: 8px 12px; border-radius: 8px;" title="Edit Berita">
+                                <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-outline btn-sm" title="Edit Berita">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <form action="{{ route('admin.posts.destroy', $post) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus berita ini?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn" style="background: #fee2e2; color: var(--danger); padding: 8px 12px; border-radius: 8px;" title="Hapus Berita">
+                                    <button type="submit" class="btn btn-danger btn-sm" title="Hapus Berita">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>

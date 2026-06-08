@@ -59,12 +59,12 @@
             <main>
                 <article>
                     <div class="post-header-content">
-                        <span class="post-category">{{ $post->category->name }}</span>
+                        <span class="post-category">{{ $post->category?->name }}</span>
                         <h2 style="font-size: 2.5rem; font-weight: 800; color: var(--primary); line-height: 1.2; margin-bottom: 25px;">{{ $post->title }}</h2>
                         <div class="post-meta">
-                            <span><i class="far fa-user"></i> {{ $post->user->name }}</span>
+                            <span><i class="far fa-user"></i> {{ $post->user?->name }}</span>
                             <span><i class="far fa-calendar-alt"></i> {{ $post->created_at->format('d M Y') }}</span>
-                            <span><i class="far fa-folder"></i> {{ $post->category->name }}</span>
+                            <span><i class="far fa-folder"></i> {{ $post->category?->name }}</span>
                         </div>
                     </div>
 

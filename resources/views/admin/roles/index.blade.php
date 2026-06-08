@@ -5,8 +5,10 @@
 @section('content')
 <div class="card">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <h3 style="margin:0;">Daftar Role & Hak Akses</h3>
-        <a href="{{ route('admin.roles.create') }}" class="btn-login" style="width: auto; padding: 8px 15px; text-decoration: none; font-size: 0.9rem;">+ Tambah Role</a>
+        <h3 style="margin:0;">Daftar Role (Peran)</h3>
+        <a href="{{ route('admin.roles.create') }}" class="btn btn-primary btn-sm">
+            <i class="fas fa-plus"></i> Tambah Role
+        </a>
     </div>
 
     @if(session('success'))
@@ -37,13 +39,17 @@
                         @endforeach
                     </td>
                     <td style="padding: 12px; border-bottom: 1px solid #e5e7eb; text-align: center;">
-                        <div style="display: flex; justify-content: center; gap: 10px;">
-                            <a href="{{ route('admin.roles.edit', $role) }}" style="color: #3b82f6;"><i class="fas fa-edit"></i></a>
+                        <div style="display: flex; justify-content: center; gap: 8px;">
+                            <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-outline btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
                             @if($role->name !== 'Super Admin')
                                 <form action="{{ route('admin.roles.destroy', $role) }}" method="POST" onsubmit="return confirm('Hapus role ini?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" style="background: none; border: none; color: #ef4444; cursor: pointer;"><i class="fas fa-trash"></i></button>
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </form>
                             @endif
                         </div>

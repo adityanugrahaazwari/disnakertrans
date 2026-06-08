@@ -5,8 +5,10 @@
 @section('content')
 <div class="card">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <h3 style="margin:0;">Struktur Menu Navigasi Admin</h3>
-        <a href="{{ route('admin.menus.create') }}" class="btn-login" style="width: auto; padding: 8px 15px; text-decoration: none; font-size: 0.9rem;">+ Tambah Menu</a>
+        <h3 style="margin:0;">Struktur Menu Navigasi</h3>
+        <a href="{{ route('admin.menus.create') }}" class="btn btn-primary btn-sm">
+            <i class="fas fa-plus"></i> Tambah Menu
+        </a>
     </div>
 
     @if(session('success'))

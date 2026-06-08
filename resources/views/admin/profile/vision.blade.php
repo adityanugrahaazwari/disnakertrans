@@ -23,7 +23,9 @@
             <textarea name="misi" required style="width: 100%; height: 250px; padding: 15px; border: 1px solid #d1d5db; border-radius: 6px; font-family: inherit; font-size: 15px; line-height: 1.5; box-sizing: border-box;" placeholder="Gunakan poin-poin...">{{ old('misi', $profile->misi ?? '') }}</textarea>
             <p style="font-size: 12px; color: #6b7280; margin-top: 5px;">* Tuliskan setiap poin misi dalam baris baru.</p>
         </div>
-        <button type="submit" class="btn-login" style="width: auto; padding: 12px 30px;">Simpan Perubahan</button>
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> Simpan Perubahan
+        </button>
     </form>
 </div>
 @endsection

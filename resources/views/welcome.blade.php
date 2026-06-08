@@ -170,21 +170,21 @@
     <div class="hero-container">
         <div class="hero-grid">
             <div class="hero-content">
-                <span class="badge-hero">{{ $hero->badge_text ?? 'Pusat Ketenagakerjaan Resmi' }}</span>
-                <h2>{!! $hero->title ?? 'Masa Depan Karirmu <br><span style="color: var(--accent);">Mulai di Sini.</span>' !!}</h2>
-                <p>{{ $hero->subtitle ?? 'Kami menjembatani pencari kerja dengan peluang terbaik dan meningkatkan kompetensi tenaga kerja Kabupaten Banjar melalui pelatihan profesional.' }}</p>
+                <span class="badge-hero">{{ $hero?->badge_text ?? 'Pusat Ketenagakerjaan Resmi' }}</span>
+                <h2>{!! $hero?->title ?? 'Masa Depan Karirmu <br><span style="color: var(--accent);">Mulai di Sini.</span>' !!}</h2>
+                <p>{{ $hero?->subtitle ?? 'Kami menjembatani pencari kerja dengan peluang terbaik dan meningkatkan kompetensi tenaga kerja Kabupaten Banjar melalui pelatihan profesional.' }}</p>
                 <div class="hero-btns">
-                    <a href="{{ $hero->button_url ?? route('jobs.index') }}" class="btn btn-accent">{{ $hero->button_text ?? 'Cari Lowongan' }} <i class="fas fa-search"></i></a>
-                    <a href="{{ $hero->button_url_2 ?? route('trainings.index') }}" class="btn btn-outline">{{ $hero->button_text_2 ?? 'Ikuti Pelatihan' }}</a>
+                    <a href="{{ $hero?->button_url ?? route('jobs.index') }}" class="btn btn-accent">{{ $hero?->button_text ?? 'Cari Lowongan' }} <i class="fas fa-search"></i></a>
+                    <a href="{{ $hero?->button_url_2 ?? route('trainings.index') }}" class="btn btn-outline">{{ $hero?->button_text_2 ?? 'Ikuti Pelatihan' }}</a>
                 </div>
                 <div class="hero-stats">
-                    <div class="stat-item"><h4>{{ $hero->stat_1_count ?? '500+' }}</h4><p>{{ $hero->stat_1_text ?? 'Lowongan Aktif' }}</p></div>
-                    <div class="stat-item"><h4>{{ $hero->stat_2_count ?? '50+' }}</h4><p>{{ $hero->stat_2_text ?? 'Program Pelatihan' }}</p></div>
-                    <div class="stat-item"><h4>{{ $hero->stat_3_count ?? '10k+' }}</h4><p>{{ $hero->stat_3_text ?? 'Tenaga Terampil' }}</p></div>
+                    <div class="stat-item"><h4>{{ $hero?->stat_1_count ?? '500+' }}</h4><p>{{ $hero?->stat_1_text ?? 'Lowongan Aktif' }}</p></div>
+                    <div class="stat-item"><h4>{{ $hero?->stat_2_count ?? '50+' }}</h4><p>{{ $hero?->stat_2_text ?? 'Program Pelatihan' }}</p></div>
+                    <div class="stat-item"><h4>{{ $hero?->stat_3_count ?? '10k+' }}</h4><p>{{ $hero?->stat_3_text ?? 'Tenaga Terampil' }}</p></div>
                 </div>
             </div>
             <div class="hero-illustration">
-                <img src="{{ $hero->image ? asset('storage/'.$hero->image) : 'https://illustrations.popsy.co/white/work-from-home.svg' }}" alt="Hero" style="width: 100%; height: auto; filter: drop-shadow(0 30px 50px rgba(0,0,0,0.12));">
+                <img src="{{ ($hero?->image) ? asset('storage/'.$hero->image) : 'https://illustrations.popsy.co/white/work-from-home.svg' }}" alt="Hero" style="width: 100%; height: auto; filter: drop-shadow(0 30px 50px rgba(0,0,0,0.12));">
             </div>
         </div>
     </div>
@@ -290,7 +290,7 @@
             @foreach($latestTrainings as $training)
                 <div class="training-card">
                     <div class="training-img">
-                        <span class="training-badge">{{ $training->category->name ?? 'Umum' }}</span>
+                        <span class="training-badge">{{ $training->category?->name ?? 'Umum' }}</span>
                         <img src="{{ $training->image ? asset('storage/'.$training->image) : 'https://via.placeholder.com/600x400' }}" alt="{{ $training->title }}">
                     </div>
                     <div style="padding: 35px; flex-grow: 1; display: flex; flex-direction: column;">
@@ -348,7 +348,7 @@
                         <img src="{{ $post->image ? asset('storage/'.$post->image) : 'https://via.placeholder.com/600x350' }}" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div style="padding: 35px;">
-                        <span style="color: var(--accent); font-weight: 800; font-size: 0.75rem; text-transform: uppercase;">{{ $post->category->name ?? 'Update' }}</span>
+                        <span style="color: var(--accent); font-weight: 800; font-size: 0.75rem; text-transform: uppercase;">{{ $post->category?->name ?? 'Update' }}</span>
                         <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--primary); margin: 15px 0; line-height: 1.4;">{{ Str::limit($post->title, 60) }}</h3>
                         <p style="color: var(--text-light); font-size: 0.9rem; font-weight: 600;"><i class="far fa-calendar-alt"></i> {{ $post->created_at->format('d M Y') }}</p>
                     </div>
@@ -395,6 +395,7 @@
             <div class="card-modern" style="padding: 50px; background: white; border: none; box-shadow: 0 40px 100px rgba(0,0,0,0.06);">
                 <form action="{{ route('messages.store') }}" method="POST">
                     @csrf
+                    <input type="hidden" name="subject" value="Aduan/Aspirasi Masyarakat">
                     <div style="margin-bottom: 25px;">
                         <label style="font-weight: 700; font-size: 0.9rem; margin-bottom: 10px; display: block;">Nama Lengkap</label>
                         <input type="text" name="name" required placeholder="Masukkan nama Anda" style="width:100%; padding: 16px 20px; border-radius: 14px; border: 1px solid #e2e8f0; background: #f8fafc; font-family: inherit;">

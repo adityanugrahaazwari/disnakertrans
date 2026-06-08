@@ -16,22 +16,31 @@
 
         <div style="margin-bottom: 25px;">
             <label style="display: block; margin-bottom: 15px; font-weight: bold;">Pilih Hak Akses (Permissions)</label>
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;">
-                @foreach($permissions as $permission)
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <input type="checkbox" name="permissions[]" value="{{ $permission->name }}" 
-                            id="p-{{ $permission->id }}" 
-                            {{ in_array($permission->id, $rolePermissions) ? 'checked' : '' }}
-                            style="width: 18px; height: 18px;">
-                        <label for="p-{{ $permission->id }}" style="font-size: 0.9rem; cursor: pointer;">{{ $permission->name }}</label>
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                @foreach($permissions->groupBy(fn($p) => $p->permissionGroup?->name ?? 'Lainnya') as $group => $groupPermissions)
+                    <div style="background: #f9fafb; padding: 15px; border-radius: 8px; border: 1px solid #e5e7eb;">
+                        <h4 style="margin: 0 0 15px 0; color: var(--primary); font-size: 0.95rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 8px;">{{ $group }}</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;">
+                            @foreach($groupPermissions as $permission)
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <input type="checkbox" name="permissions[]" value="{{ $permission->name }}" 
+                                        id="p-{{ $permission->id }}" 
+                                        {{ in_array($permission->id, $rolePermissions) ? 'checked' : '' }}
+                                        style="width: 18px; height: 18px;">
+                                    <label for="p-{{ $permission->id }}" style="font-size: 0.9rem; cursor: pointer;">{{ $permission->name }}</label>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 @endforeach
             </div>
         </div>
 
         <div style="display: flex; gap: 10px;">
-            <button type="submit" class="btn-login" style="width: auto; padding: 10px 25px;">Update Role</button>
-            <a href="{{ route('admin.roles.index') }}" style="padding: 10px 25px; text-decoration: none; color: #6b7280; border: 1px solid #d1d5db; border-radius: 6px;">Batal</a>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Update Role
+            </button>
+            <a href="{{ route('admin.roles.index') }}" class="btn btn-outline">Batal</a>
         </div>
     </form>
 </div>

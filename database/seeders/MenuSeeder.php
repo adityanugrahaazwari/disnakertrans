@@ -17,13 +17,14 @@ class MenuSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         // Ambil ID Permission
-        $pManageUsers = Permission::where('name', 'manage-users')->first()?->id;
-        $pEditProfil = Permission::where('name', 'edit-profil')->first()?->id;
-        $pManageBerita = Permission::where('name', 'manage-berita')->first()?->id;
-        $pManagePegawai = Permission::where('name', 'manage-pegawai')->first()?->id;
-        $pManagePelatihan = Permission::where('name', 'manage-pelatihan')->first()?->id;
-        $pManageLayanan = Permission::where('name', 'manage-layanan')->first()?->id;
-        $pViewDashboard = Permission::where('name', 'view-dashboard')->first()?->id;
+        $pManageUsers = Permission::where('name', 'view-users')->first()?->id ?? Permission::where('name', 'manage-users')->first()?->id;
+        $pEditProfil = Permission::where('name', 'edit-profile')->first()?->id ?? Permission::where('name', 'edit-profil')->first()?->id;
+        $pManageBerita = Permission::where('name', 'view-posts')->first()?->id ?? Permission::where('name', 'manage-berita')->first()?->id;
+        $pManagePegawai = Permission::where('name', 'manage-employees')->first()?->id ?? Permission::where('name', 'manage-pegawai')->first()?->id;
+        $pManagePelatihan = Permission::where('name', 'view-trainings')->first()?->id ?? Permission::where('name', 'manage-pelatihan')->first()?->id;
+        $pManageLayanan = Permission::where('name', 'view-jobs')->first()?->id ?? Permission::where('name', 'manage-layanan')->first()?->id;
+        $pViewDashboard = Permission::where('name', 'view-dashboard')->first()?->id ?? null;
+        $pManageSecurity = Permission::where('name', 'manage-permissions')->first()?->id ?? $pManageUsers;
 
         // --- GROUP 1: UTAMA ---
         Menu::create([
@@ -247,7 +248,7 @@ class MenuSeeder extends Seeder
             'url' => '#',
             'icon' => 'fas fa-shield-halved',
             'order' => 100,
-            'permission_id' => $pManageUsers,
+            'permission_id' => $pManageSecurity,
         ]);
 
         Menu::create([
@@ -256,16 +257,34 @@ class MenuSeeder extends Seeder
             'url' => '/users',
             'icon' => 'fas fa-users-gear',
             'order' => 1,
-            'permission_id' => $pManageUsers,
+            'permission_id' => $pManageSecurity,
         ]);
 
         Menu::create([
             'parent_id' => $system->id,
-            'title' => 'Role & Permissions',
+            'title' => 'Manajemen Role',
             'url' => '/roles',
             'icon' => 'fas fa-user-lock',
             'order' => 2,
-            'permission_id' => $pManageUsers,
+            'permission_id' => $pManageSecurity,
+        ]);
+
+        Menu::create([
+            'parent_id' => $system->id,
+            'title' => 'Grup Permission',
+            'url' => '/permission-groups',
+            'icon' => 'fas fa-layer-group',
+            'order' => 3,
+            'permission_id' => $pManageSecurity,
+        ]);
+
+        Menu::create([
+            'parent_id' => $system->id,
+            'title' => 'Daftar Hak Akses',
+            'url' => '/permissions',
+            'icon' => 'fas fa-key',
+            'order' => 4,
+            'permission_id' => $pManageSecurity,
         ]);
 
         Menu::create([
@@ -273,8 +292,8 @@ class MenuSeeder extends Seeder
             'title' => 'Pengaturan Menu',
             'url' => '/menus',
             'icon' => 'fas fa-list-ul',
-            'order' => 3,
-            'permission_id' => $pManageUsers,
+            'order' => 5,
+            'permission_id' => $pManageSecurity,
         ]);
 
         // --- GROUP 8: AKUN SAYA ---

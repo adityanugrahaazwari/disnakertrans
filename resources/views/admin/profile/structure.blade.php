@@ -9,7 +9,9 @@
             <p style="color: #6b7280;">Belum ada gambar yang diunggah.</p>
             <input type="file" style="margin-top: 10px;">
         </div>
-        <button type="submit" class="btn-login" style="width: auto; padding: 10px 25px;">Unggah Struktur</button>
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-upload"></i> Unggah Struktur
+        </button>
     </form>
 </div>
 @endsection

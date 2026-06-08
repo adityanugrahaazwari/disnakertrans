@@ -4,7 +4,9 @@
 <div class="card">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
         <h3 style="margin:0;">Daftar Pengguna Sistem</h3>
-        <a href="#" class="btn-login" style="width: auto; padding: 8px 15px; text-decoration: none; font-size: 0.9rem;">+ Tambah User</a>
+        <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-sm">
+            <i class="fas fa-plus"></i> Tambah User
+        </a>
     </div>
     <table style="width: 100%; border-collapse: collapse;">
         <thead>

@@ -14,9 +14,22 @@
             <small style="color: #6b7280;">Gunakan format huruf kecil dan tanda hubung (kebab-case).</small>
         </div>
 
+        <div style="margin-bottom: 25px;">
+            <label style="display: block; margin-bottom: 8px; font-weight: bold;">Grup Permission</label>
+            <select name="permission_group_id" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px;">
+                <option value="">-- Pilih Grup --</option>
+                @foreach($groups as $group)
+                    <option value="{{ $group->id }}">{{ $group->name }}</option>
+                @endforeach
+            </select>
+            <small style="color: #6b7280;">Digunakan untuk mengelompokkan permission di halaman manajemen role.</small>
+        </div>
+
         <div style="display: flex; gap: 10px;">
-            <button type="submit" class="btn-login" style="width: auto; padding: 10px 25px;">Simpan Permission</button>
-            <a href="{{ route('admin.permissions.index') }}" style="padding: 10px 25px; text-decoration: none; color: #6b7280; border: 1px solid #d1d5db; border-radius: 6px;">Batal</a>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Simpan Permission
+            </button>
+            <a href="{{ route('admin.permissions.index') }}" class="btn btn-outline">Batal</a>
         </div>
     </form>
 </div>

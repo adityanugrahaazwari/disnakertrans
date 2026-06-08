@@ -46,7 +46,7 @@
                                 <i class="fas fa-image fa-3x"></i>
                             </div>
                         @endif
-                        <span class="news-tag">{{ $post->category->name }}</span>
+                        <span class="news-tag">{{ $post->category?->name }}</span>
                     </div>
                     <div class="news-content">
                         <span class="news-date">{{ $post->created_at->format('d M Y') }}</span>

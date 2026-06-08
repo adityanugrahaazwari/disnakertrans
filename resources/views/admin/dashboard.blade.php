@@ -53,7 +53,7 @@
                         @forelse($latestPosts as $post)
                         <tr>
                             <td style="font-weight: 600; font-size: 0.9rem;">{{ Str::limit($post->title, 45) }}</td>
-                            <td><span class="badge" style="background: #f1f5f9; color: #475569;">{{ $post->category->name }}</span></td>
+                            <td><span class="badge" style="background: #f1f5f9; color: #475569;">{{ $post->category?->name }}</span></td>
                             <td>
                                 @if($post->status == 'published')
                                     <span class="badge" style="background: #dcfce7; color: #166534;">Published</span>

@@ -103,6 +103,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Manajemen Permission
     Route::resource('permissions', \App\Http\Controllers\PermissionController::class)->names('admin.permissions');
+    Route::resource('permission-groups', \App\Http\Controllers\PermissionGroupController::class)->names('admin.permission-groups');
 
     // Manajemen Menu Dinamis
     Route::resource('menus', \App\Http\Controllers\MenuController::class)->names('admin.menus');

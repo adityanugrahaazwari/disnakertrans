@@ -26,12 +26,13 @@ class AppServiceProvider extends ServiceProvider
             return $user->hasRole('Super Admin') ? true : null;
         });
 
-        // Share common data with public views
-        view()->composer(['welcome', 'layouts.public'], function ($view) {
+        // Share common data with all views
+        view()->composer('*', function ($view) {
             $view->with('footerProfile', \App\Models\Profile::first() ?? new \App\Models\Profile());
             $view->with('navCategories', \App\Models\Category::all());
             $view->with('navServices', \App\Models\Service::where('is_active', true)->orderBy('order')->get());
             $view->with('departments', \App\Models\Department::where('is_active', true)->orderBy('order')->get());
+            $view->with('hero', \App\Models\Hero::where('is_active', true)->first());
         });
     }
 }

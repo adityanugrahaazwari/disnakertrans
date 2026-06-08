@@ -36,7 +36,9 @@
             </div>
         </div>
 
-        <button type="submit" class="btn-login" style="width: auto; padding: 12px 30px;">Simpan Perubahan</button>
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> Simpan Perubahan
+        </button>
     </form>
 </div>
 @endsection

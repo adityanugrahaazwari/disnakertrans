@@ -239,7 +239,7 @@
                             </div>
                         @endif
                         @if($training->category)
-                            <div class="category-tag">{{ $training->category->name }}</div>
+                            <div class="category-tag">{{ $training->category?->name }}</div>
                         @endif
                     </div>
                     

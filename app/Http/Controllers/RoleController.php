@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+use App\Models\Permission;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -18,7 +18,7 @@ class RoleController extends Controller
 
     public function create(): View
     {
-        $permissions = Permission::all();
+        $permissions = Permission::with('permissionGroup')->get();
         return view('admin.roles.create', compact('permissions'));
     }
 
@@ -40,7 +40,7 @@ class RoleController extends Controller
 
     public function edit(Role $role): View
     {
-        $permissions = Permission::all();
+        $permissions = Permission::with('permissionGroup')->get();
         $rolePermissions = $role->permissions->pluck('id')->toArray();
         return view('admin.roles.edit', compact('role', 'permissions', 'rolePermissions'));
     }

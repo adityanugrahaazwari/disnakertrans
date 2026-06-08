@@ -41,13 +41,13 @@
                     <td><code style="background: #f1f5f9; padding: 4px 8px; border-radius: 6px; color: var(--accent); font-size: 0.85rem;">{{ $category->slug }}</code></td>
                     <td style="text-align: center;">
                         <div style="display: flex; justify-content: center; gap: 8px;">
-                            <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn" style="background: #f1f5f9; color: var(--primary); padding: 8px 12px; border-radius: 8px;">
+                            <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-outline btn-sm">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus kategori ini?')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn" style="background: #fee2e2; color: var(--danger); padding: 8px 12px; border-radius: 8px;">
+                                <button type="submit" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>

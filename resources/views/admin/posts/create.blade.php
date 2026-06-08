@@ -59,8 +59,10 @@
         </div>
 
         <div style="display: flex; gap: 10px;">
-            <button type="submit" class="btn-login" style="width: auto; padding: 10px 25px;">Terbitkan Berita</button>
-            <a href="{{ route('admin.posts.index') }}" style="padding: 10px 25px; text-decoration: none; color: #6b7280; border: 1px solid #d1d5db; border-radius: 6px;">Batal</a>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i> Terbitkan Berita
+            </button>
+            <a href="{{ route('admin.posts.index') }}" class="btn btn-outline">Batal</a>
         </div>
     </form>
 </div>

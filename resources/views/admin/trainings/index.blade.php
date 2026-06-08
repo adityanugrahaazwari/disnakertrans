@@ -40,7 +40,7 @@
                         <div style="font-weight: 700; color: var(--primary); font-size: 1rem;">{{ $training->title }}</div>
                     </td>
                     <td>
-                        <span class="badge" style="background: #e2e8f0; color: #475569;">{{ $training->category->name ?? 'N/A' }}</span>
+                        <span class="badge" style="background: #e2e8f0; color: #475569;">{{ $training->category?->name ?? 'N/A' }}</span>
                     </td>
                     <td>
                         <div style="font-weight: 600; color: var(--text-main);">{{ $training->quota }} Peserta</div>
@@ -64,13 +64,13 @@
                     </td>
                     <td style="text-align: center;">
                         <div style="display: flex; gap: 8px; justify-content: center;">
-                            <a href="{{ route('admin.trainings.edit', $training->id) }}" class="btn" style="background: #f1f5f9; color: var(--primary); padding: 8px 12px; border-radius: 8px;">
+                            <a href="{{ route('admin.trainings.edit', $training->id) }}" class="btn btn-outline btn-sm">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <form action="{{ route('admin.trainings.destroy', $training->id) }}" method="POST" onsubmit="return confirm('Hapus data pelatihan ini?')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn" style="background: #fee2e2; color: var(--danger); padding: 8px 12px; border-radius: 8px;">
+                                <button type="submit" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
