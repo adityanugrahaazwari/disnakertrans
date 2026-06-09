@@ -12,10 +12,12 @@
             <div>
                 <label style="display: block; margin-bottom: 8px; font-weight: bold;">Nama Perusahaan</label>
                 <input type="text" name="perusahaan" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;" value="{{ old('perusahaan') }}">
+                @error('perusahaan') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
             </div>
             <div>
                 <label style="display: block; margin-bottom: 8px; font-weight: bold;">Posisi / Jabatan</label>
                 <input type="text" name="posisi" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;" value="{{ old('posisi') }}">
+                @error('posisi') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
             </div>
         </div>
 
@@ -23,16 +25,19 @@
             <div>
                 <label style="display: block; margin-bottom: 8px; font-weight: bold;">Batas Akhir (Deadline)</label>
                 <input type="date" name="deadline" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;" value="{{ old('deadline') }}">
+                @error('deadline') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
             </div>
             <div>
                 <label style="display: block; margin-bottom: 8px; font-weight: bold;">Foto / Poster Lowongan (Bisa banyak)</label>
                 <input type="file" name="images[]" multiple style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;">
+                @error('images') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
             </div>
         </div>
 
         <div style="margin-bottom: 20px;">
             <label style="display: block; margin-bottom: 8px; font-weight: bold;">Syarat & Deskripsi Pekerjaan</label>
             <textarea name="syarat" rows="6" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;">{{ old('syarat') }}</textarea>
+            @error('syarat') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
         </div>
 
         <div style="display: flex; gap: 10px;">

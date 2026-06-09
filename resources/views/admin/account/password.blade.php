@@ -9,25 +9,22 @@
         <p style="margin: 4px 0 0; font-size: 0.875rem; color: var(--text-muted);">Perbarui password Anda secara berkala untuk menjaga keamanan akses dashboard.</p>
     </div>
 
-    @if(session('success'))
-        <div style="padding: 16px; background: #dcfce7; color: #166534; border-radius: 10px; margin-bottom: 24px; border: 1px solid #bbf7d0; display: flex; align-items: center; gap: 12px;">
-            <i class="fas fa-check-circle"></i>
-            <span style="font-weight: 600; font-size: 0.9rem;">{{ session('success') }}</span>
-        </div>
-    @endif
-
     <form action="{{ route('admin.account.password.update') }}" method="POST">
         @csrf
         <div style="margin-bottom: 24px;">
             <label>Password Saat Ini</label>
             <input type="password" name="current_password" required placeholder="••••••••">
-            @error('current_password') <small style="color: var(--danger);">{{ $message }}</small> @enderror
+            @error('current_password')
+                <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span>
+            @enderror
         </div>
 
         <div style="margin-bottom: 24px;">
             <label>Password Baru</label>
             <input type="password" name="password" required placeholder="Min. 8 karakter">
-            @error('password') <small style="color: var(--danger);">{{ $message }}</small> @enderror
+            @error('password')
+                <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span>
+            @enderror
         </div>
 
         <div style="margin-bottom: 32px;">

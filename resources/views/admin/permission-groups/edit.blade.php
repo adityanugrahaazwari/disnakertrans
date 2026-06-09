@@ -12,16 +12,25 @@
         <div style="margin-bottom: 20px;">
             <label style="display: block; margin-bottom: 8px; font-weight: bold;">Nama Grup</label>
             <input type="text" name="name" value="{{ old('name', $permissionGroup->name) }}" required>
+            @error('name')
+                <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span>
+            @enderror
         </div>
 
         <div style="margin-bottom: 20px;">
             <label style="display: block; margin-bottom: 8px; font-weight: bold;">Deskripsi</label>
             <input type="text" name="description" value="{{ old('description', $permissionGroup->description) }}">
+            @error('description')
+                <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span>
+            @enderror
         </div>
 
         <div style="margin-bottom: 25px;">
             <label style="display: block; margin-bottom: 8px; font-weight: bold;">Urutan</label>
             <input type="number" name="order" value="{{ old('order', $permissionGroup->order) }}">
+            @error('order')
+                <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span>
+            @enderror
         </div>
 
         <div style="display: flex; gap: 10px;">

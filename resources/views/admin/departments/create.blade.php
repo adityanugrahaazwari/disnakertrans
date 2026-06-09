@@ -46,7 +46,7 @@
             <div>
                 <label>Urutan Tampilan</label>
                 <input type="number" name="order" value="{{ old('order', 0) }}" required>
-                @error('order') <small style="color: var(--danger);">{{ $message }}</small> @enderror
+                @error('order') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
             </div>
         </div>
 

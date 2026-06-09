@@ -81,30 +81,36 @@
                 <div>
                     <label>Stat 1 Angka/Jumlah</label>
                     <input type="text" name="stat_1_count" value="{{ old('stat_1_count', $hero->stat_1_count) }}" placeholder="Contoh: 500+">
+                    @error('stat_1_count') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
                 </div>
                 <div>
                     <label>Stat 1 Teks</label>
                     <input type="text" name="stat_1_text" value="{{ old('stat_1_text', $hero->stat_1_text) }}" placeholder="Contoh: Lowongan Aktif">
+                    @error('stat_1_text') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="stats-input-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 15px;">
                 <div>
                     <label>Stat 2 Angka/Jumlah</label>
                     <input type="text" name="stat_2_count" value="{{ old('stat_2_count', $hero->stat_2_count) }}" placeholder="Contoh: 50+">
+                    @error('stat_2_count') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
                 </div>
                 <div>
                     <label>Stat 2 Teks</label>
                     <input type="text" name="stat_2_text" value="{{ old('stat_2_text', $hero->stat_2_text) }}" placeholder="Contoh: Program Pelatihan">
+                    @error('stat_2_text') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="stats-input-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
                 <div>
                     <label>Stat 3 Angka/Jumlah</label>
                     <input type="text" name="stat_3_count" value="{{ old('stat_3_count', $hero->stat_3_count) }}" placeholder="Contoh: 10k+">
+                    @error('stat_3_count') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
                 </div>
                 <div>
                     <label>Stat 3 Teks</label>
                     <input type="text" name="stat_3_text" value="{{ old('stat_3_text', $hero->stat_3_text) }}" placeholder="Contoh: Tenaga Terampil">
+                    @error('stat_3_text') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
                 </div>
             </div>
         </div>

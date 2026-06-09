@@ -393,20 +393,40 @@
                 @endif
             </div>
             <div class="card-modern" style="padding: 50px; background: white; border: none; box-shadow: 0 40px 100px rgba(0,0,0,0.06);">
+                @if(session('success_message'))
+                    <div style="padding: 20px; background: #dcfce7; color: #166534; border-radius: 14px; margin-bottom: 30px; border: 1px solid #bbf7d0; display: flex; align-items: center; gap: 15px;">
+                        <i class="fas fa-check-circle" style="font-size: 1.5rem;"></i>
+                        <span style="font-weight: 600;">{{ session('success_message') }}</span>
+                    </div>
+                @endif
+
+                @if($errors->any())
+                    <div style="padding: 20px; background: #fee2e2; color: #991b1b; border-radius: 14px; margin-bottom: 30px; border: 1px solid #fecaca;">
+                        <ul style="margin: 0; padding-left: 20px;">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <form action="{{ route('messages.store') }}" method="POST">
                     @csrf
                     <input type="hidden" name="subject" value="Aduan/Aspirasi Masyarakat">
                     <div style="margin-bottom: 25px;">
                         <label style="font-weight: 700; font-size: 0.9rem; margin-bottom: 10px; display: block;">Nama Lengkap</label>
-                        <input type="text" name="name" required placeholder="Masukkan nama Anda" style="width:100%; padding: 16px 20px; border-radius: 14px; border: 1px solid #e2e8f0; background: #f8fafc; font-family: inherit;">
+                        <input type="text" name="name" required placeholder="Masukkan nama Anda" style="width:100%; padding: 16px 20px; border-radius: 14px; border: 1px solid #e2e8f0; background: #f8fafc; font-family: inherit;" value="{{ old('name') }}">
+                        @error('name') <small style="color: #ef4444;">{{ $message }}</small> @enderror
                     </div>
                     <div style="margin-bottom: 25px;">
                         <label style="font-weight: 700; font-size: 0.9rem; margin-bottom: 10px; display: block;">Email Aktif</label>
-                        <input type="email" name="email" required placeholder="alamat@email.com" style="width:100%; padding: 16px 20px; border-radius: 14px; border: 1px solid #e2e8f0; background: #f8fafc; font-family: inherit;">
+                        <input type="email" name="email" required placeholder="alamat@email.com" style="width:100%; padding: 16px 20px; border-radius: 14px; border: 1px solid #e2e8f0; background: #f8fafc; font-family: inherit;" value="{{ old('email') }}">
+                        @error('email') <small style="color: #ef4444;">{{ $message }}</small> @enderror
                     </div>
                     <div style="margin-bottom: 35px;">
                         <label style="font-weight: 700; font-size: 0.9rem; margin-bottom: 10px; display: block;">Isi Pesan / Aduan</label>
-                        <textarea name="message" required rows="5" placeholder="Tuliskan detail aspirasi Anda di sini..." style="width:100%; padding: 16px 20px; border-radius: 14px; border: 1px solid #e2e8f0; background: #f8fafc; font-family: inherit; resize: none;"></textarea>
+                        <textarea name="message" required rows="5" placeholder="Tuliskan detail aspirasi Anda di sini..." style="width:100%; padding: 16px 20px; border-radius: 14px; border: 1px solid #e2e8f0; background: #f8fafc; font-family: inherit; resize: none;">{{ old('message') }}</textarea>
+                        @error('message') <small style="color: #ef4444;">{{ $message }}</small> @enderror
                     </div>
                     <button type="submit" class="btn btn-accent" style="width:100%; justify-content: center; padding: 20px;">Kirim Pesan Sekarang <i class="fas fa-paper-plane"></i></button>
                 </form>

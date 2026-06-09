@@ -57,6 +57,7 @@
         <div style="margin-bottom: 20px;">
             <label style="display: block; margin-bottom: 8px; font-weight: bold;">Syarat & Deskripsi Pekerjaan</label>
             <textarea name="syarat" rows="6" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;">{{ old('syarat', $job_vacancy->syarat) }}</textarea>
+            @error('syarat') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
         </div>
 
         <div style="display: flex; gap: 10px;">
@@ -77,7 +78,8 @@
 function deleteImage(id) {
     if (confirm('Yakin ingin menghapus foto ini?')) {
         const form = document.getElementById('delete-image-form');
-        form.action = `/job-vacancies/images/${id}`;
+        let url = "{{ route('admin.job-vacancies.images.destroy', ':id') }}";
+        form.action = url.replace(':id', id);
         form.submit();
     }
 }

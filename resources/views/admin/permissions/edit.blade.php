@@ -11,7 +11,10 @@
         @method('PUT')
         <div style="margin-bottom: 25px;">
             <label style="display: block; margin-bottom: 8px; font-weight: bold;">Nama Permission</label>
-            <input type="text" name="name" value="{{ $permission->name }}" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;">
+            <input type="text" name="name" value="{{ old('name', $permission->name) }}" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;">
+            @error('name')
+                <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span>
+            @enderror
         </div>
 
         <div style="margin-bottom: 25px;">
@@ -19,9 +22,12 @@
             <select name="permission_group_id" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px;">
                 <option value="">-- Pilih Grup --</option>
                 @foreach($groups as $group)
-                    <option value="{{ $group->id }}" {{ $permission->permission_group_id == $group->id ? 'selected' : '' }}>{{ $group->name }}</option>
+                    <option value="{{ $group->id }}" {{ old('permission_group_id', $permission->permission_group_id) == $group->id ? 'selected' : '' }}>{{ $group->name }}</option>
                 @endforeach
             </select>
+            @error('permission_group_id')
+                <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span>
+            @enderror
         </div>
 
         <div style="display: flex; gap: 10px;">

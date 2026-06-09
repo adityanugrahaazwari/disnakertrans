@@ -63,7 +63,7 @@
                 <option value="1" {{ old('is_active', $department->is_active) == '1' ? 'selected' : '' }}>Aktif</option>
                 <option value="0" {{ old('is_active', $department->is_active) == '0' ? 'selected' : '' }}>Non-aktif</option>
             </select>
-            @error('is_active') <small style="color: var(--danger);">{{ $message }}</small> @enderror
+            @error('is_active') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
         </div>
 
         <div style="display: flex; gap: 12px; border-top: 1px solid #f1f5f9; padding-top: 24px;">

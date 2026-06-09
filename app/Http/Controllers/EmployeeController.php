@@ -47,17 +47,17 @@ class EmployeeController extends Controller
         return redirect()->route('admin.profile.structure.index')->with('success', 'Data pegawai berhasil ditambahkan.');
     }
 
-    public function edit(Employee $employee): View
+    public function edit(Employee $structure): View
     {
-        $parents = Employee::where('id', '!=', $employee->id)->get();
-        return view('admin.employees.edit', compact('employee', 'parents'));
+        $parents = Employee::where('id', '!=', $structure->id)->get();
+        return view('admin.employees.edit', compact('structure', 'parents'));
     }
 
-    public function update(Request $request, Employee $employee): RedirectResponse
+    public function update(Request $request, Employee $structure): RedirectResponse
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'nip' => 'nullable|string|unique:employees,nip,' . $employee->id,
+            'nip' => 'nullable|string|unique:employees,nip,' . $structure->id,
             'jabatan' => 'required|string|max:255',
             'parent_id' => 'nullable|exists:employees,id',
             'order' => 'integer',
@@ -65,24 +65,24 @@ class EmployeeController extends Controller
         ]);
 
         if ($request->hasFile('foto')) {
-            if ($employee->foto) {
-                Storage::disk('public')->delete($employee->foto);
+            if ($structure->foto) {
+                Storage::disk('public')->delete($structure->foto);
             }
             $path = $request->file('foto')->store('employees', 'public');
             $validated['foto'] = $path;
         }
 
-        $employee->update($validated);
+        $structure->update($validated);
 
         return redirect()->route('admin.profile.structure.index')->with('success', 'Data pegawai berhasil diperbarui.');
     }
 
-    public function destroy(Employee $employee): RedirectResponse
+    public function destroy(Employee $structure): RedirectResponse
     {
-        if ($employee->foto) {
-            Storage::disk('public')->delete($employee->foto);
+        if ($structure->foto) {
+            Storage::disk('public')->delete($structure->foto);
         }
-        $employee->delete();
+        $structure->delete();
         return redirect()->route('admin.profile.structure.index')->with('success', 'Data pegawai berhasil dihapus.');
     }
 }

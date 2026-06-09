@@ -14,13 +14,13 @@
         <div style="margin-bottom: 24px;">
             <label>Judul Langkah <span style="color: var(--danger);">*</span></label>
             <input type="text" name="title" value="{{ old('title', $careerStep->title) }}" required>
-            @error('title') <small style="color: var(--danger);">{{ $message }}</small> @enderror
+            @error('title') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
         </div>
 
         <div style="margin-bottom: 24px;">
             <label>Deskripsi <span style="color: var(--danger);">*</span></label>
             <textarea name="description" rows="4" required>{{ old('description', $careerStep->description) }}</textarea>
-            @error('description') <small style="color: var(--danger);">{{ $message }}</small> @enderror
+            @error('description') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
         </div>
 
         <div style="margin-bottom: 24px;">
@@ -31,13 +31,14 @@
                 </div>
             @endif
             <input type="file" name="image" style="padding: 10px; background: #f8fafc; border: 2px dashed #e2e8f0;">
-            @error('image') <small style="color: var(--danger);">{{ $message }}</small> @enderror
+            @error('image') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
         </div>
 
         <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px;">
             <div>
                 <label>Urutan Tampilan</label>
                 <input type="number" name="order" value="{{ old('order', $careerStep->order) }}" required>
+                @error('order') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
             </div>
             <div>
                 <label>Status</label>
@@ -45,6 +46,7 @@
                     <option value="1" {{ old('is_active', $careerStep->is_active) == '1' ? 'selected' : '' }}>Aktif</option>
                     <option value="0" {{ old('is_active', $careerStep->is_active) == '0' ? 'selected' : '' }}>Non-aktif</option>
                 </select>
+                @error('is_active') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
             </div>
         </div>
 

@@ -45,13 +45,17 @@ class MenuController extends Controller
 
     public function update(Request $request, Menu $menu): RedirectResponse
     {
-        $request->validate([
-            'title' => 'required',
-            'url' => 'required',
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'url' => 'required|string|max:255',
+            'icon' => 'nullable|string|max:100',
+            'parent_id' => 'nullable|exists:menus,id',
+            'permission_id' => 'nullable|exists:permissions,id',
             'order' => 'integer',
+            'is_active' => 'boolean',
         ]);
 
-        $menu->update($request->all());
+        $menu->update($validated);
 
         return redirect()->route('admin.menus.index')->with('success', 'Menu berhasil diperbarui.');
     }

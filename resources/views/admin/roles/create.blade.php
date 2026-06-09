@@ -10,11 +10,17 @@
         @csrf
         <div style="margin-bottom: 25px;">
             <label style="display: block; margin-bottom: 8px; font-weight: bold;">Nama Role</label>
-            <input type="text" name="name" required placeholder="Contoh: Admin Berita" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;">
+            <input type="text" name="name" required placeholder="Contoh: Admin Berita" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;" value="{{ old('name') }}">
+            @error('name')
+                <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span>
+            @enderror
         </div>
 
         <div style="margin-bottom: 25px;">
             <label style="display: block; margin-bottom: 15px; font-weight: bold;">Pilih Hak Akses (Permissions)</label>
+            @error('permissions')
+                <div style="margin-bottom: 10px; color: #ef4444; font-size: 14px;">{{ $message }}</div>
+            @enderror
             <div style="display: flex; flex-direction: column; gap: 20px;">
                 @foreach($permissions->groupBy(fn($p) => $p->permissionGroup?->name ?? 'Lainnya') as $group => $groupPermissions)
                     <div style="background: #f9fafb; padding: 15px; border-radius: 8px; border: 1px solid #e5e7eb;">
@@ -22,7 +28,7 @@
                         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;">
                             @foreach($groupPermissions as $permission)
                                 <div style="display: flex; align-items: center; gap: 8px;">
-                                    <input type="checkbox" name="permissions[]" value="{{ $permission->name }}" id="p-{{ $permission->id }}" style="width: 18px; height: 18px;">
+                                    <input type="checkbox" name="permissions[]" value="{{ $permission->name }}" id="p-{{ $permission->id }}" style="width: 18px; height: 18px;" {{ in_array($permission->name, old('permissions', [])) ? 'checked' : '' }}>
                                     <label for="p-{{ $permission->id }}" style="font-size: 0.9rem; cursor: pointer;">{{ $permission->name }}</label>
                                 </div>
                             @endforeach

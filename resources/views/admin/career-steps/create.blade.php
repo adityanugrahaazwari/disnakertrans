@@ -13,26 +13,27 @@
         <div style="margin-bottom: 24px;">
             <label>Judul Langkah <span style="color: var(--danger);">*</span></label>
             <input type="text" name="title" value="{{ old('title') }}" required placeholder="Contoh: Daftar Kartu AK-1">
-            @error('title') <small style="color: var(--danger);">{{ $message }}</small> @enderror
+            @error('title') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
         </div>
 
         <div style="margin-bottom: 24px;">
             <label>Deskripsi <span style="color: var(--danger);">*</span></label>
             <textarea name="description" rows="4" required placeholder="Jelaskan langkah ini secara detail">{{ old('description') }}</textarea>
-            @error('description') <small style="color: var(--danger);">{{ $message }}</small> @enderror
+            @error('description') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
         </div>
 
         <div style="margin-bottom: 24px;">
             <label>Ilustrasi (Opsional)</label>
             <input type="file" name="image" style="padding: 10px; background: #f8fafc; border: 2px dashed #e2e8f0;">
             <small style="color: var(--text-muted); display: block; margin-top: 8px;">Format: JPG, PNG, WEBP, SVG. Maks: 2MB.</small>
-            @error('image') <small style="color: var(--danger);">{{ $message }}</small> @enderror
+            @error('image') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
         </div>
 
         <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px;">
             <div>
                 <label>Urutan Tampilan</label>
                 <input type="number" name="order" value="{{ old('order', 0) }}" required>
+                @error('order') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
             </div>
             <div>
                 <label>Status</label>
@@ -40,6 +41,7 @@
                     <option value="1" {{ old('is_active') == '1' ? 'selected' : '' }}>Aktif</option>
                     <option value="0" {{ old('is_active') == '0' ? 'selected' : '' }}>Non-aktif</option>
                 </select>
+                @error('is_active') <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span> @enderror
             </div>
         </div>
 

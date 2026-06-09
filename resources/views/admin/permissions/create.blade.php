@@ -10,7 +10,11 @@
         @csrf
         <div style="margin-bottom: 25px;">
             <label style="display: block; margin-bottom: 8px; font-weight: bold;">Nama Permission</label>
-            <input type="text" name="name" required placeholder="Contoh: hapus-berita" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;">
+            <input type="text" name="name" required placeholder="Contoh: hapus-berita" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;" value="{{ old('name') }}">
+            @error('name')
+                <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span>
+            @enderror
+            <br>
             <small style="color: #6b7280;">Gunakan format huruf kecil dan tanda hubung (kebab-case).</small>
         </div>
 
@@ -19,9 +23,13 @@
             <select name="permission_group_id" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px;">
                 <option value="">-- Pilih Grup --</option>
                 @foreach($groups as $group)
-                    <option value="{{ $group->id }}">{{ $group->name }}</option>
+                    <option value="{{ $group->id }}" {{ old('permission_group_id') == $group->id ? 'selected' : '' }}>{{ $group->name }}</option>
                 @endforeach
             </select>
+            @error('permission_group_id')
+                <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span>
+            @enderror
+            <br>
             <small style="color: #6b7280;">Digunakan untuk mengelompokkan permission di halaman manajemen role.</small>
         </div>
 
