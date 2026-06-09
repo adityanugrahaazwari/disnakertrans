@@ -25,17 +25,17 @@
                 <div style="background: white; border-radius: var(--radius-md); border: 1px solid #f1f5f9; box-shadow: var(--shadow-soft); border-top: 4px solid var(--accent); position: relative; overflow: hidden;">
                     <div style="padding: 30px;">
                         <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
-                            <span style="display: inline-block; padding: 6px 15px; background: var(--accent-soft); color: var(--accent); border-radius: 50px; font-size: 0.75rem; font-weight: 700;">{{ $job->perusahaan }}</span>
+                            <span style="display: inline-block; padding: 6px 15px; background: var(--accent-soft); color: var(--accent); border-radius: 50px; font-size: 0.75rem; font-weight: 700;">{{ $job->company }}</span>
                             @if($job->is_verified)
                                 <i class="fas fa-check-circle" style="color: #10b981;" title="Verified Company"></i>
                             @endif
                         </div>
-                        <h3 style="font-size: 1.25rem; margin-bottom: 10px; font-weight: 700; color: var(--primary);">{{ $job->posisi }}</h3>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 10px; font-weight: 700; color: var(--primary);">{{ $job->position }}</h3>
                         <div style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 20px;">
                             <i class="fas fa-clock" style="margin-right: 8px;"></i> Batas Akhir: {{ $job->deadline ? $job->deadline->format('d M Y') : 'N/A' }}
                         </div>
                         <div style="font-size: 0.9rem; color: var(--text-dark); margin-bottom: 25px; line-height: 1.6; height: 4.8em; overflow: hidden;">
-                            {!! $job->syarat !!}
+                            {!! $job->requirements !!}
                         </div>
                         <a href="{{ route('jobs.show', $job->id) }}" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent); color: white; text-decoration: none; padding: 12px; border-radius: 12px; font-weight: 700; font-size: 0.9rem; transition: 0.3s;">
                             Lihat Detail <i class="fas fa-arrow-right"></i>

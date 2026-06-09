@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class JobVacancy extends Model
 {
     protected $fillable = [
-        'perusahaan',
-        'posisi',
-        'syarat',
+        'company',
+        'position',
+        'requirements',
         'deadline',
         'is_verified',
     ];

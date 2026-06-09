@@ -12,17 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('profiles', function (Blueprint $table) {
-            $table->string('nama_kepala')->nullable();
-            $table->string('jabatan_kepala')->nullable();
-            $table->text('sambutan_kepala')->nullable();
-            $table->string('foto_kepala')->nullable();
+            $table->string('head_name')->nullable();
+            $table->string('head_position')->nullable();
+            $table->text('head_greeting')->nullable();
+            $table->string('head_photo')->nullable();
         });
     }
 
     public function down(): void
     {
         Schema::table('profiles', function (Blueprint $table) {
-            $table->dropColumn(['nama_kepala', 'jabatan_kepala', 'sambutan_kepala', 'foto_kepala']);
+            $table->dropColumn(['head_name', 'head_position', 'head_greeting', 'head_photo']);
         });
     }
 };

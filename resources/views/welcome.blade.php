@@ -209,29 +209,29 @@
     </section>
 
     <!-- Sambutan Section -->
-    @if($footerProfile->sambutan_kepala)
+    @if($footerProfile->head_greeting)
     <section class="section" style="background: #f8fafc; border-radius: 60px 60px 0 0;">
         <div class="hero-grid grid-special" style="display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 100px; align-items: center;">
             <div style="position: relative;">
                 <div style="position: absolute; width: 100%; height: 100%; border: 3px solid var(--accent); border-radius: 40px; top: 30px; left: 30px; z-index: 1;"></div>
                 <div style="position: relative; z-index: 2; border-radius: 40px; overflow: hidden; box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15);">
-                    <img src="{{ $footerProfile->foto_kepala ? asset('storage/' . $footerProfile->foto_kepala) : 'https://via.placeholder.com/500x650' }}" style="width: 100%; height: auto; display: block;">
+                    <img src="{{ $footerProfile->head_photo ? asset('storage/' . $footerProfile->head_photo) : 'https://via.placeholder.com/500x650' }}" style="width: 100%; height: auto; display: block;">
                     <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 40px; background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent); color: white;">
-                        <h4 style="font-size: 1.4rem; font-weight: 800; margin: 0;">{{ $footerProfile->nama_kepala }}</h4>
-                        <p style="font-size: 0.95rem; opacity: 0.9; margin: 8px 0 0; font-weight: 600;">{{ $footerProfile->jabatan_kepala }}</p>
+                        <h4 style="font-size: 1.4rem; font-weight: 800; margin: 0;">{{ $footerProfile->head_name }}</h4>
+                        <p style="font-size: 0.95rem; opacity: 0.9; margin: 8px 0 0; font-weight: 600;">{{ $footerProfile->head_position }}</p>
                     </div>
                 </div>
             </div>
             <div>
                 <div style="width: 70px; height: 5px; background: var(--accent); margin-bottom: 40px; border-radius: 10px;"></div>
-                <span class="section-tag" style="text-align: left;">Sambutan Hangat</span>
-                <h2 class="section-title" style="margin-bottom: 35px;">Selamat Datang di Portal Resmi Disnakertrans</h2>
+                <span class="section-tag" style="text-align: left;">Warm Greeting</span>
+                <h2 class="section-title" style="margin-bottom: 35px;">Welcome to the Official Disnakertrans Portal</h2>
                 <div style="color: var(--text-light); font-size: 1.15rem; line-height: 1.9; margin-bottom: 45px;">
-                    {!! nl2br(e($footerProfile->sambutan_kepala)) !!}
+                    {!! nl2br(e($footerProfile->head_greeting)) !!}
                 </div>
                 <div style="display: flex; align-items: center; gap: 25px; padding: 25px; background: white; border-radius: 24px; border: 1px solid #f1f5f9; box-shadow: 0 15px 30px rgba(0,0,0,0.03);">
                     <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;"><i class="fas fa-quote-right"></i></div>
-                    <p style="font-style: italic; color: var(--primary); font-weight: 700; font-size: 1.1rem; margin: 0;">"Melayani dengan Hati, Membangun Negeri."</p>
+                    <p style="font-style: italic; color: var(--primary); font-weight: 700; font-size: 1.1rem; margin: 0;">"Serving with Heart, Building the Nation."</p>
                 </div>
             </div>
         </div>
@@ -321,15 +321,15 @@
                     <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 25px;">
                         <div style="width: 50px; height: 50px; background: rgba(255,255,255,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 1.5rem;"><i class="fas fa-building"></i></div>
                         <div>
-                            <h4 style="color: white; font-size: 1.15rem; font-weight: 800; margin: 0;">{{ Str::limit($job->posisi, 30) }}</h4>
-                            <p style="color: #94a3b8; font-size: 0.85rem; margin: 5px 0 0;">{{ $job->perusahaan }}</p>
+                            <h4 style="color: white; font-size: 1.15rem; font-weight: 800; margin: 0;">{{ Str::limit($job->position, 30) }}</h4>
+                            <p style="color: #94a3b8; font-size: 0.85rem; margin: 5px 0 0;">{{ $job->company }}</p>
                         </div>
                     </div>
                     <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 25px;">
                         <span style="background: rgba(59, 130, 246, 0.15); color: var(--accent); padding: 5px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 700;">Full Time</span>
                         <span style="background: rgba(255, 255, 255, 0.05); color: #94a3b8; padding: 5px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 700;">Kab. Banjar</span>
                     </div>
-                    <span style="color: var(--accent); font-weight: 800; font-size: 0.9rem;">Lamar Sekarang <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></span>
+                    <span style="color: var(--accent); font-weight: 800; font-size: 0.9rem;">Apply Now <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></span>
                 </a>
             @endforeach
         </div>
@@ -338,8 +338,8 @@
     <!-- News Section -->
     <section class="section">
         <div class="section-header">
-            <span class="section-tag">Update Terbaru</span>
-            <h2 class="section-title">Berita & Informasi</h2>
+            <span class="section-tag">Latest Updates</span>
+            <h2 class="section-title">News & Information</h2>
         </div>
         <div class="responsive-grid">
             @foreach($latestPosts as $post)
@@ -362,15 +362,15 @@
     <section style="padding: 100px 8% 0; background: white;">
         <div class="hero-grid grid-special" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center;">
             <div>
-                <span class="section-tag" style="text-align: left;">Kunjungi Kami</span>
-                <h3 style="font-size: 2rem; font-weight: 800; color: var(--primary); margin-bottom: 30px; line-height: 1.2;">{{ $footerProfile->nama_dinas }}</h3>
+                <span class="section-tag" style="text-align: left;">Visit Us</span>
+                <h3 style="font-size: 2rem; font-weight: 800; color: var(--primary); margin-bottom: 30px; line-height: 1.2;">{{ $footerProfile->agency_name }}</h3>
                 <div style="display: flex; gap: 20px; margin-bottom: 30px;">
                     <div style="width: 50px; height: 50px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i class="fas fa-map-marker-alt"></i></div>
-                    <p style="color: var(--text-light); font-size: 1.05rem; line-height: 1.7;">{{ $footerProfile->alamat }}</p>
+                    <p style="color: var(--text-light); font-size: 1.05rem; line-height: 1.7;">{{ $footerProfile->address }}</p>
                 </div>
                 <div style="padding: 30px; background: #f8fafc; border-radius: 24px; border: 1px solid #f1f5f9;">
-                    <p style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px;"><strong>Email:</strong> <span style="color: var(--text-light);">{{ $footerProfile->email }}</span></p>
-                    <p style="display: flex; align-items: center; gap: 15px;"><strong>Telepon:</strong> <span style="color: var(--text-light);">{{ $footerProfile->telepon }}</span></p>
+                    <p style="margin-bottom: 15px; display: center; align-items: center; gap: 15px;"><strong>Email:</strong> <span style="color: var(--text-light);">{{ $footerProfile->email }}</span></p>
+                    <p style="display: flex; align-items: center; gap: 15px;"><strong>Phone:</strong> <span style="color: var(--text-light);">{{ $footerProfile->phone }}</span></p>
                 </div>
             </div>
             <div class="google-maps-container" style="border-radius: 40px; overflow: hidden; height: 450px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); border: 1px solid #f1f5f9;">
@@ -385,11 +385,11 @@
     <section class="section" id="pengaduan">
         <div class="hero-grid grid-special" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 100px; align-items: center;">
             <div>
-                <span class="section-tag" style="text-align: left;">Hubungi Kami</span>
-                <h2 class="section-title" style="margin-bottom: 30px;">Layanan Pengaduan & Aspirasi</h2>
-                <p style="color: var(--text-light); font-size: 1.15rem; line-height: 1.8; margin-bottom: 40px;">Sampaikan saran, keluhan, atau aspirasi Anda secara langsung melalui formulir resmi kami. Tim kami akan segera menindaklanjuti laporan Anda.</p>
-                @if($footerProfile->pengaduan_wa)
-                    <a href="https://wa.me/62{{ $footerProfile->pengaduan_wa }}" target="_blank" class="btn" style="background: #25d366; color: white; padding: 20px 40px; border-radius: 20px;"><i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i> Konsultasi via WhatsApp</a>
+                <span class="section-tag" style="text-align: left;">Contact Us</span>
+                <h2 class="section-title" style="margin-bottom: 30px;">Complaint & Aspiration Service</h2>
+                <p style="color: var(--text-light); font-size: 1.15rem; line-height: 1.8; margin-bottom: 40px;">Submit your suggestions, complaints, or aspirations directly through our official form. Our team will promptly follow up on your report.</p>
+                @if($footerProfile->complaint_wa)
+                    <a href="https://wa.me/62{{ $footerProfile->complaint_wa }}" target="_blank" class="btn" style="background: #25d366; color: white; padding: 20px 40px; border-radius: 20px;"><i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i> Consult via WhatsApp</a>
                 @endif
             </div>
             <div class="card-modern" style="padding: 50px; background: white; border: none; box-shadow: 0 40px 100px rgba(0,0,0,0.06);">
@@ -412,23 +412,23 @@
 
                 <form action="{{ route('messages.store') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="subject" value="Aduan/Aspirasi Masyarakat">
+                    <input type="hidden" name="subject" value="Community Complaint/Aspiration">
                     <div style="margin-bottom: 25px;">
-                        <label style="font-weight: 700; font-size: 0.9rem; margin-bottom: 10px; display: block;">Nama Lengkap</label>
-                        <input type="text" name="name" required placeholder="Masukkan nama Anda" style="width:100%; padding: 16px 20px; border-radius: 14px; border: 1px solid #e2e8f0; background: #f8fafc; font-family: inherit;" value="{{ old('name') }}">
+                        <label style="font-weight: 700; font-size: 0.9rem; margin-bottom: 10px; display: block;">Full Name</label>
+                        <input type="text" name="name" required placeholder="Enter your name" style="width:100%; padding: 16px 20px; border-radius: 14px; border: 1px solid #e2e8f0; background: #f8fafc; font-family: inherit;" value="{{ old('name') }}">
                         @error('name') <small style="color: #ef4444;">{{ $message }}</small> @enderror
                     </div>
                     <div style="margin-bottom: 25px;">
-                        <label style="font-weight: 700; font-size: 0.9rem; margin-bottom: 10px; display: block;">Email Aktif</label>
-                        <input type="email" name="email" required placeholder="alamat@email.com" style="width:100%; padding: 16px 20px; border-radius: 14px; border: 1px solid #e2e8f0; background: #f8fafc; font-family: inherit;" value="{{ old('email') }}">
+                        <label style="font-weight: 700; font-size: 0.9rem; margin-bottom: 10px; display: block;">Active Email</label>
+                        <input type="email" name="email" required placeholder="address@email.com" style="width:100%; padding: 16px 20px; border-radius: 14px; border: 1px solid #e2e8f0; background: #f8fafc; font-family: inherit;" value="{{ old('email') }}">
                         @error('email') <small style="color: #ef4444;">{{ $message }}</small> @enderror
                     </div>
                     <div style="margin-bottom: 35px;">
-                        <label style="font-weight: 700; font-size: 0.9rem; margin-bottom: 10px; display: block;">Isi Pesan / Aduan</label>
-                        <textarea name="message" required rows="5" placeholder="Tuliskan detail aspirasi Anda di sini..." style="width:100%; padding: 16px 20px; border-radius: 14px; border: 1px solid #e2e8f0; background: #f8fafc; font-family: inherit; resize: none;">{{ old('message') }}</textarea>
+                        <label style="font-weight: 700; font-size: 0.9rem; margin-bottom: 10px; display: block;">Message / Complaint Content</label>
+                        <textarea name="message" required rows="5" placeholder="Write your aspiration details here..." style="width:100%; padding: 16px 20px; border-radius: 14px; border: 1px solid #e2e8f0; background: #f8fafc; font-family: inherit; resize: none;">{{ old('message') }}</textarea>
                         @error('message') <small style="color: #ef4444;">{{ $message }}</small> @enderror
                     </div>
-                    <button type="submit" class="btn btn-accent" style="width:100%; justify-content: center; padding: 20px;">Kirim Pesan Sekarang <i class="fas fa-paper-plane"></i></button>
+                    <button type="submit" class="btn btn-accent" style="width:100%; justify-content: center; padding: 20px;">Send Message Now <i class="fas fa-paper-plane"></i></button>
                 </form>
             </div>
         </div>
@@ -440,9 +440,9 @@
             <div class="footer-col">
                 <div class="logo" style="margin-bottom: 30px;">
                     <div class="logo-icon" style="background: white; color: var(--primary);"><i class="fas fa-building-columns"></i></div>
-                    <div class="logo-text"><h1 style="color: white;">DISNAKERTRANS</h1><span style="color: #94a3b8;">KABUPATEN BANJAR</span></div>
+                    <div class="logo-text"><h1 style="color: white;">DISNAKERTRANS</h1><span style="color: #94a3b8;">BANJAR REGENCY</span></div>
                 </div>
-                <p style="color: #94a3b8; font-size: 1rem; line-height: 1.8;">{{ $footerProfile->footer_description ?? 'Membangun masyarakat Kabupaten Banjar yang sejahtera melalui pelayanan ketenagakerjaan yang profesional dan akuntabel.' }}</p>
+                <p style="color: #94a3b8; font-size: 1rem; line-height: 1.8;">{{ $footerProfile->footer_description ?? 'Building a prosperous community in Banjar Regency through professional and accountable employment services.' }}</p>
                 <div class="social-links">
                     @if($footerProfile->facebook_url)<a href="{{ $footerProfile->facebook_url }}" target="_blank" class="social-btn"><i class="fab fa-facebook-f"></i></a>@endif
                     @if($footerProfile->instagram_url)<a href="{{ $footerProfile->instagram_url }}" target="_blank" class="social-btn"><i class="fab fa-instagram"></i></a>@endif
@@ -450,34 +450,34 @@
                 </div>
             </div>
             <div class="footer-col">
-                <h4>Navigasi</h4>
+                <h4>Navigation</h4>
                 <ul>
-                    <li><a href="/">Beranda</a></li>
-                    <li><a href="{{ route('profile.vision') }}">Profil Dinas</a></li>
-                    <li><a href="{{ route('profile.structure') }}">Struktur Organisasi</a></li>
-                    <li><a href="{{ route('posts.index') }}">Berita Terkini</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{{ route('profile.vision') }}">Agency Profile</a></li>
+                    <li><a href="{{ route('profile.structure') }}">Organizational Structure</a></li>
+                    <li><a href="{{ route('posts.index') }}">Latest News</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Layanan Link</h4>
+                <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="{{ route('jobs.index') }}">Bursa Kerja</a></li>
-                    <li><a href="{{ route('trainings.index') }}">Pusat Pelatihan</a></li>
-                    <li><a href="{{ route('downloads.index') }}">Pusat Unduhan</a></li>
-                    <li><a href="#pengaduan">Layanan Pengaduan</a></li>
+                    <li><a href="{{ route('jobs.index') }}">Job Board</a></li>
+                    <li><a href="{{ route('trainings.index') }}">Training Center</a></li>
+                    <li><a href="{{ route('downloads.index') }}">Download Center</a></li>
+                    <li><a href="#pengaduan">Complaint Service</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Hubungi Kami</h4>
+                <h4>Contact Us</h4>
                 <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.7; margin-bottom: 25px;">
-                    <i class="fas fa-map-marker-alt" style="color: var(--accent); margin-right: 10px;"></i> {{ $footerProfile->alamat }}
+                    <i class="fas fa-map-marker-alt" style="color: var(--accent); margin-right: 10px;"></i> {{ $footerProfile->address }}
                 </p>
                 <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 15px;"><i class="fas fa-envelope" style="color: var(--accent); margin-right: 10px;"></i> {{ $footerProfile->email }}</p>
-                <p style="color: #94a3b8; font-size: 0.95rem;"><i class="fas fa-phone" style="color: var(--accent); margin-right: 10px;"></i> {{ $footerProfile->telepon }}</p>
+                <p style="color: #94a3b8; font-size: 0.95rem;"><i class="fas fa-phone" style="color: var(--accent); margin-right: 10px;"></i> {{ $footerProfile->phone }}</p>
             </div>
         </div>
         <div style="text-align: center; padding-top: 50px; border-top: 1px solid rgba(255,255,255,0.05); color: #64748b; font-size: 0.9rem;">
-            <p>&copy; {{ date('Y') }} Pemerintah Kabupaten Banjar. All Rights Reserved.</p>
+            <p>&copy; {{ date('Y') }} Banjar Regency Government. All Rights Reserved.</p>
         </div>
     </footer>
 

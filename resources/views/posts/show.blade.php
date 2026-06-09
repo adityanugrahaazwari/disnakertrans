@@ -42,11 +42,11 @@
 @section('content')
 <header class="page-header">
     <div class="container">
-        <h1 style="font-size: 2.5rem;">Detail Berita</h1>
+        <h1 style="font-size: 2.5rem;">News Detail</h1>
         <div class="breadcrumb">
-            <a href="/">Beranda</a>
+            <a href="/">Home</a>
             <span>/</span>
-            <a href="{{ route('posts.index') }}">Berita</a>
+            <a href="{{ route('posts.index') }}">News</a>
             <span>/</span>
             <span>Detail</span>
         </div>
@@ -91,7 +91,7 @@
             <aside>
                 @if($relatedPosts->count() > 0)
                     <div class="sidebar-widget">
-                        <h3 class="widget-title">Berita Terkait</h3>
+                        <h3 class="widget-title">Related News</h3>
                         @foreach($relatedPosts as $related)
                             <a href="{{ route('posts.show', $related->slug) }}" class="related-post-card">
                                 <div class="related-img">
@@ -113,15 +113,15 @@
                 @endif
 
                 <div class="sidebar-widget">
-                    <h3 class="widget-title">Hubungi Kami</h3>
+                    <h3 class="widget-title">Contact Us</h3>
                     <div style="font-size: 0.95rem; color: var(--text-dark); line-height: 1.7;">
                         <p style="margin-bottom: 20px; display: flex; gap: 15px;">
                             <i class="fas fa-map-marker-alt" style="color: var(--accent); margin-top: 5px;"></i>
-                            <span>{{ $footerProfile->alamat }}</span>
+                            <span>{{ $footerProfile->address }}</span>
                         </p>
                         <p style="margin-bottom: 20px; display: flex; gap: 15px;">
                             <i class="fas fa-phone" style="color: var(--accent);"></i>
-                            <span>{{ $footerProfile->telepon }}</span>
+                            <span>{{ $footerProfile->phone }}</span>
                         </p>
                         <p style="display: flex; gap: 15px;">
                             <i class="fas fa-envelope" style="color: var(--accent);"></i>

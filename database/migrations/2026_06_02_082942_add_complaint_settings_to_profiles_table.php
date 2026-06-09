@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('profiles', function (Blueprint $table) {
-            $table->string('pengaduan_title')->nullable();
-            $table->text('pengaduan_description')->nullable();
-            $table->string('pengaduan_wa')->nullable();
+            $table->string('complaint_title')->nullable();
+            $table->text('complaint_description')->nullable();
+            $table->string('complaint_wa')->nullable();
         });
     }
 
     public function down(): void
     {
         Schema::table('profiles', function (Blueprint $table) {
-            $table->dropColumn(['pengaduan_title', 'pengaduan_description', 'pengaduan_wa']);
+            $table->dropColumn(['complaint_title', 'complaint_description', 'complaint_wa']);
         });
     }
 };

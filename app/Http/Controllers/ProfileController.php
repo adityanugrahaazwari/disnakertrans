@@ -19,17 +19,17 @@ class ProfileController extends Controller
     public function updateVision(Request $request): RedirectResponse
     {
         $request->validate([
-            'visi' => 'required',
-            'misi' => 'required',
+            'vision' => 'required',
+            'mission' => 'required',
         ]);
 
         $profile = Profile::firstOrCreate(['id' => 1]);
         $profile->update([
-            'visi' => $request->visi,
-            'misi' => $request->misi,
+            'vision' => $request->vision,
+            'mission' => $request->mission,
         ]);
 
-        return back()->with('success', 'Visi & Misi berhasil diperbarui.');
+        return back()->with('success', 'Vision & Mission updated successfully.');
     }
 
     public function history(): View
@@ -41,15 +41,15 @@ class ProfileController extends Controller
     public function updateHistory(Request $request): RedirectResponse
     {
         $request->validate([
-            'sejarah' => 'required',
+            'history' => 'required',
         ]);
 
         $profile = Profile::firstOrCreate(['id' => 1]);
         $profile->update([
-            'sejarah' => $request->sejarah,
+            'history' => $request->history,
         ]);
 
-        return back()->with('success', 'Sejarah berhasil diperbarui.');
+        return back()->with('success', 'History updated successfully.');
     }
 
     public function contact(): View
@@ -61,16 +61,16 @@ class ProfileController extends Controller
     public function updateContact(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'alamat' => 'required',
+            'address' => 'required',
             'google_maps_url' => 'nullable|string',
             'email' => 'required|email',
-            'telepon' => 'required',
+            'phone' => 'required',
         ]);
 
         $profile = Profile::firstOrCreate(['id' => 1]);
         $profile->update($validated);
 
-        return back()->with('success', 'Informasi kontak berhasil diperbarui.');
+        return back()->with('success', 'Contact information updated successfully.');
     }
 
     public function footer(): View
@@ -93,7 +93,7 @@ class ProfileController extends Controller
         $profile = Profile::firstOrCreate(['id' => 1]);
         $profile->update($validated);
 
-        return back()->with('success', 'Pengaturan footer berhasil diperbarui.');
+        return back()->with('success', 'Footer settings updated successfully.');
     }
 
     public function greeting(): View
@@ -105,25 +105,25 @@ class ProfileController extends Controller
     public function updateGreeting(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'nama_kepala' => 'required|string|max:255',
-            'jabatan_kepala' => 'required|string|max:255',
-            'sambutan_kepala' => 'required|string',
-            'foto_kepala' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'head_name' => 'required|string|max:255',
+            'head_position' => 'required|string|max:255',
+            'head_greeting' => 'required|string',
+            'head_photo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
         $profile = Profile::firstOrCreate(['id' => 1]);
 
-        if ($request->hasFile('foto_kepala')) {
-            if ($profile->foto_kepala) {
-                Storage::disk('public')->delete($profile->foto_kepala);
+        if ($request->hasFile('head_photo')) {
+            if ($profile->head_photo) {
+                Storage::disk('public')->delete($profile->head_photo);
             }
-            $path = $request->file('foto_kepala')->store('profile', 'public');
-            $validated['foto_kepala'] = $path;
+            $path = $request->file('head_photo')->store('profile', 'public');
+            $validated['head_photo'] = $path;
         }
 
         $profile->update($validated);
 
-        return back()->with('success', 'Sambutan Kepala Dinas berhasil diperbarui.');
+        return back()->with('success', 'Head of Department greeting updated successfully.');
     }
 
     public function complaint(): View
@@ -135,15 +135,15 @@ class ProfileController extends Controller
     public function updateComplaint(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'pengaduan_title' => 'required|string|max:255',
-            'pengaduan_description' => 'required|string',
-            'pengaduan_wa' => 'nullable|string|max:20',
+            'complaint_title' => 'required|string|max:255',
+            'complaint_description' => 'required|string',
+            'complaint_wa' => 'nullable|string|max:20',
         ]);
 
         $profile = Profile::firstOrCreate(['id' => 1]);
         $profile->update($validated);
 
-        return back()->with('success', 'Pengaturan section pengaduan berhasil diperbarui.');
+        return back()->with('success', 'Complaint section settings updated successfully.');
     }
 
     public function maklumat(): View
@@ -155,14 +155,14 @@ class ProfileController extends Controller
     public function updateMaklumat(Request $request): RedirectResponse
     {
         $request->validate([
-            'maklumat_pelayanan' => 'required',
+            'service_charter' => 'required',
         ]);
 
         $profile = Profile::firstOrCreate(['id' => 1]);
         $profile->update([
-            'maklumat_pelayanan' => $request->maklumat_pelayanan,
+            'service_charter' => $request->service_charter,
         ]);
 
-        return back()->with('success', 'Maklumat Pelayanan berhasil diperbarui.');
+        return back()->with('success', 'Service Charter updated successfully.');
     }
 }

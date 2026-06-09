@@ -10,10 +10,10 @@ class Employee extends Model
 {
     protected $fillable = [
         'parent_id',
-        'nama',
+        'name',
         'nip',
-        'jabatan',
-        'foto',
+        'position',
+        'photo',
         'order',
     ];
 

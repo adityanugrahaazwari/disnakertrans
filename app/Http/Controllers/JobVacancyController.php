@@ -25,9 +25,9 @@ class JobVacancyController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'perusahaan' => 'required|string|max:255',
-            'posisi' => 'required|string|max:255',
-            'syarat' => 'required|string',
+            'company' => 'required|string|max:255',
+            'position' => 'required|string|max:255',
+            'requirements' => 'required|string',
             'deadline' => 'nullable|date',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
@@ -41,7 +41,7 @@ class JobVacancyController extends Controller
             }
         }
 
-        return redirect()->route('admin.job-vacancies.index')->with('success', 'Lowongan kerja berhasil ditambahkan.');
+        return redirect()->route('admin.job-vacancies.index')->with('success', 'Job vacancy added successfully.');
     }
 
     public function edit(JobVacancy $job_vacancy): View
@@ -53,9 +53,9 @@ class JobVacancyController extends Controller
     public function update(Request $request, JobVacancy $job_vacancy): RedirectResponse
     {
         $validated = $request->validate([
-            'perusahaan' => 'required|string|max:255',
-            'posisi' => 'required|string|max:255',
-            'syarat' => 'required|string',
+            'company' => 'required|string|max:255',
+            'position' => 'required|string|max:255',
+            'requirements' => 'required|string',
             'deadline' => 'nullable|date',
             'is_verified' => 'boolean',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
@@ -72,7 +72,7 @@ class JobVacancyController extends Controller
             }
         }
 
-        return redirect()->route('admin.job-vacancies.index')->with('success', 'Lowongan kerja berhasil diperbarui.');
+        return redirect()->route('admin.job-vacancies.index')->with('success', 'Job vacancy updated successfully.');
     }
 
     public function destroy(JobVacancy $job_vacancy): RedirectResponse
@@ -81,13 +81,13 @@ class JobVacancyController extends Controller
             Storage::disk('public')->delete($image->path);
         }
         $job_vacancy->delete();
-        return redirect()->route('admin.job-vacancies.index')->with('success', 'Lowongan kerja berhasil dihapus.');
+        return redirect()->route('admin.job-vacancies.index')->with('success', 'Job vacancy deleted successfully.');
     }
 
     public function destroyImage(JobVacancyImage $image): RedirectResponse
     {
         Storage::disk('public')->delete($image->path);
         $image->delete();
-        return back()->with('success', 'Foto berhasil dihapus.');
+        return back()->with('success', 'Photo deleted successfully.');
     }
 }

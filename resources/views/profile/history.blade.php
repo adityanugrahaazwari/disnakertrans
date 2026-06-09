@@ -27,8 +27,8 @@
             </div>
 
             <div style="font-size: 1.15rem; color: var(--text-dark); line-height: 1.8; text-align: justify;">
-                @if($profile->sejarah)
-                    {!! nl2br(e($profile->sejarah)) !!}
+                @if($profile->history)
+                    {!! nl2br(e($profile->history)) !!}
                 @else
                     <div style="text-align: center; padding: 40px; background: #f8fafc; border-radius: 16px; color: var(--text-light);">
                         <p>Konten sejarah sedang dalam tahap penyusunan. Silakan kembali lagi nanti.</p>

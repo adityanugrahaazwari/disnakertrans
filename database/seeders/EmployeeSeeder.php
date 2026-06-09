@@ -17,18 +17,18 @@ class EmployeeSeeder extends Seeder
 
         // 1. Kepala Dinas (Top Level)
         $kepalaDinas = Employee::create([
-            'nama' => 'Drs. H. Syahrialluddin, M.Si',
+            'name' => 'Drs. H. Syahrialluddin, M.Si',
             'nip' => '19680512 199003 1 005',
-            'jabatan' => 'Kepala Dinas',
+            'position' => 'Kepala Dinas',
             'order' => 1,
         ]);
 
         // 2. Sekretaris (Bawah Kepala Dinas)
         $sekretaris = Employee::create([
             'parent_id' => $kepalaDinas->id,
-            'nama' => 'Hj. Siti Nurhaliza, S.Sos, M.AP',
+            'name' => 'Hj. Siti Nurhaliza, S.Sos, M.AP',
             'nip' => '19750821 199803 2 003',
-            'jabatan' => 'Sekretaris',
+            'position' => 'Sekretaris',
             'order' => 2,
         ]);
 
@@ -42,9 +42,9 @@ class EmployeeSeeder extends Seeder
         foreach ($kasubags as $index => $kasubag) {
             Employee::create([
                 'parent_id' => $sekretaris->id,
-                'nama' => 'Pejabat ' . $kasubag,
+                'name' => 'Pejabat ' . $kasubag,
                 'nip' => '198' . rand(0, 9) . rand(1000, 9999) . ' 20' . rand(10, 20) . rand(1, 2) . ' ' . rand(1, 2) . ' 00' . rand(1, 9),
-                'jabatan' => $kasubag,
+                'position' => $kasubag,
                 'order' => 20 + $index,
             ]);
         }
@@ -52,36 +52,36 @@ class EmployeeSeeder extends Seeder
         // 4. Bendahara (Bawah Kepala Dinas)
         Employee::create([
             'parent_id' => $kepalaDinas->id,
-            'nama' => 'Rina Amalia, SE',
+            'name' => 'Rina Amalia, SE',
             'nip' => '19850615 201001 2 015',
-            'jabatan' => 'Bendahara Pengeluaran',
+            'position' => 'Bendahara Pengeluaran',
             'order' => 3,
         ]);
 
         // Define Departments (Bidang)
         $bidangs = [
             [
-                'nama' => 'H. Ahmad Syarif, ST, MT',
+                'name' => 'H. Ahmad Syarif, ST, MT',
                 'nip' => '19800115 200501 1 012',
-                'jabatan' => 'Kepala Bidang Hubungan Industrial',
+                'position' => 'Kepala Bidang Hubungan Industrial',
                 'seksis' => [
                     'Seksi Kesejahteraan Pekerja',
                     'Seksi Perselisihan Industrial'
                 ]
             ],
             [
-                'nama' => 'Ir. Hj. Linda Wati, MP',
+                'name' => 'Ir. Hj. Linda Wati, MP',
                 'nip' => '19780410 200312 2 005',
-                'jabatan' => 'Kepala Bidang Penempatan Tenaga Kerja',
+                'position' => 'Kepala Bidang Penempatan Tenaga Kerja',
                 'seksis' => [
                     'Seksi Informasi Pasar Kerja',
                     'Seksi Perluasan Kesempatan Kerja'
                 ]
             ],
             [
-                'nama' => 'Bambang Irawan, SE, MM',
+                'name' => 'Bambang Irawan, SE, MM',
                 'nip' => '19821130 200801 1 008',
-                'jabatan' => 'Kepala Bidang Pelatihan dan Produktivitas',
+                'position' => 'Kepala Bidang Pelatihan dan Produktivitas',
                 'seksis' => [
                     'Seksi Standarisasi Kompetensi',
                     'Seksi Kelembagaan Pelatihan'
@@ -93,9 +93,9 @@ class EmployeeSeeder extends Seeder
             // Create Kepala Bidang
             $kabid = Employee::create([
                 'parent_id' => $kepalaDinas->id, // Langsung di bawah kadis atau di bawah sekretaris? Biasanya sejajar struktural tapi garis koordinasi.
-                'nama' => $bidangData['nama'],
+                'name' => $bidangData['name'],
                 'nip' => $bidangData['nip'],
-                'jabatan' => $bidangData['jabatan'],
+                'position' => $bidangData['position'],
                 'order' => 10 + $bIndex,
             ]);
 
@@ -103,9 +103,9 @@ class EmployeeSeeder extends Seeder
                 // Create Kepala Seksi
                 $kasi = Employee::create([
                     'parent_id' => $kabid->id,
-                    'nama' => 'Pejabat ' . $seksiName,
+                    'name' => 'Pejabat ' . $seksiName,
                     'nip' => '198' . rand(0, 9) . rand(1000, 9999) . ' 20' . rand(10, 20) . rand(1, 2) . ' ' . rand(1, 2) . ' 00' . rand(1, 9),
-                    'jabatan' => 'Kepala ' . $seksiName,
+                    'position' => 'Kepala ' . $seksiName,
                     'order' => ($bIndex + 1) * 100 + $sIndex,
                 ]);
 
@@ -113,9 +113,9 @@ class EmployeeSeeder extends Seeder
                 for ($i = 1; $i <= 3; $i++) {
                     Employee::create([
                         'parent_id' => $kasi->id,
-                        'nama' => 'Staf ' . $i . ' - ' . $seksiName,
+                        'name' => 'Staf ' . $i . ' - ' . $seksiName,
                         'nip' => '199' . rand(0, 9) . rand(1000, 9999) . ' 20' . rand(20, 24) . rand(1, 2) . ' ' . rand(1, 2) . ' 00' . rand(1, 9),
-                        'jabatan' => 'Staf Pelaksana',
+                        'position' => 'Staf Pelaksana',
                         'order' => ($bIndex + 1) * 1000 + ($sIndex + 1) * 100 + $i,
                     ]);
                 }

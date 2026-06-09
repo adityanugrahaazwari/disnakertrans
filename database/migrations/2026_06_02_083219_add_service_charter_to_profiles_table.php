@@ -12,17 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('profiles', function (Blueprint $table) {
-            $table->text('sejarah')->nullable()->after('misi');
+            $table->text('service_charter')->nullable();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::table('profiles', function (Blueprint $table) {
-            $table->dropColumn('sejarah');
+            $table->dropColumn('service_charter');
         });
     }
 };

@@ -4,21 +4,21 @@
             @if($level > 0)
                 <span style="color: #cbd5e1; font-weight: 300;">└─</span>
             @endif
-            @if($employee->foto)
-                <img src="{{ asset('storage/'.$employee->foto) }}" alt="Foto" style="width: 42px; height: 42px; border-radius: 10px; object-fit: cover; border: 2px solid white; box-shadow: var(--shadow-sm);">
+            @if($employee->photo)
+                <img src="{{ asset('storage/'.$employee->photo) }}" alt="Photo" style="width: 42px; height: 42px; border-radius: 10px; object-fit: cover; border: 2px solid white; box-shadow: var(--shadow-sm);">
             @else
                 <div style="width: 42px; height: 42px; border-radius: 10px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 1.1rem; border: 1px dashed #cbd5e1;">
                     <i class="fas fa-user"></i>
                 </div>
             @endif
             <div>
-                <div style="font-weight: 700; color: var(--primary); font-size: 0.95rem;">{{ $employee->nama }}</div>
+                <div style="font-weight: 700; color: var(--primary); font-size: 0.95rem;">{{ $employee->name }}</div>
                 <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">NIP: {{ $employee->nip ?? '-' }}</div>
             </div>
         </div>
     </td>
     <td style="padding: 16px;">
-        <span class="badge" style="background: #eff6ff; color: #3b82f6; border-radius: 6px;">{{ $employee->jabatan }}</span>
+        <span class="badge" style="background: #eff6ff; color: #3b82f6; border-radius: 6px;">{{ $employee->position }}</span>
     </td>
     <td style="padding: 16px; text-align: center;">
         <span style="font-weight: 600; color: var(--text-light); font-size: 0.85rem;">#{{ $employee->order }}</span>
@@ -28,10 +28,10 @@
             <a href="{{ route('admin.profile.structure.edit', $employee->id) }}" class="btn" style="background: #f1f5f9; color: var(--primary); padding: 8px 12px; border-radius: 8px;" title="Edit">
                 <i class="fas fa-edit"></i>
             </a>
-            <form action="{{ route('admin.profile.structure.destroy', $employee->id) }}" method="POST" onsubmit="return confirm('Hapus data pegawai ini?')">
+            <form action="{{ route('admin.profile.structure.destroy', $employee->id) }}" method="POST" onsubmit="return confirm('Delete this employee data?')">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn" style="background: #fee2e2; color: var(--danger); padding: 8px 12px; border-radius: 8px;" title="Hapus">
+                <button type="submit" class="btn" style="background: #fee2e2; color: var(--danger); padding: 8px 12px; border-radius: 8px;" title="Delete">
                     <i class="fas fa-trash"></i>
                 </button>
             </form>

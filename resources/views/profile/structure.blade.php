@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Struktur Organisasi - Disnakertrans Kabupaten Banjar')
+@section('title', 'Organizational Structure - Disnakertrans Kabupaten Banjar')
 
 @section('extra_css')
 <style>
@@ -166,13 +166,13 @@
 @section('content')
 <header class="page-header">
     <div class="container">
-        <h1>Struktur Organisasi</h1>
+        <h1>Organizational Structure</h1>
         <div class="breadcrumb">
-            <a href="/">Beranda</a>
+            <a href="/">Home</a>
             <span>/</span>
-            <span>Profil</span>
+            <span>Profile</span>
             <span>/</span>
-            <span>Struktur Organisasi</span>
+            <span>Organizational Structure</span>
         </div>
     </div>
 </header>
@@ -189,15 +189,15 @@
                     <li class="level-0">
                         <div class="node-box">
                             <div class="node-header" style="height: 140px;">
-                                @if($kadis->foto)
-                                    <img src="{{ asset('storage/'.$kadis->foto) }}" alt="{{ $kadis->nama }}">
+                                @if($kadis->photo)
+                                    <img src="{{ asset('storage/'.$kadis->photo) }}" alt="{{ $kadis->name }}">
                                 @else
                                     <i class="fas fa-user-tie"></i>
                                 @endif
                             </div>
                             <div class="node-body">
-                                <span class="node-role">{{ $kadis->jabatan }}</span>
-                                <h4 class="node-name">{{ $kadis->nama }}</h4>
+                                <span class="node-role">{{ $kadis->position }}</span>
+                                <h4 class="node-name">{{ $kadis->name }}</h4>
                                 <span class="node-nip">NIP. {{ $kadis->nip }}</span>
                             </div>
                         </div>
@@ -210,20 +210,20 @@
                             <ul>
                                 @foreach($level1 as $l1)
                                     @php 
-                                        $isSupport = (strpos(strtolower($l1->jabatan), 'sekretaris') !== false || strpos(strtolower($l1->jabatan), 'bendahara') !== false);
+                                        $isSupport = (strpos(strtolower($l1->position), 'sekretaris') !== false || strpos(strtolower($l1->position), 'bendahara') !== false || strpos(strtolower($l1->position), 'secretary') !== false || strpos(strtolower($l1->position), 'treasurer') !== false);
                                     @endphp
                                     <li class="{{ $isSupport ? 'level-1-support' : 'level-1-op' }}">
                                         <div class="node-box">
                                             <div class="node-header">
-                                                @if($l1->foto)
-                                                    <img src="{{ asset('storage/'.$l1->foto) }}" alt="{{ $l1->nama }}">
+                                                @if($l1->photo)
+                                                    <img src="{{ asset('storage/'.$l1->photo) }}" alt="{{ $l1->name }}">
                                                 @else
                                                     <i class="fas fa-user"></i>
                                                 @endif
                                             </div>
                                             <div class="node-body">
-                                                <span class="node-role">{{ $l1->jabatan }}</span>
-                                                <h4 class="node-name">{{ $l1->nama }}</h4>
+                                                <span class="node-role">{{ $l1->position }}</span>
+                                                <h4 class="node-name">{{ $l1->name }}</h4>
                                                 <span class="node-nip">NIP. {{ $l1->nip }}</span>
 
                                                 <!-- Level 2 & 3 (Vertical Stack) -->
@@ -236,14 +236,14 @@
                                                         @foreach($level2 as $l2)
                                                             <div class="stack-item">
                                                                 <div class="stack-card">
-                                                                    <span class="stack-role">{{ $l2->jabatan }}</span>
-                                                                    <span class="stack-name">{{ $l2->nama }}</span>
+                                                                    <span class="stack-role">{{ $l2->position }}</span>
+                                                                    <span class="stack-name">{{ $l2->name }}</span>
                                                                     
                                                                     @php $staffs = $employees->where('parent_id', $l2->id)->sortBy('order'); @endphp
                                                                     @if($staffs->count() > 0)
                                                                         <div class="staff-list">
                                                                             @foreach($staffs as $staff)
-                                                                                <span class="staff-mini">• {{ $staff->nama }}</span>
+                                                                                <span class="staff-mini">• {{ $staff->name }}</span>
                                                                             @endforeach
                                                                         </div>
                                                                     @endif
@@ -265,20 +265,20 @@
     @else
         <div style="text-align: center; padding: 100px 0;">
             <i class="fas fa-users fa-4x" style="color: #e2e8f0; margin-bottom: 20px;"></i>
-            <p style="color: var(--text-light); font-weight: 600;">Data sedang diperbarui.</p>
+            <p style="color: var(--text-light); font-weight: 600;">Data is being updated.</p>
         </div>
     @endif
 </div>
 
-@if($profile->struktur_organisasi)
+@if($profile->organizational_structure)
 <section class="section" style="background: #f8fafc; border-top: 1px solid #e2e8f0;">
     <div class="container">
         <div style="text-align: center; margin-bottom: 50px;">
-            <span style="display: inline-block; padding: 8px 20px; background: var(--accent-soft); color: var(--accent); border-radius: 50px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">Bagan Visual</span>
-            <h2 style="font-size: 2.2rem; font-weight: 800; color: var(--primary);">Bagan Struktur Organisasi</h2>
+            <span style="display: inline-block; padding: 8px 20px; background: var(--accent-soft); color: var(--accent); border-radius: 50px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">Visual Chart</span>
+            <h2 style="font-size: 2.2rem; font-weight: 800; color: var(--primary);">Organizational Structure Chart</h2>
         </div>
         <div style="background: white; padding: 30px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); border: 1px solid #f1f5f9;">
-            <img src="{{ asset('storage/'.$profile->struktur_organisasi) }}" alt="Bagan Struktur Organisasi" style="width: 100%; border-radius: 15px;">
+            <img src="{{ asset('storage/'.$profile->organizational_structure) }}" alt="Organizational Structure Chart" style="width: 100%; border-radius: 15px;">
         </div>
     </div>
 </section>

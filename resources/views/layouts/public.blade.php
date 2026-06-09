@@ -475,11 +475,11 @@
                 <ul style="color: #94a3b8; font-size: 0.9rem;">
                     <li style="display: flex; gap: 10px;">
                         <i class="fas fa-map-marker-alt" style="margin-top: 5px; color: var(--accent);"></i>
-                        {{ $footerProfile->alamat ?? 'Jl. Jenderal Ahmad Yani No. 123, Martapura, Kab. Banjar' }}
+                        {{ $footerProfile->address ?? 'Jl. Jenderal Ahmad Yani No. 123, Martapura, Kab. Banjar' }}
                     </li>
                     <li style="display: flex; gap: 10px;">
                         <i class="fas fa-phone" style="margin-top: 5px; color: var(--accent);"></i>
-                        {{ $footerProfile->telepon ?? '(0511) 4721XXX' }}
+                        {{ $footerProfile->phone ?? '(0511) 4721XXX' }}
                     </li>
                     <li style="display: flex; gap: 10px;">
                         <i class="fas fa-envelope" style="margin-top: 5px; color: var(--accent);"></i>

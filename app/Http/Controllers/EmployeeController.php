@@ -29,22 +29,22 @@ class EmployeeController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'nama' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'nip' => 'nullable|string|unique:employees,nip',
-            'jabatan' => 'required|string|max:255',
+            'position' => 'required|string|max:255',
             'parent_id' => 'nullable|exists:employees,id',
             'order' => 'integer',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        if ($request->hasFile('foto')) {
-            $path = $request->file('foto')->store('employees', 'public');
-            $validated['foto'] = $path;
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('employees', 'public');
+            $validated['photo'] = $path;
         }
 
         Employee::create($validated);
 
-        return redirect()->route('admin.profile.structure.index')->with('success', 'Data pegawai berhasil ditambahkan.');
+        return redirect()->route('admin.profile.structure.index')->with('success', 'Employee data added successfully.');
     }
 
     public function edit(Employee $structure): View
@@ -56,33 +56,33 @@ class EmployeeController extends Controller
     public function update(Request $request, Employee $structure): RedirectResponse
     {
         $validated = $request->validate([
-            'nama' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'nip' => 'nullable|string|unique:employees,nip,' . $structure->id,
-            'jabatan' => 'required|string|max:255',
+            'position' => 'required|string|max:255',
             'parent_id' => 'nullable|exists:employees,id',
             'order' => 'integer',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        if ($request->hasFile('foto')) {
-            if ($structure->foto) {
-                Storage::disk('public')->delete($structure->foto);
+        if ($request->hasFile('photo')) {
+            if ($structure->photo) {
+                Storage::disk('public')->delete($structure->photo);
             }
-            $path = $request->file('foto')->store('employees', 'public');
-            $validated['foto'] = $path;
+            $path = $request->file('photo')->store('employees', 'public');
+            $validated['photo'] = $path;
         }
 
         $structure->update($validated);
 
-        return redirect()->route('admin.profile.structure.index')->with('success', 'Data pegawai berhasil diperbarui.');
+        return redirect()->route('admin.profile.structure.index')->with('success', 'Employee data updated successfully.');
     }
 
     public function destroy(Employee $structure): RedirectResponse
     {
-        if ($structure->foto) {
-            Storage::disk('public')->delete($structure->foto);
+        if ($structure->photo) {
+            Storage::disk('public')->delete($structure->photo);
         }
         $structure->delete();
-        return redirect()->route('admin.profile.structure.index')->with('success', 'Data pegawai berhasil dihapus.');
+        return redirect()->route('admin.profile.structure.index')->with('success', 'Employee data deleted successfully.');
     }
 }

@@ -1,36 +1,29 @@
 @extends('layouts.admin')
 
-@section('header_title', 'Lowongan Kerja')
+@section('header_title', 'Job Vacancies')
 
 @section('content')
 <div class="card">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
         <div>
-            <h3 style="margin:0; font-size: 1.25rem; font-weight: 700; color: var(--primary);">Bursa Lowongan Kerja</h3>
-            <p style="margin: 4px 0 0; font-size: 0.875rem; color: var(--text-muted);">Informasi lowongan dari mitra perusahaan yang telah terverifikasi.</p>
+            <h3 style="margin:0; font-size: 1.25rem; font-weight: 700; color: var(--primary);">Job Vacancy Board</h3>
+            <p style="margin: 4px 0 0; font-size: 0.875rem; color: var(--text-muted);">Information on vacancies from verified partner companies.</p>
         </div>
         <a href="{{ route('admin.job-vacancies.create') }}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Tambah Lowongan
+            <i class="fas fa-plus-circle"></i> Add Vacancy
         </a>
     </div>
-
-    @if(session('success'))
-        <div style="padding: 16px; background: #dcfce7; color: #166534; border-radius: 10px; margin-bottom: 24px; border: 1px solid #bbf7d0; display: flex; align-items: center; gap: 12px;">
-            <i class="fas fa-check-circle"></i>
-            <span style="font-weight: 600; font-size: 0.9rem;">{{ session('success') }}</span>
-        </div>
-    @endif
 
     <div class="table-responsive">
         <table>
             <thead>
                 <tr>
                     <th style="width: 80px;">Poster</th>
-                    <th>Perusahaan</th>
-                    <th>Posisi</th>
-                    <th>Batas Waktu</th>
+                    <th>Company</th>
+                    <th>Position</th>
+                    <th>Deadline</th>
                     <th style="text-align: center;">Status</th>
-                    <th style="text-align: center;">Aksi</th>
+                    <th style="text-align: center;">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,13 +39,13 @@
                         @endif
                     </td>
                     <td>
-                        <div style="font-weight: 700; color: var(--primary);">{{ $vacancy->perusahaan }}</div>
+                        <div style="font-weight: 700; color: var(--primary);">{{ $vacancy->company }}</div>
                     </td>
-                    <td><span style="font-weight: 500; color: var(--text-main);">{{ $vacancy->posisi }}</span></td>
+                    <td><span style="font-weight: 500; color: var(--text-main);">{{ $vacancy->position }}</span></td>
                     <td>
                         <div style="font-size: 0.85rem; font-weight: 600; color: {{ $vacancy->deadline && $vacancy->deadline->isPast() ? 'var(--danger)' : 'var(--text-main)' }}">
                             <i class="far fa-calendar-alt" style="margin-right: 4px; opacity: 0.5;"></i>
-                            {{ $vacancy->deadline ? $vacancy->deadline->format('d M Y') : 'Tanpa Batas' }}
+                            {{ $vacancy->deadline ? $vacancy->deadline->format('d M Y') : 'No Deadline' }}
                         </div>
                     </td>
                     <td style="text-align: center;">
@@ -67,7 +60,7 @@
                             <a href="{{ route('admin.job-vacancies.edit', $vacancy->id) }}" class="btn" style="background: #f1f5f9; color: var(--primary); padding: 8px 12px; border-radius: 8px;">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <form action="{{ route('admin.job-vacancies.destroy', $vacancy->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus lowongan ini?')">
+                            <form action="{{ route('admin.job-vacancies.destroy', $vacancy->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this vacancy?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn" style="background: #fee2e2; color: var(--danger); padding: 8px 12px; border-radius: 8px;">
@@ -80,7 +73,7 @@
                 @empty
                 <tr>
                     <td colspan="6" style="padding: 40px; text-align: center; color: var(--text-muted);">
-                        <p style="font-weight: 500;">Belum ada data lowongan kerja.</p>
+                        <p style="font-weight: 500;">No job vacancy data available.</p>
                     </td>
                 </tr>
                 @endforelse

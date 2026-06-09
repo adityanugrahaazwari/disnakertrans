@@ -11,13 +11,13 @@ return new class extends Migration
         // Profiles (Singleton)
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_dinas')->default('Disnakertrans Kab. Banjar');
-            $table->text('visi')->nullable();
-            $table->text('misi')->nullable();
-            $table->string('struktur_organisasi')->nullable();
-            $table->string('alamat')->nullable();
+            $table->string('agency_name')->default('Disnakertrans Kab. Banjar');
+            $table->text('vision')->nullable();
+            $table->text('mission')->nullable();
+            $table->string('organizational_structure')->nullable();
+            $table->string('address')->nullable();
             $table->string('email')->nullable();
-            $table->string('telepon')->nullable();
+            $table->string('phone')->nullable();
             $table->timestamps();
         });
 
@@ -46,10 +46,10 @@ return new class extends Migration
         // Employees (Pegawai)
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('name');
             $table->string('nip')->unique()->nullable();
-            $table->string('jabatan');
-            $table->string('foto')->nullable();
+            $table->string('position');
+            $table->string('photo')->nullable();
             $table->integer('order')->default(0);
             $table->timestamps();
         });
@@ -70,9 +70,9 @@ return new class extends Migration
         // Job Vacancies (Lowongan)
         Schema::create('job_vacancies', function (Blueprint $table) {
             $table->id();
-            $table->string('perusahaan');
-            $table->string('posisi');
-            $table->text('syarat')->nullable();
+            $table->string('company');
+            $table->string('position');
+            $table->text('requirements')->nullable();
             $table->date('deadline')->nullable();
             $table->boolean('is_verified')->default(false);
             $table->timestamps();

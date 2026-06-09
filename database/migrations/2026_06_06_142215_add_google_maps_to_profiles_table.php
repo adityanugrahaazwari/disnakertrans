@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('profiles', function (Blueprint $table) {
-            $table->text('google_maps_url')->nullable()->after('alamat');
+            $table->text('google_maps_url')->nullable()->after('address');
         });
     }
 

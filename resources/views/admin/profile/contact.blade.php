@@ -1,17 +1,17 @@
 @extends('layouts.admin')
 
-@section('header_title', 'Kontak Dinas')
+@section('header_title', 'Agency Contact')
 
 @section('content')
 <div class="card">
-    <h3 style="margin-top:0;">Pengaturan Informasi Kontak</h3>
+    <h3 style="margin-top:0;">Contact Information Settings</h3>
 
     <form action="{{ route('admin.profile.contact.update') }}" method="POST">
         @csrf
         <div style="margin-bottom: 20px;">
-            <label style="display: block; margin-bottom: 8px; font-weight: bold;">Alamat Lengkap</label>
-            <textarea name="alamat" required style="width: 100%; height: 80px; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;">{{ old('alamat', $profile->alamat ?? '') }}</textarea>
-            @error('alamat')
+            <label style="display: block; margin-bottom: 8px; font-weight: bold;">Full Address</label>
+            <textarea name="address" required style="width: 100%; height: 80px; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;">{{ old('address', $profile->address ?? '') }}</textarea>
+            @error('address')
                 <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span>
             @enderror
         </div>
@@ -23,28 +23,28 @@
                 <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span>
             @enderror
             <br>
-            <small style="color: #6b7280;">Tempelkan kode <strong>Embed Map (iframe)</strong> dari Google Maps. Buka Google Maps, cari lokasi, klik Bagikan > Sematkan peta, lalu salin HTML-nya.</small>
+            <small style="color: #6b7280;">Paste the <strong>Embed Map (iframe)</strong> code from Google Maps.</small>
         </div>
         
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
             <div>
-                <label style="display: block; margin-bottom: 8px; font-weight: bold;">Email Dinas</label>
+                <label style="display: block; margin-bottom: 8px; font-weight: bold;">Agency Email</label>
                 <input type="email" name="email" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;" value="{{ old('email', $profile->email ?? '') }}">
                 @error('email')
                     <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span>
                 @enderror
             </div>
             <div>
-                <label style="display: block; margin-bottom: 8px; font-weight: bold;">Nomor Telepon</label>
-                <input type="text" name="telepon" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;" value="{{ old('telepon', $profile->telepon ?? '') }}">
-                @error('telepon')
+                <label style="display: block; margin-bottom: 8px; font-weight: bold;">Phone Number</label>
+                <input type="text" name="phone" required style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;" value="{{ old('phone', $profile->phone ?? '') }}">
+                @error('phone')
                     <span style="color: #ef4444; font-size: 14px;">{{ $message }}</span>
                 @enderror
             </div>
         </div>
 
         <button type="submit" class="btn btn-primary">
-            <i class="fas fa-save"></i> Simpan Perubahan
+            <i class="fas fa-save"></i> Save Changes
         </button>
     </form>
 </div>

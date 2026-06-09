@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('profiles', function (Blueprint $table) {
-            $table->text('footer_description')->nullable()->after('nama_dinas');
+            $table->text('footer_description')->nullable()->after('agency_name');
             $table->string('facebook_url')->nullable();
             $table->string('instagram_url')->nullable();
             $table->string('youtube_url')->nullable();

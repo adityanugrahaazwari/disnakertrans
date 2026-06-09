@@ -24,7 +24,7 @@
                 <h2 style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 30px;">Visi</h2>
                 <div style="font-size: 1.5rem; color: var(--text-dark); font-style: italic; line-height: 1.6; max-width: 800px; margin: 0 auto; position: relative; padding: 0 40px;">
                     <i class="fas fa-quote-left" style="position: absolute; top: -10px; left: 0; opacity: 0.1; font-size: 3rem;"></i>
-                    "{{ $profile->visi ?? 'Terwujudnya Tenaga Kerja yang Kompeten, Produktif, dan Sejahtera.' }}"
+                    "{{ $profile->vision ?? 'Terwujudnya Tenaga Kerja yang Kompeten, Produktif, dan Sejahtera.' }}"
                     <i class="fas fa-quote-right" style="position: absolute; bottom: -10px; right: 0; opacity: 0.1; font-size: 3rem;"></i>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                 <h2 style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 40px; text-align: center;">Misi</h2>
                 <div style="display: grid; gap: 20px;">
                     @php
-                        $misiPoints = explode("\n", $profile->misi ?? '');
+                        $misiPoints = explode("\n", $profile->mission ?? '');
                     @endphp
                     @foreach($misiPoints as $index => $point)
                         @if(trim($point))

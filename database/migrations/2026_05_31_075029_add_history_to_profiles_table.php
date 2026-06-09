@@ -12,14 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('profiles', function (Blueprint $table) {
-            $table->text('maklumat_pelayanan')->nullable();
+            $table->text('history')->nullable()->after('mission');
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
         Schema::table('profiles', function (Blueprint $table) {
-            $table->dropColumn('maklumat_pelayanan');
+            $table->dropColumn('history');
         });
     }
 };
