@@ -52,7 +52,7 @@
             <button type="submit" class="btn btn-primary">
                 <i class="fas fa-save"></i> Simpan Data
             </button>
-            <a href="{{ route('admin.employees.index') }}" class="btn btn-outline">Batal</a>
+            <a href="{{ route('admin.profile.structure.index') }}" class="btn btn-outline">Batal</a>
         </div>
     </form>
 </div>
