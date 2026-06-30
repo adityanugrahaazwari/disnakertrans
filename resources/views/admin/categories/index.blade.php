@@ -34,7 +34,7 @@
             <tbody>
                 @forelse($categories as $index => $category)
                 <tr>
-                    <td style="font-weight: 600; color: var(--text-light);">{{ $index + 1 }}</td>
+                    <td style="font-weight: 600; color: var(--text-light);">{{ $categories->firstItem() + $index }}</td>
                     <td>
                         <div style="font-weight: 700; color: var(--primary);">{{ $category->name }}</div>
                     </td>
@@ -61,6 +61,10 @@
                 @endforelse
             </tbody>
         </table>
+    </div>
+    
+    <div style="margin-top: 32px;">
+        {{ $categories->links() }}
     </div>
 </div>
 @endsection

@@ -10,7 +10,7 @@ class TrainingCategoryController extends Controller
 {
     public function index()
     {
-        $categories = TrainingCategory::all();
+        $categories = TrainingCategory::paginate(10);
         return view('admin.training-categories.index', compact('categories'));
     }
 

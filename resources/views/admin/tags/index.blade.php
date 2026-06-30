@@ -34,7 +34,7 @@
             <tbody>
                 @forelse($tags as $index => $tag)
                 <tr>
-                    <td style="font-weight: 600; color: var(--text-light);">{{ $index + 1 }}</td>
+                    <td style="font-weight: 600; color: var(--text-light);">{{ $tags->firstItem() + $index }}</td>
                     <td>
                         <div style="font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px;">
                             <i class="fas fa-hashtag" style="color: var(--accent); font-size: 0.8rem;"></i>
@@ -64,6 +64,10 @@
                 @endforelse
             </tbody>
         </table>
+    </div>
+    
+    <div style="margin-top: 32px;">
+        {{ $tags->links() }}
     </div>
 </div>
 @endsection

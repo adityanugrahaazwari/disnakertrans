@@ -13,7 +13,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class PublicPagesTest extends TestCase
 {
-    use RefreshDatabase, WithoutMiddleware;
+    use RefreshDatabase;
 
     protected function setUp(): void
     {

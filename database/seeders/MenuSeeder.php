@@ -25,6 +25,7 @@ class MenuSeeder extends Seeder
         $pManageLayanan = Permission::where('name', 'view-jobs')->first()?->id ?? Permission::where('name', 'manage-layanan')->first()?->id;
         $pViewDashboard = Permission::where('name', 'view-dashboard')->first()?->id ?? null;
         $pManageSecurity = Permission::where('name', 'manage-permissions')->first()?->id ?? $pManageUsers;
+        $pManageMenus = Permission::where('name', 'manage-menus')->first()?->id ?? $pManageSecurity;
 
         // --- GROUP 1: UTAMA ---
         Menu::create([
@@ -293,7 +294,7 @@ class MenuSeeder extends Seeder
             'url' => '/menus',
             'icon' => 'fas fa-list-ul',
             'order' => 5,
-            'permission_id' => $pManageSecurity,
+            'permission_id' => $pManageMenus,
         ]);
 
         // --- GROUP 8: AKUN SAYA ---

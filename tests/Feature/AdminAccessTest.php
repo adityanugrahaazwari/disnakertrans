@@ -61,4 +61,35 @@ class AdminAccessTest extends TestCase
         
         $response->assertStatus(200);
     }
+
+    public function test_admin_can_access_heroes_management()
+    {
+        $user = User::factory()->create();
+        
+        $response = $this->actingAs($user)->get(route('admin.heroes.index'));
+        
+        $response->assertStatus(200);
+        $response->assertSee('badge_text');
+    }
+
+    public function test_unauthorized_user_cannot_access_menu_management()
+    {
+        $user = User::factory()->create();
+        
+        $response = $this->actingAs($user)->get(route('admin.menus.index'));
+        
+        $response->assertStatus(403);
+    }
+
+    public function test_authorized_user_can_access_menu_management()
+    {
+        \Spatie\Permission\Models\Permission::create(['name' => 'manage-menus', 'guard_name' => 'web']);
+        
+        $user = User::factory()->create();
+        $user->givePermissionTo('manage-menus');
+        
+        $response = $this->actingAs($user)->get(route('admin.menus.index'));
+        
+        $response->assertStatus(200);
+    }
 }

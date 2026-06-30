@@ -134,6 +134,15 @@
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
         }
 
+        .menu-link.parent-active {
+            background-color: rgba(255, 255, 255, 0.03);
+            color: white;
+        }
+
+        .menu-link.parent-active i:first-child {
+            color: var(--accent);
+        }
+
         .menu-link i:first-child {
             width: 24px;
             margin-right: 12px;
@@ -164,7 +173,8 @@
         }
 
         .submenu-link {
-            display: block;
+            display: flex;
+            align-items: center;
             padding: 8px 16px;
             color: #94a3b8;
             text-decoration: none;
@@ -176,6 +186,23 @@
         .submenu-link:hover {
             color: white;
             padding-left: 20px;
+        }
+
+        .submenu-link.active-sub {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.05);
+            font-weight: 600;
+            padding-left: 20px;
+        }
+
+        .submenu-link.active-sub::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            margin-right: 8px;
         }
 
         /* Main Content */
@@ -482,6 +509,112 @@
             z-index: 999;
         }
 
+        /* Pagination Styling */
+        .pagination {
+            display: flex;
+            padding-left: 0;
+            list-style: none;
+            border-radius: var(--radius);
+            gap: 6px;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0 0;
+        }
+
+        .page-item {
+            display: inline;
+        }
+
+        .page-link, .page-item span {
+            position: relative;
+            display: block;
+            padding: 10px 16px;
+            color: var(--text-main);
+            text-decoration: none;
+            background-color: var(--bg-card);
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .page-item.active .page-link, 
+        .page-item.active span {
+            z-index: 3;
+            color: #fff;
+            background-color: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);
+        }
+
+        .page-item.disabled .page-link,
+        .page-item.disabled span {
+            color: var(--text-muted);
+            pointer-events: none;
+            background-color: #f1f5f9;
+            border-color: #e2e8f0;
+            opacity: 0.6;
+        }
+
+        .page-link:hover {
+            z-index: 2;
+            color: var(--accent);
+            background-color: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        /* Laravel Bootstrap Paginator Responsive Utilities */
+        nav .d-flex {
+            display: flex;
+            align-items: center;
+        }
+        nav .justify-content-between {
+            justify-content: space-between;
+        }
+        nav .align-items-center {
+            align-items: center;
+        }
+        nav .flex-fill {
+            flex: 1 1 auto;
+        }
+        
+        /* By default (mobile) */
+        nav .d-sm-none {
+            display: flex;
+        }
+        nav .d-none {
+            display: none !important;
+        }
+        
+        /* Desktop layout overrides */
+        @media (min-width: 576px) {
+            nav .d-sm-none {
+                display: none !important;
+            }
+            nav .d-none.d-sm-flex {
+                display: flex !important;
+            }
+            nav .align-items-sm-center {
+                align-items: center;
+            }
+            nav .justify-content-sm-between {
+                justify-content: space-between;
+            }
+        }
+        
+        nav p.small.text-muted {
+            font-size: 0.875rem;
+            color: var(--text-muted) !important;
+            margin: 0;
+        }
+
+        nav p.small.text-muted span,
+        nav p.small.text-muted font {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
         @media (max-width: 1024px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -519,9 +652,24 @@
             <li class="menu-label">Main Navigation</li>
             @php $menus = \App\Http\Controllers\AdminController::getMenus(); @endphp
             @foreach($menus as $menu)
-                <li class="menu-item {{ Request::is(ltrim($menu->url, '/').'*') ? 'open' : '' }}">
+                @php
+                    $isOpen = false;
+                    $isActive = false;
+
+                    if ($menu->children->count() > 0) {
+                        foreach ($menu->children as $child) {
+                            if ($child->url !== '#' && Request::is(ltrim($child->url, '/').'*')) {
+                                $isOpen = true;
+                                break;
+                            }
+                        }
+                    } else {
+                        $isActive = $menu->url !== '#' && Request::is(ltrim($menu->url, '/').'*');
+                    }
+                @endphp
+                <li class="menu-item {{ $isOpen ? 'open' : '' }}">
                     <a href="{{ $menu->children->count() > 0 ? 'javascript:void(0)' : $menu->url }}" 
-                       class="menu-link {{ Request::is(ltrim($menu->url, '/').'*') ? 'active' : '' }}">
+                       class="menu-link {{ $isActive ? 'active' : '' }} {{ $isOpen ? 'parent-active' : '' }}">
                         <i class="{{ $menu->icon }}"></i>
                         <span>{{ $menu->title }}</span>
                         @if($menu->children->count() > 0)
@@ -532,7 +680,7 @@
                         <ul class="submenu">
                             @foreach($menu->children as $child)
                                 <li>
-                                    <a href="{{ $child->url }}" class="submenu-link {{ Request::is(ltrim($child->url, '/').'*') ? 'active-sub' : '' }}">
+                                    <a href="{{ $child->url }}" class="submenu-link {{ ($child->url !== '#' && Request::is(ltrim($child->url, '/').'*')) ? 'active-sub' : '' }}">
                                         {{ $child->title }}
                                     </a>
                                 </li>

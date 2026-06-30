@@ -56,5 +56,9 @@
             </tbody>
         </table>
     </div>
+    
+    <div style="margin-top: 32px;">
+        {{ $groups->links() }}
+    </div>
 </div>
 @endsection

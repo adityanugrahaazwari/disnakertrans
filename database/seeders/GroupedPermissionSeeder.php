@@ -28,7 +28,7 @@ class GroupedPermissionSeeder extends Seeder
                 'view-jobs', 'create-jobs', 'edit-jobs', 'delete-jobs'
             ],
             'User & Security' => [
-                'view-users', 'create-users', 'edit-users', 'delete-users', 'manage-roles', 'manage-permissions'
+                'view-users', 'create-users', 'edit-users', 'delete-users', 'manage-roles', 'manage-permissions', 'manage-menus'
             ],
             'Profil Dinas' => [
                 'edit-profile', 'manage-employees', 'manage-messages'

@@ -106,5 +106,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('permission-groups', \App\Http\Controllers\PermissionGroupController::class)->names('admin.permission-groups');
 
     // Manajemen Menu Dinamis
-    Route::resource('menus', \App\Http\Controllers\MenuController::class)->names('admin.menus');
+    Route::resource('menus', \App\Http\Controllers\MenuController::class)
+        ->names('admin.menus')
+        ->middleware('can:manage-menus');
 });

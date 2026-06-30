@@ -11,7 +11,7 @@ class PermissionGroupController extends Controller
 {
     public function index(): View
     {
-        $groups = PermissionGroup::withCount('permissions')->orderBy('order')->get();
+        $groups = PermissionGroup::withCount('permissions')->orderBy('order')->paginate(10);
         return view('admin.permission-groups.index', compact('groups'));
     }
 

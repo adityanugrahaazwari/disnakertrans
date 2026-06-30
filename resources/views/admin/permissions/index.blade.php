@@ -62,5 +62,9 @@
             </tbody>
         </table>
     </div>
+
+    <div style="margin-top: 32px;">
+        {{ $permissions->links() }}
+    </div>
 </div>
 @endsection

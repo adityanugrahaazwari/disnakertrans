@@ -8,7 +8,8 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 
-class EmployeeController extends Controller
+class
+EmployeeController extends Controller
 {
     public function index(): View
     {
@@ -16,7 +17,7 @@ class EmployeeController extends Controller
             ->whereNull('parent_id')
             ->orderBy('order')
             ->get();
-            
+
         return view('admin.employees.index', compact('employees'));
     }
 

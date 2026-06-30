@@ -313,6 +313,112 @@
             font-size: 0.9rem;
         }
 
+        /* Pagination Styling */
+        .pagination {
+            display: flex;
+            padding-left: 0;
+            list-style: none;
+            border-radius: var(--radius-md);
+            gap: 6px;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0 0;
+        }
+
+        .page-item {
+            display: inline;
+        }
+
+        .page-link, .page-item span {
+            position: relative;
+            display: block;
+            padding: 10px 18px;
+            color: var(--text-dark);
+            text-decoration: none;
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .page-item.active .page-link, 
+        .page-item.active span {
+            z-index: 3;
+            color: #fff;
+            background-color: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+        }
+
+        .page-item.disabled .page-link,
+        .page-item.disabled span {
+            color: var(--text-light);
+            pointer-events: none;
+            background-color: #f8fafc;
+            border-color: #e2e8f0;
+            opacity: 0.6;
+        }
+
+        .page-link:hover {
+            z-index: 2;
+            color: var(--accent);
+            background-color: var(--accent-soft);
+            border-color: #cbd5e1;
+        }
+
+        /* Laravel Bootstrap Paginator Responsive Utilities */
+        nav .d-flex {
+            display: flex;
+            align-items: center;
+        }
+        nav .justify-content-between {
+            justify-content: space-between;
+        }
+        nav .align-items-center {
+            align-items: center;
+        }
+        nav .flex-fill {
+            flex: 1 1 auto;
+        }
+        
+        /* By default (mobile) */
+        nav .d-sm-none {
+            display: flex;
+        }
+        nav .d-none {
+            display: none !important;
+        }
+        
+        /* Desktop layout overrides */
+        @media (min-width: 576px) {
+            nav .d-sm-none {
+                display: none !important;
+            }
+            nav .d-none.d-sm-flex {
+                display: flex !important;
+            }
+            nav .align-items-sm-center {
+                align-items: center;
+            }
+            nav .justify-content-sm-between {
+                justify-content: space-between;
+            }
+        }
+        
+        nav p.small.text-muted {
+            font-size: 0.9rem;
+            color: var(--text-light) !important;
+            margin: 0;
+        }
+
+        nav p.small.text-muted span,
+        nav p.small.text-muted font {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
         .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.8rem; color: var(--primary); cursor: pointer; }
 
         @media (max-width: 1024px) {

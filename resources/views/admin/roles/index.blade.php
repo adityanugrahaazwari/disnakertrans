@@ -58,5 +58,9 @@
             @endforeach
         </tbody>
     </table>
+    
+    <div style="margin-top: 32px;">
+        {{ $roles->links() }}
+    </div>
 </div>
 @endsection
